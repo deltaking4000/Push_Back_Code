@@ -3,7 +3,7 @@
 /////
 // For installation, upgrading, documentations, and tutorials, check out our website!
 // https://ez-robotics.github.io/EZ-Template/
-/////
+///// 
 
 // Chassis constructor
 ez::Drive chassis(
@@ -11,7 +11,7 @@ ez::Drive chassis(
     {-1, -11, 13},     // Left Chassis Ports (negative port will reverse it!)
     {8, 16, -18},  // Right Chassis Ports (negative port will reverse it!)
 
-    9,      // IMU Port
+    9,      // Gyro Port
     3.25,  // Wheel Diameter (Remember, 4" wheels without screw holes are actually 4.125!)
     450);   // Wheel RPM = cartridge * (motor gear / wheel gear)
 
@@ -243,6 +243,7 @@ void ez_template_extras() {
 void opcontrol() {
   // This is preference to what you like to drive on
   chassis.drive_brake_set(MOTOR_BRAKE_COAST);
+  bool intakeStarted = false; 
 
   while (true) {
     // Gives you some extras to make EZ-Template ezier
@@ -257,6 +258,33 @@ void opcontrol() {
     // . . .
     // Put more user control code here!
     // . . .
+
+
+		if (master.get_digital_new_press(DIGITAL_R1)) {
+			if (intakeStarted == false) {
+				intake.move_velocity(600);
+				intakeStarted = true;
+			}
+			else {
+				intake.move_velocity(0);
+				intakeStarted = false;
+			}
+		}
+
+		else if (master.get_digital_new_press(DIGITAL_R2)) {
+
+			if (intakeStarted == false) {
+				intake.move_velocity(-600);
+				intakeStarted = true;
+			}
+			else {
+				intake.move_velocity(0);
+				intakeStarted = false;
+			}
+
+		}
+
+    matchloader.button_toggle(master.get_digital(DIGITAL_L1));
 
     pros::delay(ez::util::DELAY_TIME);  // This is used for timer calculations!  Keep this ez::util::DELAY_TIME
   }
