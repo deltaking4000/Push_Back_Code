@@ -6,7 +6,7 @@
 /////
 
 // These are out of 127
-const int DRIVE_SPEED = 110;
+const int DRIVE_SPEED = 65;
 const int TURN_SPEED = 90;
 const int SWING_SPEED = 110;
 
@@ -378,14 +378,87 @@ void measure_offsets() {
 // Make your own autonomous functions here!
 // . . .
 
-void TestAuton() {
-  chassis.pid_drive_set(30_in, 600, true);
-  chassis.pid_wait();
+void OldSpooktacularAutonRight() {
 
-  chassis.pid_turn_set(90_deg, 600);
+  lowerintake.move(-127);
+  chassis.pid_drive_set(37_in, DRIVE_SPEED, true);
   chassis.pid_wait();
-
-  chassis.pid_drive_set(-10_in, 600);
+  chassis.pid_turn_set(106_deg, TURN_SPEED);
   chassis.pid_wait();
+  chassis.pid_drive_set(43_in, DRIVE_SPEED);
+  chassis.pid_wait();
+  chassis.pid_turn_set(155_deg, TURN_SPEED);
+  chassis.pid_wait();
+  chassis.pid_drive_set(-22_in, DRIVE_SPEED);
+  chassis.pid_wait();
+  upperintake.move(-127);
+ // chassis.pid_turn_set(160_deg, TURN_SPEED);
+ // chassis.pid_wait();
 
 }
+
+
+void SpooktacularAutonRight() {
+
+  lowerintake.move(-127);
+  chassis.pid_drive_set(25_in, DRIVE_SPEED, true);
+  chassis.pid_wait();
+  chassis.pid_turn_set(25_deg, TURN_SPEED);
+  chassis.pid_wait();
+  chassis.pid_drive_set(24_in, DRIVE_SPEED);
+  chassis.pid_wait();
+  chassis.pid_turn_set(137_deg, TURN_SPEED);
+  chassis.pid_wait();
+  chassis.pid_drive_set(36_in, DRIVE_SPEED);
+  chassis.pid_wait();
+  chassis.pid_turn_set(180_deg, DRIVE_SPEED);
+  chassis.pid_wait();
+  chassis.pid_drive_set(-32_in, DRIVE_SPEED);
+  chassis.pid_wait();
+  upperintake.move(-127);
+
+ // chassis.pid_turn_set(160_deg, TURN_SPEED);
+ // chassis.pid_wait();
+
+}
+
+
+///
+// Drive Example
+///
+void OldSpooktacularAutonLeft() {
+  intake.move(-127);
+  chassis.pid_drive_set(34_in, DRIVE_SPEED, true);
+  chassis.pid_wait();
+  chassis.pid_turn_set(-106_deg, TURN_SPEED);
+  chassis.pid_wait();
+  chassis.pid_drive_set(32_in, DRIVE_SPEED);
+  chassis.pid_wait();
+  chassis.pid_turn_set(-160_deg, TURN_SPEED);
+  chassis.pid_wait();
+  chassis.pid_drive_set(-12_in, DRIVE_SPEED);
+  chassis.pid_wait();
+}
+
+void SpooktacularAutonLeft() {
+  chassis.odom_theta_flip();
+  SpooktacularAutonRight();
+
+  // lowerintake.move(-127);
+  // chassis.pid_drive_set(25_in, DRIVE_SPEED, true);
+  // chassis.pid_wait();
+  // chassis.pid_turn_set(-25_deg, TURN_SPEED);
+  // chassis.pid_wait();
+  // chassis.pid_drive_set(22_in, DRIVE_SPEED);
+  // chassis.pid_wait();
+  // chassis.pid_turn_set(-137_deg, TURN_SPEED);
+  // chassis.pid_wait();
+  // chassis.pid_drive_set(48_in, DRIVE_SPEED);
+  // chassis.pid_wait();
+  // chassis.pid_turn_set(180_deg, DRIVE_SPEED);
+  // chassis.pid_wait();
+  // chassis.pid_drive_set(-32_in, DRIVE_SPEED);
+  // chassis.pid_wait();
+  // upperintake.move(-127);
+}
+

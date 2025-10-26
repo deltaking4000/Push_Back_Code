@@ -12,7 +12,7 @@ ez::Drive chassis(
     {8, 16, -18},  // Right Chassis Ports (negative port will reverse it!)
 
     9,      // Gyro Port
-    3.25,  // Wheel Diameter (Remember, 4" wheels without screw holes are actually 4.125!)
+    (24.0/29)*3.25,  // Wheel Diameter (Remember, 4" wheels without screw holes are actually 4.125!)
     450);   // Wheel RPM = cartridge * (motor gear / wheel gear)
 
 // Uncomment the trackers you're using here!
@@ -58,9 +58,11 @@ void initialize() {
 
   // Autonomous Selector using LLEMU
   ez::as::auton_selector.autons_add({
-      {"Testing ez-template auton\n Position however.", TestAuton},
+      {"RIGHT BLUE/RED\nPosition on the right.", SpooktacularAutonRight},
+      {"LEFT BLUE/RED\nPosition on the left.", SpooktacularAutonLeft},
       {"Drive\n\nDrive forward and come back", drive_example},
       {"Turn\n\nTurn 3 times.", turn_example},
+      /*
       {"Drive and Turn\n\nDrive forward, turn, come back", drive_and_turn},
       {"Drive and Turn\n\nSlow down during drive", wait_until_change_speed},
       {"Swing Turn\n\nSwing in an 'S' curve", swing_example},
@@ -73,6 +75,7 @@ void initialize() {
       {"Boomerang\n\nGo to (0, 24, 45) then come back to (0, 0, 0)", odom_boomerang_example},
       {"Boomerang Pure Pursuit\n\nGo to (0, 24, 45) on the way to (24, 24) then come back to (0, 0, 0)", odom_boomerang_injected_pure_pursuit_example},
       {"Measure Offsets\n\nThis will turn the robot a bunch of times and calculate your offsets for your tracking wheels.", measure_offsets},
+      */
   });
 
   // Initialize chassis and auton selector
@@ -175,6 +178,10 @@ void ez_screen_task() {
           screen_print_tracker(chassis.odom_tracker_back, "b", 6);
           screen_print_tracker(chassis.odom_tracker_front, "f", 7);
         }
+      }
+      else if (ez::as::page_blank_is_on(1)) {
+          ez::screen_print("Left: " + util::to_string_with_precision(chassis.drive_sensor_left()) +
+          "\nRight: " + util::to_string_with_precision(chassis.drive_sensor_right()), 1);
       }
     }
 
@@ -281,8 +288,11 @@ void opcontrol() {
 				intake.move_velocity(0);
 				intakeStarted = false;
 			}
-
 		}
+
+    if (master.get_digital(DIGITAL_L1)) {
+        chassis.drive_sensor_reset();
+    }
 
     matchloader.button_toggle(master.get_digital(DIGITAL_L1));
 
