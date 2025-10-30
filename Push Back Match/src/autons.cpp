@@ -6,7 +6,7 @@
 /////
 
 // These are out of 127
-const int DRIVE_SPEED = 65;
+const int DRIVE_SPEED = 110;
 const int TURN_SPEED = 90;
 const int SWING_SPEED = 110;
 
@@ -411,7 +411,7 @@ void SpooktacularAutonRight() {
   chassis.pid_wait();
   chassis.pid_drive_set(36_in, DRIVE_SPEED);
   chassis.pid_wait();
-  chassis.pid_turn_set(180_deg, DRIVE_SPEED);
+  chassis.pid_turn_set(180_deg, TURN_SPEED);
   chassis.pid_wait();
   chassis.pid_drive_set(-32_in, DRIVE_SPEED);
   chassis.pid_wait();
