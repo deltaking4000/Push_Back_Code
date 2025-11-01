@@ -291,10 +291,11 @@ void opcontrol() {
 		}
 
     if (master.get_digital(DIGITAL_L1)) {
-        chassis.drive_sensor_reset();
-    }
-
-    matchloader.button_toggle(master.get_digital(DIGITAL_L1));
+      matchloader.set(true);
+    } 
+    else if (master.get_digital(DIGITAL_L2)) {
+      matchloader.set(false);
+    } 
 
     pros::delay(ez::util::DELAY_TIME);  // This is used for timer calculations!  Keep this ez::util::DELAY_TIME
   }
