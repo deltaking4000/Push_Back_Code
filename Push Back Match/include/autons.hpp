@@ -20,3 +20,4 @@ void TestAuton();
 
 void SpooktacularAutonRight(); 
 void SpooktacularAutonLeft();
+void SpooktacularAuton60Seconds();

@@ -462,3 +462,44 @@ void SpooktacularAutonLeft() {
   // upperintake.move(-127);
 }
 
+
+///
+// 60 second auton - robot starts on right of parkzone
+///
+void SpooktacularAuton60Seconds() {
+  // only start lower intake so preload don't get thrown out 
+  lowerintake.move(-127);
+
+  // drive to/pickup 4-blocks on right
+  chassis.pid_drive_set(25_in, DRIVE_SPEED, true);
+  chassis.pid_wait();
+  chassis.pid_turn_set(25_deg, TURN_SPEED);
+  chassis.pid_wait();
+  chassis.pid_drive_set(24_in, DRIVE_SPEED);
+  chassis.pid_wait();
+
+  // drive to long goal
+  chassis.pid_turn_set(137_deg, TURN_SPEED);
+  chassis.pid_wait();
+  chassis.pid_drive_set(36_in, DRIVE_SPEED);
+  chassis.pid_wait();
+  chassis.pid_turn_set(180_deg, TURN_SPEED);
+  chassis.pid_wait();
+  chassis.pid_drive_set(-32_in, DRIVE_SPEED);
+  chassis.pid_wait();
+
+  // score in long goal and wait for blocks to score
+  upperintake.move(-127);
+  pros::delay(5 * 1000); 
+  intake.move(0);
+
+  // park the robot
+  chassis.pid_drive_set(37_in, DRIVE_SPEED);
+  chassis.pid_wait();
+  chassis.pid_turn_set(267_deg, TURN_SPEED);
+
+  chassis.pid_drive_set(33_in, DRIVE_SPEED);
+  chassis.pid_wait();
+  chassis.pid_turn_set(270_deg, TURN_SPEED);
+  chassis.pid_wait();
+}

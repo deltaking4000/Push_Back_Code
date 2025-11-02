@@ -60,6 +60,7 @@ void initialize() {
   ez::as::auton_selector.autons_add({
       {"RIGHT BLUE/RED\nPosition on the right.", SpooktacularAutonRight},
       {"LEFT BLUE/RED\nPosition on the left.", SpooktacularAutonLeft},
+      {"60 SECOND AUTON\nPosition on the right.", SpooktacularAuton60Seconds},
       {"Drive\n\nDrive forward and come back", drive_example},
       {"Turn\n\nTurn 3 times.", turn_example},
       /*
