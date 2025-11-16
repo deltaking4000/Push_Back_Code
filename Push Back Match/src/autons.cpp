@@ -440,7 +440,7 @@ void OldSpooktacularAutonLeft() {
   chassis.pid_wait();
 }
 
-void SpooktacularAutonLeft() {
+void SpaceAutonLeft() {
   chassis.odom_theta_flip();
   SpooktacularAutonRight();
 
@@ -462,6 +462,30 @@ void SpooktacularAutonLeft() {
   // upperintake.move(-127);
 }
 
+void SpooktacularAutonLeft() {
+  pros::delay(10000);
+  chassis.pid_drive_set(18.741_in, DRIVE_SPEED); 
+  chassis.pid_wait();
+  chassis.pid_turn_set(269.287_deg, TURN_SPEED);
+  chassis.pid_wait();
+  chassis.pid_drive_set(33.961_in, DRIVE_SPEED); 
+  chassis.pid_wait();
+  chassis.pid_turn_set(182.694_deg, TURN_SPEED);
+  chassis.pid_wait();
+  chassis.pid_drive_set(11.99_in, DRIVE_SPEED); 
+  chassis.pid_wait();
+  matchloader.set(true);
+  intake.move(-127);
+  pros::delay(2000);
+  matchloader.set(false);
+  chassis.pid_turn_set(1.251_deg, TURN_SPEED);
+  chassis.pid_wait();
+  chassis.pid_drive_set(32.275_in, DRIVE_SPEED); 
+  chassis.pid_wait();
+  chassis.pid_turn_set(1.2_deg, TURN_SPEED);
+  chassis.pid_wait();
+  outtake.move(-127);
+}
 
 ///
 // 60 second auton - robot starts on right of parkzone

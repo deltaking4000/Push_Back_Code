@@ -10,6 +10,8 @@ inline pros::MotorGroup intake({-5, -6});  // Negative port will reverse the mot
 inline ez::Piston matchloader('A');
 inline pros::Motor lowerintake(-5);  // Negative port will reverse the motor
 inline pros::Motor upperintake(-6);  // Negative port will reverse the motor
+inline pros::Motor outtake(-7);
+inline ez::Piston wingmech('B');
  
 // inline pros::Motor intake(1);
 // inline pros::adi::DigitalIn limit_switch('A');
