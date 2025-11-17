@@ -378,26 +378,6 @@ void measure_offsets() {
 // Make your own autonomous functions here!
 // . . .
 
-void OldSpooktacularAutonRight() {
-
-  lowerintake.move(-127);
-  chassis.pid_drive_set(37_in, DRIVE_SPEED, true);
-  chassis.pid_wait();
-  chassis.pid_turn_set(106_deg, TURN_SPEED);
-  chassis.pid_wait();
-  chassis.pid_drive_set(43_in, DRIVE_SPEED);
-  chassis.pid_wait();
-  chassis.pid_turn_set(155_deg, TURN_SPEED);
-  chassis.pid_wait();
-  chassis.pid_drive_set(-22_in, DRIVE_SPEED);
-  chassis.pid_wait();
-  upperintake.move(-127);
- // chassis.pid_turn_set(160_deg, TURN_SPEED);
- // chassis.pid_wait();
-
-}
-
-
 void SpooktacularAutonRight() {
 
   lowerintake.move(-127);
@@ -416,75 +396,51 @@ void SpooktacularAutonRight() {
   chassis.pid_drive_set(-32_in, DRIVE_SPEED);
   chassis.pid_wait();
   upperintake.move(-127);
-
- // chassis.pid_turn_set(160_deg, TURN_SPEED);
- // chassis.pid_wait();
-
 }
 
+void SpooktacularAutonLeft() {
+  chassis.odom_theta_flip();
+  SpaceAutonRight();
+}
 
 ///
-// Drive Example
+// 15 second auton with matchloader - robot starts above parkzone facing right
 ///
-void OldSpooktacularAutonLeft() {
+void SpaceAutonRight() {
+  // rightmatchloader
+
+  // start intake and drop matchloader
   intake.move(-127);
-  chassis.pid_drive_set(34_in, DRIVE_SPEED, true);
+  matchloader.set(true);
+
+  // drive to matchloader
+  chassis.pid_drive_set(42.284_in, DRIVE_SPEED); 
   chassis.pid_wait();
-  chassis.pid_turn_set(-106_deg, TURN_SPEED);
+  chassis.pid_turn_set(92.222_deg, TURN_SPEED);
   chassis.pid_wait();
-  chassis.pid_drive_set(32_in, DRIVE_SPEED);
+  chassis.pid_drive_set(14.811_in, DRIVE_SPEED); 
   chassis.pid_wait();
-  chassis.pid_turn_set(-160_deg, TURN_SPEED);
+
+  // wait couple seconds to remove blocks from matchloader
+  pros::delay(2 * 1000); 
+
+  // backup into long goal
+  chassis.pid_drive_set(-32.454_in, DRIVE_SPEED); 
   chassis.pid_wait();
-  chassis.pid_drive_set(-12_in, DRIVE_SPEED);
+  chassis.pid_turn_set(90_deg, TURN_SPEED);
   chassis.pid_wait();
+
+  // score into long goal
+  outtake.move(-127);
+  pros::delay(4 * 1000); 
+
+  // all done
+  matchloader.set(false);
 }
 
 void SpaceAutonLeft() {
   chassis.odom_theta_flip();
-  SpooktacularAutonRight();
-
-  // lowerintake.move(-127);
-  // chassis.pid_drive_set(25_in, DRIVE_SPEED, true);
-  // chassis.pid_wait();
-  // chassis.pid_turn_set(-25_deg, TURN_SPEED);
-  // chassis.pid_wait();
-  // chassis.pid_drive_set(22_in, DRIVE_SPEED);
-  // chassis.pid_wait();
-  // chassis.pid_turn_set(-137_deg, TURN_SPEED);
-  // chassis.pid_wait();
-  // chassis.pid_drive_set(48_in, DRIVE_SPEED);
-  // chassis.pid_wait();
-  // chassis.pid_turn_set(180_deg, DRIVE_SPEED);
-  // chassis.pid_wait();
-  // chassis.pid_drive_set(-32_in, DRIVE_SPEED);
-  // chassis.pid_wait();
-  // upperintake.move(-127);
-}
-
-void SpooktacularAutonLeft() {
-  pros::delay(10000);
-  chassis.pid_drive_set(18.741_in, DRIVE_SPEED); 
-  chassis.pid_wait();
-  chassis.pid_turn_set(269.287_deg, TURN_SPEED);
-  chassis.pid_wait();
-  chassis.pid_drive_set(33.961_in, DRIVE_SPEED); 
-  chassis.pid_wait();
-  chassis.pid_turn_set(182.694_deg, TURN_SPEED);
-  chassis.pid_wait();
-  chassis.pid_drive_set(11.99_in, DRIVE_SPEED); 
-  chassis.pid_wait();
-  matchloader.set(true);
-  intake.move(-127);
-  pros::delay(2000);
-  matchloader.set(false);
-  chassis.pid_turn_set(1.251_deg, TURN_SPEED);
-  chassis.pid_wait();
-  chassis.pid_drive_set(32.275_in, DRIVE_SPEED); 
-  chassis.pid_wait();
-  chassis.pid_turn_set(1.2_deg, TURN_SPEED);
-  chassis.pid_wait();
-  outtake.move(-127);
+  SpaceAutonRight();
 }
 
 ///

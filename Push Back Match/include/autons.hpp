@@ -20,5 +20,6 @@ void TestAuton();
 
 void SpooktacularAutonRight(); 
 void SpooktacularAutonLeft();
-void SpooktacularAuton60Seconds();
+void SpaceAutonRight();
 void SpaceAutonLeft();
+void SpooktacularAuton60Seconds();
