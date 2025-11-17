@@ -400,7 +400,7 @@ void SpooktacularAutonRight() {
 
 void SpooktacularAutonLeft() {
   chassis.odom_theta_flip();
-  SpaceAutonRight();
+  SpooktacularAutonRight();
 }
 
 ///
@@ -483,3 +483,4 @@ void SpooktacularAuton60Seconds() {
   chassis.pid_turn_set(270_deg, TURN_SPEED);
   chassis.pid_wait();
 }
+
