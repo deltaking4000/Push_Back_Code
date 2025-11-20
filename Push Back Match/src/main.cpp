@@ -9,7 +9,7 @@
 ez::Drive chassis(
     // These are your drive motors, the first motor is used for sensing!
     {-1, -11, 13},     // Left Chassis Ports (negative port will reverse it!)
-    {8, 16, -18},  // Right Chassis Ports (negative port will reverse it!)
+    {10, 16, -18},  // Right Chassis Ports (negative port will reverse it!)
 
     9,      // Gyro Port
     (24.0/29)*3.25,  // Wheel Diameter (Remember, 4" wheels without screw holes are actually 4.125!)
@@ -62,7 +62,7 @@ void initialize() {
       {"LEFT BLUE/RED (BASIC)\nPosition on the left.", SpooktacularAutonLeft},
       {"RIGHT BLUE/RED WITH MATCHLOADER\nPosition above parkzone facing right.", SpaceAutonRight},
       {"LEFT BLUE/RED WITH MATCHLOADER\nPosition above parkzone facing left.", SpaceAutonLeft},
-      {"60 SECOND AUTON\nPosition on the right.", SpooktacularAuton60Seconds},
+      {"60 SECOND AUTON\nPosition on the right.", SpaceAuton60Seconds},
       {"Drive\n\nDrive forward and come back", drive_example},
       {"Turn\n\nTurn 3 times.", turn_example},
       /*

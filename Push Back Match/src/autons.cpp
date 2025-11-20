@@ -418,7 +418,7 @@ void SpaceAutonRight() {
   chassis.pid_wait();
   chassis.pid_turn_set(92.222_deg, TURN_SPEED);
   chassis.pid_wait();
-  chassis.pid_drive_set(14.811_in, DRIVE_SPEED); 
+  chassis.pid_drive_set(14_in, DRIVE_SPEED); 
   chassis.pid_wait();
 
   // wait couple seconds to remove blocks from matchloader
@@ -482,5 +482,47 @@ void SpooktacularAuton60Seconds() {
   chassis.pid_wait();
   chassis.pid_turn_set(270_deg, TURN_SPEED);
   chassis.pid_wait();
+}
+
+///
+// 60 second auton - robot starts above parkzone facing right
+///
+void SpaceAuton60Seconds() {
+  // only start intake so preload don't get thrown out 
+  intake.move(-127);
+  matchloader.set(true);
+
+  // drive to long-goal
+  chassis.pid_drive_set(42.28_in, DRIVE_SPEED); 
+  chassis.pid_wait();
+  chassis.pid_turn_set(90_deg, TURN_SPEED);
+  chassis.pid_wait();
+  chassis.pid_drive_set(14_in, DRIVE_SPEED); 
+  chassis.pid_wait();
+
+  // wait couple seconds to remove blocks from matchloader
+  pros::delay(2 * 1000); 
+
+  // drive back and score into long goal
+  chassis.pid_drive_set(-32.783_in, DRIVE_SPEED); 
+  chassis.pid_wait();
+  outtake.move(-127);
+  pros::delay(4 * 1000); 
+  matchloader.set(false);
+
+  // go to park zone
+  intake.move(0);
+  outtake.move(0);
+  chassis.pid_drive_set(20_in, DRIVE_SPEED); 
+  chassis.pid_wait();
+  chassis.pid_turn_set(-15_deg, TURN_SPEED);
+  chassis.pid_wait();
+  chassis.slew_drive_set(false);
+  chassis.pid_drive_set(-120_in, 127); 
+  chassis.pid_wait();
+  //chassis.pid_drive_set(5_in, 127); 
+  //chassis.pid_wait();
+  //chassis.pid_drive_set(-15_in, 127); 
+  //chassis.pid_wait();
 }
 
