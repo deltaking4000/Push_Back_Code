@@ -422,7 +422,7 @@ void SpaceAutonRight() {
   chassis.pid_wait();
 
   // wait couple seconds to remove blocks from matchloader
-  pros::delay(2 * 1000); 
+  pros::delay(0.75 * 1000); 
 
   // backup into long goal
   chassis.pid_drive_set(-32.454_in, DRIVE_SPEED); 
@@ -506,7 +506,10 @@ void SpaceAuton60Seconds() {
   // drive back and score into long goal
   chassis.pid_drive_set(-32.783_in, DRIVE_SPEED); 
   chassis.pid_wait();
+  intake.move(0);
   outtake.move(-127);
+  pros::delay(0.5*1000);
+  intake.move(-127);
   pros::delay(4 * 1000); 
   matchloader.set(false);
 
