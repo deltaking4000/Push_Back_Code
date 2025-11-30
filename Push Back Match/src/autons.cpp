@@ -484,6 +484,123 @@ void SpooktacularAuton60Seconds() {
   chassis.pid_wait();
 }
 
+
+///
+// 60 second auton - robot starts above parkzone facing right
+///
+void PressureBreakpointSkills() {
+  // 79 skills
+
+  // First matchload
+  matchloader.set(true);
+  intake.move(-127);
+  chassis.pid_drive_set(42.2_in, DRIVE_SPEED); 
+  chassis.pid_wait();
+  chassis.pid_turn_set(90_deg, TURN_SPEED);
+  chassis.pid_wait();
+  chassis.pid_drive_set(12_in, DRIVE_SPEED); 
+  chassis.pid_wait();
+  //timeout
+  pros::delay(2 * 1000); 
+  chassis.pid_turn_set(115_deg, TURN_SPEED);
+  chassis.pid_wait();
+
+  // Driving to second matchload
+  matchloader.set(false);
+  chassis.pid_drive_set(-31_in, DRIVE_SPEED); 
+  chassis.pid_wait();
+  chassis.pid_turn_set(90_deg, TURN_SPEED);
+  chassis.pid_wait();
+  chassis.pid_drive_set(-51_in, DRIVE_SPEED); 
+  chassis.pid_wait();
+  chassis.pid_turn_set(60.5_deg, TURN_SPEED);
+  chassis.pid_wait();
+  chassis.pid_drive_set(-28_in, DRIVE_SPEED); 
+  chassis.pid_wait();
+  chassis.pid_turn_set(270_deg, TURN_SPEED);
+  chassis.pid_wait();
+
+// Second matchload
+matchloader.set(true);
+outtake.move(-127);
+  chassis.pid_drive_set(-15.975_in, DRIVE_SPEED); 
+  chassis.pid_wait();
+ // chassis.pid_turn_set(271.279_deg, TURN_SPEED);
+  //chassis.pid_wait();
+  chassis.pid_drive_set(22.632_in, DRIVE_SPEED); 
+  chassis.pid_wait();
+  //chassis.pid_turn_set(271.279_deg, TURN_SPEED);
+  //chassis.pid_wait();
+  chassis.pid_drive_set(-22.632_in, DRIVE_SPEED); 
+  chassis.pid_wait();
+  chassis.pid_turn_set(240.315_deg, TURN_SPEED);
+  chassis.pid_wait();
+
+  // Driving to third matchload
+  outtake.move(0);
+  matchloader.set(false);
+  chassis.pid_drive_set(7.763_in, DRIVE_SPEED); 
+  chassis.pid_wait();
+  chassis.pid_turn_set(0.315_deg, TURN_SPEED);
+  chassis.pid_wait();
+  chassis.pid_drive_set(-89.372_in, DRIVE_SPEED); 
+  chassis.pid_wait();
+  chassis.pid_turn_set(271.279_deg, TURN_SPEED);
+  chassis.pid_wait();
+
+  // Third Matchload
+  matchloader.set(true);
+  chassis.pid_drive_set(17.479_in, DRIVE_SPEED); 
+  chassis.pid_wait();
+  chassis.pid_turn_set(293.45_deg, TURN_SPEED);
+  chassis.pid_wait();
+
+  // Driving to fourth matchload
+  matchloader.set(false);
+  chassis.pid_drive_set(-33.963_in, DRIVE_SPEED); 
+  chassis.pid_wait();
+  chassis.pid_turn_set(271.279_deg, TURN_SPEED);
+  chassis.pid_wait();
+  chassis.pid_drive_set(-52.587_in, DRIVE_SPEED); 
+  chassis.pid_wait();
+  chassis.pid_turn_set(56.322_deg, TURN_SPEED);
+  chassis.pid_wait();
+  chassis.pid_drive_set(20.912_in, DRIVE_SPEED); 
+  chassis.pid_wait();
+  chassis.pid_turn_set(90.515_deg, TURN_SPEED);
+  chassis.pid_wait();
+
+  // Fourth Matchload
+  outtake.move(-127);
+  matchloader.set(true);
+  chassis.pid_drive_set(-12.482_in, DRIVE_SPEED); 
+  chassis.pid_wait();
+ // chassis.pid_turn_set(91.279_deg, TURN_SPEED);
+  //chassis.pid_wait();
+  chassis.pid_drive_set(22.965_in, DRIVE_SPEED); 
+  chassis.pid_wait();
+  //chassis.pid_turn_set(90.424_deg, TURN_SPEED);
+  //chassis.pid_wait();
+  chassis.pid_drive_set(-22.301_in, DRIVE_SPEED); 
+  chassis.pid_wait();
+  chassis.pid_turn_set(54.012_deg, TURN_SPEED);
+  chassis.pid_wait();
+
+  // Parking
+  outtake.move(0);
+  chassis.pid_drive_set(28.856_in, DRIVE_SPEED); 
+  chassis.pid_wait();
+  chassis.pid_turn_set(8.13_deg, TURN_SPEED);
+  chassis.pid_wait();
+  chassis.pid_drive_set(43.242_in, DRIVE_SPEED); 
+  chassis.pid_wait();
+  chassis.pid_turn_set(1.279_deg, TURN_SPEED);
+  chassis.pid_wait();
+
+
+}
+
+
 ///
 // 60 second auton - robot starts above parkzone facing right
 ///
