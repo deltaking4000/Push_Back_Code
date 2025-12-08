@@ -8,7 +8,7 @@
 // Chassis constructor
 ez::Drive chassis(
     // These are your drive motors, the first motor is used for sensing!
-    {-1, -11, 13},     // Left Chassis Ports (negative port will reverse it!)
+    {-1, -15, 17},     // Le12wft Chassis Ports (negative port will reverse it!)
     {10, 16, -18},  // Right Chassis Ports (negative port will reverse it!)
 
     9,      // Gyro Port
