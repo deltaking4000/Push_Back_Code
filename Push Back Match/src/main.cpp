@@ -5,15 +5,21 @@
 // https://ez-robotics.github.io/EZ-Template/
 ///// 
 
+
+
 // Chassis constructor
 ez::Drive chassis(
     // These are your drive motors, the first motor is used for sensing!
-    {-1, -15, 17},     // Le12wft Chassis Ports (negative port will reverse it!)
-    {10, 16, -18},  // Right Chassis Ports (negative port will reverse it!)
+    {-1, 15, -17},     // Le12wft Chassis Ports (negative port will reverse it!)
+    {10, -16, 18},  // Right Chassis Ports (negative port will reverse it!)
 
-    9,      // Gyro Port
-    (24.0/29)*3.25,  // Wheel Diameter (Remember, 4" wheels without screw holes are actually 4.125!)
-    450);   // Wheel RPM = cartridge * (motor gear / wheel gear)
+    7,      // Gyro Port
+    3.25,  // Wheel Diameter (Remember, 4" wheels without screw holes are actually 4.125!)
+    450,   // Wheel RPM = cartridge * (motor gear / wheel gear)
+
+    // eg. if your drive is 84:36 where the 36t is powered, your RATIO would be 84/36 which is 2.333
+    // eg. if your drive is 36:60 where the 60t is powered, your RATIO would be 36/60 which is 0.6
+    48.0/36.0);
 
 // Uncomment the trackers you're using here!
 // - `8` and `9` are smart ports (making these negative will reverse the sensor)
@@ -22,6 +28,8 @@ ez::Drive chassis(
 // - `4.0` is the distance from the center of the wheel to the center of the robot
 // ez::tracking_wheel horiz_tracker(8, 2.75, 4.0);  // This tracking wheel is perpendicular to the drive wheels
 // ez::tracking_wheel vert_tracker(9, 2.75, 4.0);   // This tracking wheel is parallel to the drive wheels
+ez::tracking_wheel horiz_tracker(-14, 2, 4.0);  // This tracking wheel is perpendicular to the drive wheels
+ez::tracking_wheel vert_tracker(12, 2, 0.0);  // This tracking wheel is parallel to the drive wheels
 
 /**
  * Runs initialization code. This occurs as soon as the program is started.
@@ -38,11 +46,11 @@ void initialize() {
   // Look at your horizontal tracking wheel and decide if it's in front of the midline of your robot or behind it
   //  - change `back` to `front` if the tracking wheel is in front of the midline
   //  - ignore this if you aren't using a horizontal tracker
-  // chassis.odom_tracker_back_set(&horiz_tracker);
+   chassis.odom_tracker_back_set(&horiz_tracker);
   // Look at your vertical tracking wheel and decide if it's to the left or right of the center of the robot
   //  - change `left` to `right` if the tracking wheel is to the right of the centerline
   //  - ignore this if you aren't using a vertical tracker
-  // chassis.odom_tracker_left_set(&vert_tracker);
+   chassis.odom_tracker_left_set(&vert_tracker);
 
   // Configure your chassis controls
   chassis.opcontrol_curve_buttons_toggle(true);   // Enables modifying the controller curve with buttons on the joysticks
@@ -62,8 +70,11 @@ void initialize() {
       {"LEFT BLUE/RED (BASIC)\nPosition on the left.", SpooktacularAutonLeft},
       {"RIGHT BLUE/RED WITH MATCHLOADER\nPosition above parkzone facing right.", SpaceAutonRight},
       {"LEFT BLUE/RED WITH MATCHLOADER\nPosition above parkzone facing left.", SpaceAutonLeft},
-      {"60 SECOND AUTON\nPosition above park zone facing right.", PressureBreakpointSkills},
+      {"60 SECOND AUTON\nPosition above park zone facing right.",  PressureBreakpointSkills},
+      {"SuperSoloAWP\n\nPosition above parkzone facing right", SuperSoloAWP},
       {"Drive\n\nDrive forward and come back", drive_example},
+      {"Odom Drive\n\nDrive forward and come back", odom_drive_example},
+      {"Odom Coordinates PP Drive\n\nDrive forward and come back", odom_pure_pursuit_example},
       {"Turn\n\nTurn 3 times.", turn_example},
       /*
       {"Drive and Turn\n\nDrive forward, turn, come back", drive_and_turn},
@@ -182,7 +193,8 @@ void ez_screen_task() {
           screen_print_tracker(chassis.odom_tracker_front, "f", 7);
         }
       }
-      else if (ez::as::page_blank_is_on(1)) {
+      
+      if (ez::as::page_blank_is_on(1)) {
           ez::screen_print("Left: " + util::to_string_with_precision(chassis.drive_sensor_left()) +
           "\nRight: " + util::to_string_with_precision(chassis.drive_sensor_right()), 1);
       }
@@ -269,7 +281,7 @@ void opcontrol() {
     // Put more user control code here!
     // . . .
 
-
+/*
 		if (master.get_digital_new_press(DIGITAL_R1)) {
 			if (intakeStarted == false) {
 				intake.move_velocity(600);
@@ -291,7 +303,21 @@ void opcontrol() {
 				intake.move_velocity(0);
 				intakeStarted = false;
 			}
-		}
+		}*/
+
+     // Uncomment for hold-button to spin, comment out above block
+
+    if (master.get_digital(DIGITAL_R1)) {
+      intake.move(-127);
+    } 
+    else if (master.get_digital(DIGITAL_R2)){
+      outtake.move(-127);
+      intake.move(-127);
+    }
+    else {
+      outtake.move(0);
+      intake.move(0);
+    }
 
     if (master.get_digital(DIGITAL_L1)) {
       matchloader.set(true);
@@ -301,7 +327,7 @@ void opcontrol() {
     } 
 
     if (master.get_digital(DIGITAL_UP)) {
-      outtake.move(-127);
+      outtake.move(-82.5);
     } 
     else if (master.get_digital(DIGITAL_DOWN)) {
       outtake.move(0);
@@ -312,6 +338,7 @@ void opcontrol() {
     } 
     if (master.get_digital(DIGITAL_B)) {
       wingmech.set(false);
+         
     }
   
     pros::delay(ez::util::DELAY_TIME);  // This is used for timer calculations!  Keep this ez::util::DELAY_TIME

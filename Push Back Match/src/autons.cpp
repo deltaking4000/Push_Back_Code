@@ -7,11 +7,13 @@
 
 // These are out of 127
 const int DRIVE_SPEED = 110;
+const int DRIVE_SPEED_SLOW = 70;
 const int TURN_SPEED = 90;
 const int SWING_SPEED = 110;
 
+
 ///
-// Constants
+// Constantsq
 ///
 void default_constants() {
   // P, I, D, and Start I
@@ -414,11 +416,11 @@ void SpaceAutonRight() {
   matchloader.set(true);
 
   // drive to matchloader
-  chassis.pid_drive_set(42.284_in, DRIVE_SPEED); 
+  chassis.pid_drive_set(41.274_in, DRIVE_SPEED); 
   chassis.pid_wait();
-  chassis.pid_turn_set(92.222_deg, TURN_SPEED);
+  chassis.pid_turn_set(90_deg, TURN_SPEED);
   chassis.pid_wait();
-  chassis.pid_drive_set(14_in, DRIVE_SPEED); 
+  chassis.pid_drive_set(13.314_in, DRIVE_SPEED); 
   chassis.pid_wait();
 
   // wait couple seconds to remove blocks from matchloader
@@ -426,8 +428,6 @@ void SpaceAutonRight() {
 
   // backup into long goal
   chassis.pid_drive_set(-32.454_in, DRIVE_SPEED); 
-  chassis.pid_wait();
-  chassis.pid_turn_set(90_deg, TURN_SPEED);
   chassis.pid_wait();
 
   // score into long goal
@@ -489,17 +489,83 @@ void SpooktacularAuton60Seconds() {
 // 60 second auton - robot starts above parkzone facing right
 ///
 void PressureBreakpointSkills() {
+
+  matchloader.set(true);
+  intake.move(-82.5);
+
+  // 1. 1st match-loader - drive and intake
+  chassis.pid_drive_set(37.943_in, DRIVE_SPEED); 
+  chassis.pid_wait();
+  chassis.pid_turn_set(90_deg, TURN_SPEED);
+  chassis.pid_wait();
+  chassis.pid_drive_set(10.069_in, DRIVE_SPEED); 
+  chassis.pid_wait();
+  chassis.pid_turn_set(90_deg, TURN_SPEED);
+  chassis.pid_wait();
+  // wait for intake to complete
+  pros::delay(2 * 1000); 
+
+  // 2. drive to other end of long-goal andcore
+  chassis.pid_drive_set(-3.411_in, DRIVE_SPEED); 
+  chassis.pid_wait();
+
+
+  matchloader.set(false);
+
+  chassis.pid_turn_set(124.737_deg, TURN_SPEED);
+  chassis.pid_wait();
+  chassis.pid_drive_set(-21.465_in, DRIVE_SPEED); 
+  chassis.pid_wait();
+  chassis.pid_turn_set(90_deg, TURN_SPEED);
+  chassis.pid_wait();
+  chassis.pid_drive_set(-65.066_in, DRIVE_SPEED); 
+  chassis.pid_wait();
+  chassis.pid_turn_set(57.923_deg, TURN_SPEED);
+  chassis.pid_wait();
+  chassis.pid_drive_set(-21.626_in, DRIVE_SPEED); 
+  chassis.pid_wait();
+  chassis.pid_turn_set(270_deg, TURN_SPEED);
+  chassis.pid_wait();
+  chassis.pid_drive_set(-15.911_in, DRIVE_SPEED); 
+  chassis.pid_wait();
+  chassis.pid_turn_set(270_deg, TURN_SPEED);
+  chassis.pid_wait();
+
+  // score in long goal and wait for blocks to score
+  outtake.move(-82.5);
+  pros::delay(5 * 1000); 
+  outtake.move(0);
+
+  // 3. 2nd match-loader intake and score
+  matchloader.set(true);
+
+  chassis.pid_drive_set(23.464_in, DRIVE_SPEED); 
+  chassis.pid_wait();
+  chassis.pid_turn_set(270_deg, TURN_SPEED);
+  chassis.pid_wait();
+
+  // wait for intake to complete
+  pros::delay(2 * 1000); 
+
+  chassis.pid_drive_set(-23.464_in, DRIVE_SPEED); 
+  chassis.pid_wait();
+  chassis.pid_turn_set(270_deg, TURN_SPEED);
+  chassis.pid_wait();
+
+  // score in long goal and wait for blocks to score
+  outtake.move(-82.5);
+  pros::delay(5 * 1000); 
+  outtake.move(0);
+  matchloader.set(false);
+}
+
+void PressureBreakpointSkillsOld() {
   // 79 skills
 
   // First matchload
   matchloader.set(true);
   intake.move(-127);
-  chassis.pid_drive_set(42.2_in, DRIVE_SPEED); 
-  chassis.pid_wait();
-  chassis.pid_turn_set(90_deg, TURN_SPEED);
-  chassis.pid_wait();
-  chassis.pid_drive_set(12_in, DRIVE_SPEED); 
-  chassis.pid_wait();
+
   //timeout
   pros::delay(2 * 1000); 
   chassis.pid_turn_set(115_deg, TURN_SPEED);
@@ -507,15 +573,15 @@ void PressureBreakpointSkills() {
 
   // Driving to second matchload
   matchloader.set(false);
-  chassis.pid_drive_set(-31_in, DRIVE_SPEED); 
+  chassis.pid_drive_set(-27_in, DRIVE_SPEED); 
   chassis.pid_wait();
   chassis.pid_turn_set(90_deg, TURN_SPEED);
   chassis.pid_wait();
-  chassis.pid_drive_set(-51_in, DRIVE_SPEED); 
+  chassis.pid_drive_set(-60_in, DRIVE_SPEED); 
   chassis.pid_wait();
   chassis.pid_turn_set(60.5_deg, TURN_SPEED);
   chassis.pid_wait();
-  chassis.pid_drive_set(-28_in, DRIVE_SPEED); 
+  chassis.pid_drive_set(-35_in, DRIVE_SPEED); 
   chassis.pid_wait();
   chassis.pid_turn_set(270_deg, TURN_SPEED);
   chassis.pid_wait();
@@ -523,15 +589,16 @@ void PressureBreakpointSkills() {
 // Second matchload
 matchloader.set(true);
 outtake.move(-127);
-  chassis.pid_drive_set(-15.975_in, DRIVE_SPEED); 
+  chassis.pid_drive_set(-25.975_in, DRIVE_SPEED); 
   chassis.pid_wait();
  // chassis.pid_turn_set(271.279_deg, TURN_SPEED);
   //chassis.pid_wait();
-  chassis.pid_drive_set(22.632_in, DRIVE_SPEED); 
+  chassis.pid_drive_set(29.632_in, DRIVE_SPEED); 
   chassis.pid_wait();
+  pros::delay(2 * 1000);
   //chassis.pid_turn_set(271.279_deg, TURN_SPEED);
   //chassis.pid_wait();
-  chassis.pid_drive_set(-22.632_in, DRIVE_SPEED); 
+  chassis.pid_drive_set(-29.632_in, DRIVE_SPEED); 
   chassis.pid_wait();
   chassis.pid_turn_set(240.315_deg, TURN_SPEED);
   chassis.pid_wait();
@@ -539,11 +606,11 @@ outtake.move(-127);
   // Driving to third matchload
   outtake.move(0);
   matchloader.set(false);
-  chassis.pid_drive_set(7.763_in, DRIVE_SPEED); 
+  chassis.pid_drive_set(10.763_in, DRIVE_SPEED); 
   chassis.pid_wait();
   chassis.pid_turn_set(0.315_deg, TURN_SPEED);
   chassis.pid_wait();
-  chassis.pid_drive_set(-89.372_in, DRIVE_SPEED); 
+  chassis.pid_drive_set(-93.372_in, DRIVE_SPEED); 
   chassis.pid_wait();
   chassis.pid_turn_set(271.279_deg, TURN_SPEED);
   chassis.pid_wait();
@@ -563,7 +630,7 @@ outtake.move(-127);
   chassis.pid_wait();
   chassis.pid_drive_set(-52.587_in, DRIVE_SPEED); 
   chassis.pid_wait();
-  chassis.pid_turn_set(56.322_deg, TURN_SPEED);
+  chassis.pid_turn_set(-56.322_deg, TURN_SPEED);
   chassis.pid_wait();
   chassis.pid_drive_set(20.912_in, DRIVE_SPEED); 
   chassis.pid_wait();
@@ -614,7 +681,7 @@ void SpaceAuton60Seconds() {
   chassis.pid_wait();
   chassis.pid_turn_set(90_deg, TURN_SPEED);
   chassis.pid_wait();
-  chassis.pid_drive_set(14_in, DRIVE_SPEED); 
+  chassis.pid_drive_set(10_in, DRIVE_SPEED_SLOW); 
   chassis.pid_wait();
 
   // wait couple seconds to remove blocks from matchloader
@@ -624,9 +691,9 @@ void SpaceAuton60Seconds() {
   chassis.pid_drive_set(-32.783_in, DRIVE_SPEED); 
   chassis.pid_wait();
   intake.move(0);
-  outtake.move(-127);
+  outtake.move(-82.5);
   pros::delay(0.5*1000);
-  intake.move(-127);
+  intake.move(-82.5);//-127
   pros::delay(4 * 1000); 
   matchloader.set(false);
 
@@ -646,3 +713,57 @@ void SpaceAuton60Seconds() {
   //chassis.pid_wait();
 }
 
+//
+// 60 second auton - robot starts above parkzone facing right
+///
+void SuperSoloAWP() {
+  // Path
+
+chassis.pid_drive_set(-16.807_in, DRIVE_SPEED); 
+chassis.pid_wait();
+chassis.pid_turn_set(179.831_deg, TURN_SPEED);
+chassis.pid_wait();
+chassis.pid_drive_set(56.413_in, DRIVE_SPEED); 
+chassis.pid_wait();
+chassis.pid_turn_set(90_deg, TURN_SPEED);
+chassis.pid_wait();
+chassis.pid_drive_set(-11.649_in, DRIVE_SPEED); 
+chassis.pid_wait();
+chassis.pid_turn_set(270_deg, TURN_SPEED);
+chassis.pid_wait();
+chassis.pid_drive_set(-24.296_in, DRIVE_SPEED); 
+chassis.pid_wait();
+chassis.pid_turn_set(179.488_deg, TURN_SPEED);
+chassis.pid_wait();
+chassis.pid_drive_set(-18.639_in, DRIVE_SPEED); 
+chassis.pid_wait();
+chassis.pid_turn_set(55.814_deg, TURN_SPEED);
+chassis.pid_wait();
+chassis.pid_drive_set(10.662_in, DRIVE_SPEED); 
+chassis.pid_wait();
+chassis.pid_turn_set(0.205_deg, TURN_SPEED);
+chassis.pid_wait();
+chassis.pid_drive_set(46.595_in, DRIVE_SPEED); 
+chassis.pid_wait();
+chassis.pid_turn_set(314.519_deg, TURN_SPEED);
+chassis.pid_wait();
+chassis.pid_drive_set(-14.003_in, DRIVE_SPEED); 
+chassis.pid_wait();
+chassis.pid_turn_set(318.711_deg, TURN_SPEED);
+chassis.pid_wait();
+chassis.pid_drive_set(43.629_in, DRIVE_SPEED); 
+chassis.pid_wait();
+chassis.pid_turn_set(270_deg, TURN_SPEED);
+chassis.pid_wait();
+chassis.pid_drive_set(14.311_in, DRIVE_SPEED); 
+chassis.pid_wait();
+chassis.pid_turn_set(270_deg, TURN_SPEED);
+chassis.pid_wait();
+chassis.pid_drive_set(-24.296_in, DRIVE_SPEED); 
+chassis.pid_wait();
+chassis.pid_turn_set(0_deg, TURN_SPEED);
+chassis.pid_wait();
+
+
+
+}
