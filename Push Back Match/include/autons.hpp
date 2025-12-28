@@ -17,7 +17,6 @@ void odom_boomerang_example();
 void odom_boomerang_injected_pure_pursuit_example();
 void measure_offsets();
 void TestAuton(); 
-
 void SpooktacularAutonRight(); 
 void SpooktacularAutonLeft();
 void SpaceAutonRight();
@@ -25,3 +24,4 @@ void SpaceAutonLeft();
 void SpooktacularAuton60Seconds();
 void SpaceAuton60Seconds();
 void PressureBreakpointSkills();
+void SuperSoloAWP();
