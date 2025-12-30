@@ -10,7 +10,7 @@
 // Chassis constructor
 ez::Drive chassis(
     // These are your drive motors, the first motor is used for sensing!
-    {-1, 15, -17},     // Le12wft Chassis Ports (negative port will reverse it!)
+    {-1, 15, -17},     // Left Chassis Ports (negative port will reverse it!)
     {10, -16, 18},  // Right Chassis Ports (negative port will reverse it!)
 
     7,      // Gyro Port
@@ -28,8 +28,8 @@ ez::Drive chassis(
 // - `4.0` is the distance from the center of the wheel to the center of the robot
 // ez::tracking_wheel horiz_tracker(8, 2.75, 4.0);  // This tracking wheel is perpendicular to the drive wheels
 // ez::tracking_wheel vert_tracker(9, 2.75, 4.0);   // This tracking wheel is parallel to the drive wheels
-ez::tracking_wheel horiz_tracker(-14, 2, 4.0);  // This tracking wheel is perpendicular to the drive wheels
-ez::tracking_wheel vert_tracker(12, 2, 0.0);  // This tracking wheel is parallel to the drive wheels
+// ez::tracking_wheel horiz_tracker(-14, 2, 4.0);  // This tracking wheel is perpendicular to the drive wheels
+ez::tracking_wheel vert_tracker(-12, 2, 0.0);  // This tracking wheel is parallel to the drive wheels
 
 /**
  * Runs initialization code. This occurs as soon as the program is started.
@@ -46,7 +46,7 @@ void initialize() {
   // Look at your horizontal tracking wheel and decide if it's in front of the midline of your robot or behind it
   //  - change `back` to `front` if the tracking wheel is in front of the midline
   //  - ignore this if you aren't using a horizontal tracker
-   chassis.odom_tracker_back_set(&horiz_tracker);
+  //  chassis.odom_tracker_back_set(&horiz_tracker);
   // Look at your vertical tracking wheel and decide if it's to the left or right of the center of the robot
   //  - change `left` to `right` if the tracking wheel is to the right of the centerline
   //  - ignore this if you aren't using a vertical tracker
