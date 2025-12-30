@@ -29,7 +29,7 @@ ez::Drive chassis(
 // ez::tracking_wheel horiz_tracker(8, 2.75, 4.0);  // This tracking wheel is perpendicular to the drive wheels
 // ez::tracking_wheel vert_tracker(9, 2.75, 4.0);   // This tracking wheel is parallel to the drive wheels
 // ez::tracking_wheel horiz_tracker(-14, 2, 4.0);  // This tracking wheel is perpendicular to the drive wheels
-ez::tracking_wheel vert_tracker(-12, 2, 0.0);  // This tracking wheel is parallel to the drive wheels
+ez::tracking_wheel vert_tracker(-12, 2, -1.04);  // This tracking wheel is parallel to the drive wheels
 
 /**
  * Runs initialization code. This occurs as soon as the program is started.
@@ -76,6 +76,8 @@ void initialize() {
       {"Odom Drive\n\nDrive forward and come back", odom_drive_example},
       {"Odom Coordinates PP Drive\n\nDrive forward and come back", odom_pure_pursuit_example},
       {"Turn\n\nTurn 3 times.", turn_example},
+      {"Tracking Wheel Offsets\n\n Measure Tracking Wheel Offsets.", measure_offsets},
+
       /*
       {"Drive and Turn\n\nDrive forward, turn, come back", drive_and_turn},
       {"Drive and Turn\n\nSlow down during drive", wait_until_change_speed},
