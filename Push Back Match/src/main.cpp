@@ -14,8 +14,8 @@ ez::Drive chassis(
     {10, -16, 18},  // Right Chassis Ports (negative port will reverse it!)
 
     7,      // Gyro Port
-    3.25,  // Wheel Diameter (Remember, 4" wheels without screw holes are actually 4.125!)
-    450,   // Wheel RPM = cartridge * (motor gear / wheel gear)
+    (24.0/17.91)*3.25,  // Wheel Diameter (Remember, 4" wheels without screw holes are actually 4.125!)
+    450,   // Wheel RPM = cartridge * (motor gear / wheel gear) 
 
     // eg. if your drive is 84:36 where the 36t is powered, your RATIO would be 84/36 which is 2.333
     // eg. if your drive is 36:60 where the 60t is powered, your RATIO would be 36/60 which is 0.6
