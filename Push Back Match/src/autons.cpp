@@ -48,6 +48,8 @@ void default_constants() {
   chassis.odom_boomerang_dlead_set(0.625);     // This handles how aggressive the end of boomerang motions are
 
   chassis.pid_angle_behavior_set(ez::shortest);  // Changes the default behavior for turning, this defaults it to the shortest path there
+
+  chassis.drive_imu_scaler_set(360.0/359.28);
 }
 
 ///
