@@ -1,4 +1,5 @@
 #include "main.h"
+#include "lemlib/api.hpp" // IWYU pragma: keep
 
 /////
 // For installation, upgrading, documentations, and tutorials, check out our website!
@@ -29,7 +30,67 @@ ez::Drive chassis(
 // ez::tracking_wheel horiz_tracker(8, 2.75, 4.0);  // This tracking wheel is perpendicular to the drive wheels
 // ez::tracking_wheel vert_tracker(9, 2.75, 4.0);   // This tracking wheel is parallel to the drive wheels
 // ez::tracking_wheel horiz_tracker(-14, 2, 4.0);  // This tracking wheel is perpendicular to the drive wheels
-ez::tracking_wheel vert_tracker(-12, 2, -1.04);  // This tracking wheel is parallel to the drive wheels
+ez::tracking_wheel vert_tracker(-12, 2, -0.4);  // This tracking wheel is parallel to the drive wheels
+
+//////////////////////////////////////////////////////////
+// Lemlib config:
+
+// motor groups
+pros::MotorGroup leftMotors({-1, 15, -17}, pros::MotorGearset::blue); // left motor group 
+pros::MotorGroup rightMotors({10, -16, 18}, pros::MotorGearset::blue); // right motor group  
+
+// Inertial Sensor on port 10
+pros::Imu imu(7);
+
+// drivetrain settings
+lemlib::Drivetrain drivetrain(&leftMotors, // left motor group
+                              &rightMotors, // right motor group
+                              12, // 12 inch track width
+                              lemlib::Omniwheel::NEW_325, // using new 3.25" omnis + traction
+                              450, // drivetrain rpm is 360
+                              2 // horizontal drift is 2 (for now)
+);
+
+// odometry settings
+lemlib::OdomSensors sensors(nullptr, // vertical tracking wheel 1, set to null
+                            nullptr, // vertical tracking wheel 2, set to nullptr as we are using IMEs
+                            nullptr, // horizontal tracking wheel 1
+                            nullptr, // horizontal tracking wheel 2, set to nullptr as we don't have a second one
+                            &imu // inertial sensor
+);
+
+// lateral PID controller
+lemlib::ControllerSettings lateral_controller(10, // proportional gain (kP)
+                                              0, // integral gain (kI)
+                                              3, // derivative gain (kD)
+                                              3, // anti windup
+                                              1, // small error range, in inches
+                                              100, // small error range timeout, in milliseconds
+                                              3, // large error range, in inches
+                                              500, // large error range timeout, in milliseconds
+                                              20 // maximum acceleration (slew)
+);
+
+// angular PID controller
+lemlib::ControllerSettings angular_controller(2, // proportional gain (kP)
+                                              0, // integral gain (kI)
+                                              10, // derivative gain (kD)
+                                              3, // anti windup
+                                              1, // small error range, in degrees
+                                              100, // small error range timeout, in milliseconds
+                                              3, // large error range, in degrees
+                                              500, // large error range timeout, in milliseconds
+                                              0 // maximum acceleration (slew)
+);
+
+// create the chassis
+lemlib::Chassis lemchassis(drivetrain, // drivetrain settings
+                        lateral_controller, // lateral PID settings
+                        angular_controller, // angular PID settings
+                        sensors // odometry sensors
+);
+//////////////////////////////////////////////////////////
+
 
 /**
  * Runs initialization code. This occurs as soon as the program is started.
@@ -50,7 +111,8 @@ void initialize() {
   // Look at your vertical tracking wheel and decide if it's to the left or right of the center of the robot
   //  - change `left` to `right` if the tracking wheel is to the right of the centerline
   //  - ignore this if you aren't using a vertical tracker
-   chassis.odom_tracker_left_set(&vert_tracker);
+  
+  // chassis.odom_tracker_left_set(&vert_tracker);
 
   // Configure your chassis controls
   chassis.opcontrol_curve_buttons_toggle(true);   // Enables modifying the controller curve with buttons on the joysticks
@@ -98,6 +160,10 @@ void initialize() {
   chassis.initialize();
   ez::as::initialize();
   master.rumble(chassis.drive_imu_calibrated() ? "." : "---");
+
+  //////////////////////////////////////////////////////////////////
+  lemchassis.calibrate(); // calibrate sensors
+  /////////////////////////////////////////////////////////////////
 }
 
 /**
@@ -274,10 +340,19 @@ void opcontrol() {
     ez_template_extras();
 
     // chassis.opcontrol_tank();  // Tank control
-    chassis.opcontrol_arcade_standard(ez::SPLIT);   // Standard split arcade
+    //chassis.opcontrol_arcade_standard(ez::SPLIT);   // Standard split arcade
     // chassis.opcontrol_arcade_standard(ez::SINGLE);  // Standard single arcade
     // chassis.opcontrol_arcade_flipped(ez::SPLIT);    // Flipped split arcade
     // chassis.opcontrol_arcade_flipped(ez::SINGLE);   // Flipped single arcade
+
+    //////////////////////////////////////////////////////////////////////////////
+    // get left y and right x positions
+    int leftY = master.get_analog(pros::E_CONTROLLER_ANALOG_LEFT_Y);
+    int rightX = master.get_analog(pros::E_CONTROLLER_ANALOG_RIGHT_X);
+
+    // move the robot
+    lemchassis.curvature(leftY, rightX);
+    //////////////////////////////////////////////////////////////////////////////
 
     // . . .
     // Put more user control code here!
