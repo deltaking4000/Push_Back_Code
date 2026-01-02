@@ -316,6 +316,9 @@ void opcontrol() {
       outtake.move(-127);
       intake.move(-127);
     }
+    else if (master.get_digital(DIGITAL_UP)) {
+      intake.move(127);
+    } 
     else {
       outtake.move(0);
       intake.move(0);
@@ -328,12 +331,8 @@ void opcontrol() {
       matchloader.set(false);
     } 
 
-    if (master.get_digital(DIGITAL_UP)) {
-      outtake.move(-82.5);
-    } 
-    else if (master.get_digital(DIGITAL_DOWN)) {
-      outtake.move(0);
-    }
+
+
 
     if (master.get_digital(DIGITAL_X)) {
       wingmech.set(true);
@@ -342,6 +341,8 @@ void opcontrol() {
       wingmech.set(false);
          
     }
+
+    middlegoal.button_toggle(master.get_digital(DIGITAL_A));
   
     pros::delay(ez::util::DELAY_TIME);  // This is used for timer calculations!  Keep this ez::util::DELAY_TIME
   }
