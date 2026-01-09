@@ -34,7 +34,7 @@ ez::tracking_wheel vert_tracker(-12, 2, 0.4);  // This tracking wheel is paralle
 
 //////////////////////////////////////////////////////////
 // Lemlib config:
-
+/*
 // motor groups
 pros::MotorGroup leftMotors({-1, 15, -17}, pros::MotorGearset::blue); // left motor group 
 pros::MotorGroup rightMotors({10, -16, 18}, pros::MotorGearset::blue); // right motor group  
@@ -89,6 +89,7 @@ lemlib::Chassis lemchassis(drivetrain, // drivetrain settings
                         angular_controller, // angular PID settings
                         sensors // odometry sensors
 );
+*/
 //////////////////////////////////////////////////////////
 
 
@@ -117,7 +118,7 @@ void initialize() {
   // Configure your chassis controls
   chassis.opcontrol_curve_buttons_toggle(true);   // Enables modifying the controller curve with buttons on the joysticks
   chassis.opcontrol_drive_activebrake_set(0.0);   // Sets the active brake kP. We recommend ~2.  0 will disable.
-  chassis.opcontrol_curve_default_set(0.0, 0.0);  // Defaults for curve. If using tank, only the first parameter is used. (Comment this line out if you have an SD card!)
+  // chassis.opcontrol_curve_default_set(0.0, 0.0);  // Defaults for curve. If using tank, only the first parameter is used. (Comment this line out if you have an SD card!)
 
   // Set the drive to your own constants from autons.cpp!
   default_constants();
@@ -317,6 +318,21 @@ void ez_template_extras() {
   }
 }
 
+// Curvature drive from lemlib 
+// https://github.com/LemLib/LemLib/blob/79acbe657559d08057f5de5136761ad88ce49bae/src/lemlib/chassis/opcontrol.cpp#L27
+void opcontrol_curvature(int forward, int turn) {
+    // If we're not moving forwards change to arcade drive
+    if (forward == 0) {
+      chassis.opcontrol_arcade_standard(ez::SPLIT);   // Standard split arcade
+      return;
+    }
+
+    double leftPower = forward + std::abs(forward) * turn;
+    double rightPower = forward - std::abs(forward) * turn;
+
+    chassis.drive_set(leftPower, rightPower);
+}
+
 /**
  * Runs the operator control code. This function will be started in its own task
  * with the default priority and stack size whenever the robot is enabled via
@@ -334,6 +350,7 @@ void opcontrol() {
   // This is preference to what you like to drive on
   chassis.drive_brake_set(MOTOR_BRAKE_COAST);
   bool intakeStarted = false; 
+  bool enableCurvatureDrive = true;
 
   while (true) {
     // Gives you some extras to make EZ-Template ezier
@@ -343,12 +360,18 @@ void opcontrol() {
     // Use lemlib opcontrol for curvature drive instead of eztemplate
     // chassis.opcontrol_arcade_standard(ez::SPLIT);   // Standard split arcade
 
-    // get left y and right x positions
-    int leftY = master.get_analog(pros::E_CONTROLLER_ANALOG_LEFT_Y);
-    int rightX = master.get_analog(pros::E_CONTROLLER_ANALOG_RIGHT_X);
+    if (master.get_digital(DIGITAL_Y) && master.get_digital(DIGITAL_DOWN)) {
+      enableCurvatureDrive = !enableCurvatureDrive;
+      master.print(0, 0, enableCurvatureDrive ? "Curvature Drive" : "Arcade Drive   ");
+    }
 
-    // move the robot
-    lemchassis.curvature(leftY, rightX);
+    if (enableCurvatureDrive) {
+      int leftY = master.get_analog(pros::E_CONTROLLER_ANALOG_LEFT_Y);
+      int rightX = master.get_analog(pros::E_CONTROLLER_ANALOG_RIGHT_X);
+      opcontrol_curvature(leftY, rightX);
+    } else {
+      chassis.opcontrol_arcade_standard(ez::SPLIT);   // Standard split arcade
+    }
     //////////////////////////////////////////////////////////////////////////////
 
     // . . .
