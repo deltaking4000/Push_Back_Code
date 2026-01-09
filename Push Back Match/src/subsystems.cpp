@@ -25,19 +25,19 @@ void reverse_intake() {
 
 // Pneumatics
 void lift_matchloader() {
-  matchloader.set(true);
-}
-
-void drop_matchloader() {
     matchloader.set(false); 
 }
 
+void drop_matchloader() {
+    matchloader.set(true);
+}
+
 void lift_middlegoal() {
-    middlegoal.set(true);
+    middlegoal.set(false);
 }
 
 void drop_middlegoal() {
-    middlegoal.set(false);
+    middlegoal.set(true);
 }
 
 void lift_wingmech() {
