@@ -1,3 +1,4 @@
+
 #include "main.h"
 #include "lemlib/api.hpp" // IWYU pragma: keep
 
@@ -129,17 +130,19 @@ void initialize() {
 
   // Autonomous Selector using LLEMU
   ez::as::auton_selector.autons_add({
-      {"RIGHT BLUE/RED (BASIC)\nPosition on the right.", SpooktacularAutonRight},
-      {"LEFT BLUE/RED (BASIC)\nPosition on the left.", SpooktacularAutonLeft},
-      {"RIGHT BLUE/RED WITH MATCHLOADER\nPosition above parkzone facing right.", SpaceAutonRight},
-      {"LEFT BLUE/RED WITH MATCHLOADER\nPosition above parkzone facing left.", SpaceAutonLeft},
-      {"60 SECOND AUTON\nPosition above park zone facing right.",  PressureBreakpointSkills},
+      // {"RIGHT BLUE/RED (BASIC)\nPosition on the right.", SpooktacularAutonRight},
+      // {"LEFT BLUE/RED (BASIC)\nPosition on the left.", SpooktacularAutonLeft},
+      {"doesnt move\n\nPosition at parkzone corner facing either direction", Move_Nothing_Auton},
+      {"Moves fwd 1 inch\n\nPosition at parkzone corner facing either direction", MoveFwd1},
+      {"RIGHT BLUE/RED WITH MATCHLOADER\nPosition above parkzone facing right.", AutonRightMatchloaderOnly},
+      {"LEFT BLUE/RED WITH MATCHLOADER\nPosition above parkzone facing left.", AutonLeftMatchloaderOnly},
       {"SuperSoloAWP\n\nPosition above parkzone facing right", SuperSoloAWP},
-      {"Drive\n\nDrive forward and come back", drive_example},
-      {"Odom Drive\n\nDrive forward and come back", odom_drive_example},
-      {"Odom Coordinates PP Drive\n\nDrive forward and come back", odom_pure_pursuit_example},
-      {"Turn\n\nTurn 3 times.", turn_example},
-      {"Tracking Wheel Offsets\n\n Measure Tracking Wheel Offsets.", measure_offsets},
+      {"60 SECOND AUTON\nPosition above park zone facing right.",  SpaceAuton60Seconds},
+      // {"Drive\n\nDrive forward and come back", drive_example},
+      // {"Odom Drive\n\nDrive forward and come back", odom_drive_example},
+      // {"Odom Coordinates PP Drive\n\nDrive forward and come back", odom_pure_pursuit_example},
+      // {"Turn\n\nTurn 3 times.", turn_example},
+      // {"Tracking Wheel Offsets\n\n Measure Tracking Wheel Offsets.", measure_offsets},
 
       /*
       {"Drive and Turn\n\nDrive forward, turn, come back", drive_and_turn},

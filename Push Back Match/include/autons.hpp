@@ -25,3 +25,5 @@ void SpooktacularAuton60Seconds();
 void SpaceAuton60Seconds();
 void PressureBreakpointSkills();
 void SuperSoloAWP();
+void MoveFwd1();
+ void Move_Nothing_Auton();
