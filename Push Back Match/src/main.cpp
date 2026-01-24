@@ -353,7 +353,7 @@ void opcontrol() {
   // This is preference to what you like to drive on
   chassis.drive_brake_set(MOTOR_BRAKE_COAST);
   bool intakeStarted = false; 
-  bool enableCurvatureDrive = true;
+  bool enableCurvatureDrive = false;
 
   while (true) {
     // Gives you some extras to make EZ-Template ezier
