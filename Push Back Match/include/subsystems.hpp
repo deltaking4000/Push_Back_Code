@@ -9,7 +9,7 @@ extern Drive chassis;
 inline pros::MotorGroup intake({-5});  // Negative port will reverse the motor
 inline pros::Motor lowerintake(-11);  // Negative port will reverse the motor
 inline pros::Motor upperintake(-12);  // Negative port will reverse the motor
-inline pros::Motor outtake(-8);
+inline pros::Motor outtake(-14);
 inline ez::Piston matchloader('A');
 inline ez::Piston wingmech('B');
 inline ez::Piston middlegoal('H');
@@ -19,7 +19,6 @@ void spin_outtake();
 void stop_intake();
 void stop_outtake();
 void reverse_intake();
-
 void lift_matchloader();
 void drop_matchloader();
 void lift_middlegoal();
