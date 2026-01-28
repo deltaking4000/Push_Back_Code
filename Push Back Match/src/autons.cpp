@@ -537,7 +537,9 @@ void PressureBreakpointSkills() {
   spin_intake();
 
   // 1. 1st match-loader - drive and intake
-  chassis.pid_drive_set(41_in, DRIVE_SPEED); 
+
+ 
+  chassis.pid_drive_set(41, DRIVE_SPEED);
   chassis.pid_wait();
   chassis.pid_turn_set(90_deg, TURN_SPEED);
   chassis.pid_wait();
@@ -665,44 +667,157 @@ void PressureBreakpointSkills() {
   chassis.pid_wait();
  chassis.pid_drive_set(-3_in, DRIVE_SPEED); 
   chassis.pid_wait();
-  
-  // PARK
- 
-   chassis.pid_drive_set(10, DRIVE_SPEED);
-  chassis.pid_wait();
-   chassis.pid_turn_set(180_deg, TURN_SPEED);
-  chassis.pid_wait();
- chassis.pid_drive_set(17, DRIVE_SPEED);
-  chassis.pid_wait();
-   chassis.pid_turn_set(90_deg, TURN_SPEED);
-  chassis.pid_wait();
-   chassis.pid_drive_set(71, DRIVE_SPEED);
-  chassis.pid_wait();
-chassis.pid_turn_set(180_deg, TURN_SPEED);
-  chassis.pid_wait();
-   chassis.pid_drive_set(30, DRIVE_SPEED);
-  chassis.pid_wait();
-chassis.pid_turn_set(90_deg, TURN_SPEED);
-  chassis.pid_wait();
-   chassis.pid_drive_set(50, DRIVE_SPEED);
-  chassis.pid_wait();
 
 // afterparty
-/*
+
 chassis.pid_drive_set(10, DRIVE_SPEED);
 chassis.pid_wait();
 chassis.pid_turn_set(180_deg, TURN_SPEED);
 chassis.pid_wait();
-chassis.pid_drive_set(71, DRIVE_SPEED);
+chassis.pid_drive_set(100, DRIVE_SPEED);
 chassis.pid_wait();
+  
+  // Conclusion of Act 1 -180
+  // Part 2
 
-Ectera, Ectera
+  chassis.pid_turn_set(-90_deg, TURN_SPEED);
+  chassis.pid_wait();
+  chassis.pid_drive_set(10.5_in, DRIVE_SPEED_SLOW); 
+  chassis.pid_wait();
+  chassis.pid_turn_set(-90_deg, TURN_SPEED);
+  chassis.pid_wait();
+  // wait for intake to complete
+  pros::delay(0.5 * 1000); 
+  // JIGGLE
+  chassis.pid_drive_set(-2.5_in, DRIVE_SPEED_SLOW);
+  chassis.pid_wait();
+  chassis.pid_drive_set(2.5_in, DRIVE_SPEED_SLOW);
+  chassis.pid_wait();
+  pros::delay(0.25 * 1000); 
+  chassis.pid_drive_set(-2.5_in, DRIVE_SPEED_SLOW);
+  chassis.pid_wait();
+  chassis.pid_drive_set(3_in, DRIVE_SPEED_SLOW);
+  chassis.pid_wait();
+  pros::delay(0.25 * 1000); 
+  chassis.pid_drive_set(-2.5_in, DRIVE_SPEED_SLOW);
+  chassis.pid_wait();
+  chassis.pid_drive_set(3_in, DRIVE_SPEED_SLOW);
+  chassis.pid_wait();
+  pros::delay(0.25 * 1000); 
+  chassis.pid_drive_set(-2.5_in, DRIVE_SPEED_SLOW);
+  chassis.pid_wait();
+  chassis.pid_drive_set(3_in, DRIVE_SPEED_SLOW);
+  chassis.pid_wait();
+  pros::delay(0.25 * 1000); 
+  chassis.pid_drive_set(-2.5_in, DRIVE_SPEED_SLOW);
+  chassis.pid_wait();
+  chassis.pid_drive_set(3_in, DRIVE_SPEED_SLOW);
+  chassis.pid_wait();
+  pros::delay(0.25 * 1000); 
+  chassis.pid_drive_set(-2.5_in, DRIVE_SPEED_SLOW);
+  chassis.pid_wait();
+  chassis.pid_drive_set(3_in, DRIVE_SPEED_SLOW);
+  chassis.pid_wait();
 
 
+  // 2. drive to other end of long-goal andcore
+  chassis.pid_drive_set(-3.411_in, DRIVE_SPEED); 
+  chassis.pid_wait();
+  stop_intake();
 
 
-*/
+  matchloader.set(false);
 
+  chassis.pid_turn_set(-124.737_deg, TURN_SPEED);
+  chassis.pid_wait();
+  chassis.pid_drive_set(-22_in, DRIVE_SPEED); 
+  chassis.pid_wait();
+  chassis.pid_turn_set(-90_deg, TURN_SPEED);
+  chassis.pid_wait();
+  chassis.pid_drive_set(-65.066_in, DRIVE_SPEED); 
+  chassis.pid_wait();
+  chassis.pid_turn_set(-57.923_deg, TURN_SPEED);
+  chassis.pid_wait();
+  chassis.pid_drive_set(-33_in, DRIVE_SPEED); 
+  chassis.pid_wait();
+  chassis.pid_turn_set(-270_deg, TURN_SPEED);
+  chassis.pid_wait();
+  chassis.pid_drive_set(-27_in, DRIVE_SPEED);
+  chassis.pid_wait();
+  chassis.pid_turn_set(-270_deg, TURN_SPEED);
+  chassis.pid_wait();
+
+  // score in long goal and wait for blocks to score
+  spin_intake();
+  spin_outtake();
+  pros::delay(5 * 1000); 
+  outtake.move(0);
+
+  // 3. 2nd match-loader intake and score
+  matchloader.set(true);
+
+  chassis.pid_drive_set(34.5_in, DRIVE_SPEED_SLOW); 
+  chassis.pid_wait();
+  chassis.pid_turn_set(-270_deg, TURN_SPEED);
+  chassis.pid_wait();
+
+  // wait for intake to complete
+  
+  // JIGGLE
+  pros::delay(0.5 * 1000); 
+  chassis.pid_drive_set(-2.5_in, DRIVE_SPEED_SLOW);
+  chassis.pid_wait();
+  chassis.pid_drive_set(2.5_in, DRIVE_SPEED_SLOW);
+  chassis.pid_wait();
+  chassis.pid_drive_set(-2.5_in, DRIVE_SPEED_SLOW);
+  chassis.pid_wait();
+  chassis.pid_drive_set(2.5_in, DRIVE_SPEED_SLOW);
+  chassis.pid_wait();
+  chassis.pid_drive_set(-2.5_in, DRIVE_SPEED_SLOW);
+  chassis.pid_wait();
+  chassis.pid_drive_set(2.5_in, DRIVE_SPEED_SLOW);
+  chassis.pid_wait();
+  chassis.pid_drive_set(-2.5_in, DRIVE_SPEED_SLOW);
+  chassis.pid_wait();
+  chassis.pid_drive_set(2.5_in, DRIVE_SPEED_SLOW);
+  chassis.pid_wait();
+  chassis.pid_drive_set(-2.5_in, DRIVE_SPEED_SLOW);
+  chassis.pid_wait();
+  chassis.pid_drive_set(2.5_in, DRIVE_SPEED_SLOW);
+  chassis.pid_wait();
+  chassis.pid_drive_set(-2.5_in, DRIVE_SPEED_SLOW);
+  chassis.pid_wait();
+  chassis.pid_drive_set(3_in, DRIVE_SPEED_SLOW);
+  chassis.pid_wait();
+  stop_intake();
+
+  chassis.pid_drive_set(-35_in, 55); 
+  chassis.pid_wait();
+  chassis.pid_turn_set(-270_deg, TURN_SPEED);
+  chassis.pid_wait();
+
+  // score in long goal and wait for blocks to score
+  spin_intake();
+  spin_outtake();
+  pros::delay(5 * 1000); 
+  outtake.move(0);
+  matchloader.set(false);
+  chassis.pid_drive_set(3_in, DRIVE_SPEED); 
+  chassis.pid_wait();
+ chassis.pid_drive_set(-3_in, DRIVE_SPEED); 
+  chassis.pid_wait();
+
+// park
+chassis.pid_drive_set(24, DRIVE_SPEED);
+chassis.pid_wait();
+chassis.pid_turn_set(-0_deg, TURN_SPEED);
+chassis.pid_wait();
+chassis.pid_drive_set(55, DRIVE_SPEED);
+chassis.pid_wait();
+chassis.pid_turn_set(-90_deg, TURN_SPEED);
+chassis.pid_wait();
+chassis.pid_drive_set(48, DRIVE_SPEED);
+chassis.pid_wait();
 
 }
 
@@ -775,54 +890,53 @@ void SuperSoloAWP() {
 
   // take care of the other robot and steal their preload
   intake.move(-127);
-  chassis.pid_drive_set(7.916_in,
-    DRIVE_SPEED); 
+  chassis.pid_drive_set(7.916_in, DRIVE_SPEED); 
   chassis.pid_wait();
 
   // drive to matchloader to matchload
-  chassis.pid_drive_set(-47.26_in, DRIVE_SPEED); 
-  chassis.pid_wait();
+  chassis.pid_drive_set(-35_in, DRIVE_SPEED); ///////////////////////////////////////////////
+  chassis.pid_wait_quick_chain();
   drop_matchloader();
-  chassis.pid_turn_set(90_deg, TURN_SPEED);
-  chassis.pid_wait();
+  chassis.pid_turn_set(93_deg, TURN_SPEED);
+  chassis.pid_wait_quick_chain();
 
   // intaking from the loader
-  chassis.pid_drive_set(12.905_in, DRIVE_SPEED, false); 
+  chassis.pid_drive_set(12_in, DRIVE_SPEED, false); 
   chassis.pid_wait();
-  pros::delay(0.75*1000); // pick up alliance color blocks from loader
+  pros::delay(0.1*1000); // pick up alliance color blocks from loader
 
   // score into 1st long goal
-  chassis.pid_drive_set(-29.711_in, DRIVE_SPEED); 
+  chassis.pid_drive_set(-28.7_in, DRIVE_SPEED); 
   chassis.pid_wait();
   outtake.move(-127);
-  pros::delay(2*1000); // score into long goal
+  pros::delay(1.5*1000); // score into long goal
   outtake.move(0);
   lift_matchloader();
 
   // go get 3-block heap #1
-  chassis.pid_swing_set(ez::LEFT_SWING, 225_deg, SWING_SPEED, ez::RIGHT_TURN);
-  chassis.pid_wait();
+  chassis.pid_swing_set(ez::LEFT_SWING, 230_deg, SWING_SPEED, ez::RIGHT_TURN);
+  chassis.pid_wait_quick_chain();
 
-  chassis.pid_drive_set(15_in, DRIVE_SPEED); 
+  chassis.pid_drive_set(16_in, DRIVE_SPEED); 
   chassis.pid_wait_until(7_in);
   drop_matchloader();
-  chassis.pid_wait();
+  chassis.pid_wait_quick_chain();
  
   // go get 3-block heap #2
   chassis.pid_turn_set(190_deg, TURN_SPEED);
-  chassis.pid_wait();
+  chassis.pid_wait_quick_chain();
   lift_matchloader();
   
-  chassis.pid_odom_set({{23.5_in, -29_in}, fwd, DRIVE_SPEED});
+  chassis.pid_odom_set({{22_in, -32_in}, fwd, DRIVE_SPEED});
   chassis.pid_wait();
 
   // scoring in middle goal
-  chassis.pid_turn_set(136.019_deg, TURN_SPEED);
-  chassis.pid_wait();
-  chassis.pid_drive_set(-26_in, DRIVE_SPEED); 
-  chassis.pid_wait();
+  chassis.pid_turn_set(140_deg, TURN_SPEED);
+  chassis.pid_wait_quick_chain();
+  chassis.pid_drive_set(-20_in, DRIVE_SPEED); 
+  chassis.pid_wait_quick_chain();
   drop_middlegoal();
-  pros::delay(1*1000); // score middle goal blocks - leave some for long goal
+  pros::delay(0.5*1000); // score middle goal blocks - leave some for long goal
   stop_outtake();
   lift_middlegoal();
   
@@ -833,10 +947,10 @@ void SuperSoloAWP() {
   chassis.pid_wait();
   chassis.pid_turn_set(90_deg, TURN_SPEED);
   chassis.pid_wait();
-  chassis.pid_drive_set(-16.807_in, DRIVE_SPEED); 
+  chassis.pid_drive_set(-18.807_in, DRIVE_SPEED); 
   chassis.pid_wait();
   outtake.move(-127); // dump all blocks
-  pros::delay(2*1000); // score long goal
+  pros::delay(1.5*1000); // score long goal
 
 }
 
