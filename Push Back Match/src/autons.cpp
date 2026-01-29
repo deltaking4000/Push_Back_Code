@@ -901,9 +901,9 @@ void SuperSoloAWP() {
   chassis.pid_wait_quick_chain();
 
   // intaking from the loader
-  chassis.pid_drive_set(12_in, DRIVE_SPEED, false); 
+  chassis.pid_drive_set(12.5_in, DRIVE_SPEED, false); 
   chassis.pid_wait();
-  pros::delay(0.1*1000); // pick up alliance color blocks from loader
+  pros::delay(0.2*1000); // pick up alliance color blocks from loader
 
   // score into 1st long goal
   chassis.pid_drive_set(-28.7_in, DRIVE_SPEED); 
@@ -943,7 +943,7 @@ void SuperSoloAWP() {
   // Last long goal
   chassis.pid_turn_set(135.544_deg, TURN_SPEED);
   chassis.pid_wait();
-  chassis.pid_drive_set(49.541_in, DRIVE_SPEED); 
+  chassis.pid_drive_set(52.541_in, DRIVE_SPEED); 
   chassis.pid_wait();
   chassis.pid_turn_set(90_deg, TURN_SPEED);
   chassis.pid_wait();
