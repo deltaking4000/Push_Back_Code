@@ -8,6 +8,7 @@
 // These are out of 127
 const int DRIVE_SPEED = 110;
 const int DRIVE_SPEED_SLOW = 70;
+const int DRIVE_SPEED_MAX = 127;
 const int TURN_SPEED = 90;
 const int SWING_SPEED = 110;
 
@@ -973,37 +974,47 @@ void Left_7_ball() {
 
 void Right_7_ball() {
 
-// 7-ball w/o wing
-chassis.odom_xyt_set(46.2_in, 14.8_in, 0_deg);    // Set the current position, you can start at a specific position with this
-//  chassis.drive_angle_set(0_deg);    // Set the current angle for drive motions
+  // 7-ball w/o wing
+  chassis.odom_xyt_set(46.2_in, 14.8_in, 0_deg);    // Set the current position, you can start at a specific position with this
+  //  chassis.drive_angle_set(0_deg);    // Set the current angle for drive motions
 
-spin_intake();
-chassis.pid_turn_set(340_deg, TURN_SPEED);
-chassis.pid_wait();
-chassis.pid_drive_set(26_in, DRIVE_SPEED_SLOW); 
-chassis.pid_wait_until(15_in);
-drop_matchloader();
-chassis.pid_wait();
-chassis.pid_turn_set(46.538_deg, TURN_SPEED);
-chassis.pid_wait();
-chassis.pid_drive_set(-36_in, DRIVE_SPEED);  
-chassis.pid_wait();
-chassis.pid_turn_set(180_deg, TURN_SPEED);
-chassis.pid_wait();
-chassis.pid_drive_set(8.5_in, DRIVE_SPEED); 
-chassis.pid_wait();
-pros::delay(0.75 * 1000); 
-chassis.pid_drive_set(-32.213_in, DRIVE_SPEED); 
-chassis.pid_wait();
-lift_matchloader();
-spin_outtake();
-pros::delay(2 * 1000); 
+  // pick the 3 blocks on field
+  spin_intake();
+  chassis.pid_turn_set(340_deg, TURN_SPEED);
+  chassis.pid_wait();
+  chassis.pid_drive_set(26_in, DRIVE_SPEED_SLOW); 
+  chassis.pid_wait_until(15_in);
+  drop_matchloader();
+  chassis.pid_wait();
 
-// dancing in spedtember
+  // go to matchloader
+  chassis.pid_turn_set(46.538_deg, TURN_SPEED);
+  chassis.pid_wait();
+  chassis.pid_drive_set(-36_in, DRIVE_SPEED);  
+  chassis.pid_wait();
+  chassis.pid_turn_set(180_deg, TURN_SPEED);
+  chassis.pid_wait();
+  chassis.pid_drive_set(8.5_in, DRIVE_SPEED); 
+  chassis.pid_wait();
+  pros::delay(0.75 * 1000); 
 
-// the ram is annoying
+  // drive backward to long goal
+  chassis.pid_drive_set(-32.213_in, DRIVE_SPEED); 
+  chassis.pid_wait();
+  // try reversing intake for a bit to unjam
+  reverse_intake();
+  pros::delay(0.4 * 1000);  
+  // score into long goal
+  spin_intake();
+  spin_outtake();
+  lift_matchloader();
+  pros::delay(2 * 1000); 
 
-
+  // hood slam
+  chassis.pid_drive_set(5_in, DRIVE_SPEED); 
+  chassis.pid_wait();
+  chassis.pid_drive_set(-6_in, DRIVE_SPEED_MAX); 
+  chassis.pid_wait();
 }
 
 
