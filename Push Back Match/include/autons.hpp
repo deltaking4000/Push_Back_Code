@@ -29,4 +29,4 @@ void MoveFwd1();
  void Move_Nothing_Auton();
  void Right_7_ball();
  void Left_7_ball();
-
+void SplitGoalRight();

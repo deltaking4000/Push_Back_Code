@@ -138,8 +138,9 @@ void initialize() {
       {"LEFT BLUE/RED WITH MATCHLOADER\nPosition above parkzone facing left.", AutonLeftMatchloaderOnly},
       {"LEFT SIDE 7 BALL\nPosition above parkzone facing up.", Right_7_ball},
       {"RIGHT SIDE 7 BALL\nPosition above parkzone facing up.", Left_7_ball},
-      {"SuperSoloAWP\n\nPosition above parkzone facing right", SuperSoloAWP},
-      {"60 SECOND AUTON\nPosition above park zone facing left on the right side.",  PressureBreakpointSkills},
+      {"RIGHT SIDE SPLIT MIDDLE+LONG\nPosition above parkzone facing left on the right side.", SplitGoalRight},
+      {"SuperSoloAWP\n\nPosition above parkzone facing left on the right side.", SuperSoloAWP},
+      {"60 SECOND AUTON\nPosition above park zone facing right",  PressureBreakpointSkills},
       // {"Drive\n\nDrive forward and come back", drive_example},
       // {"Odom Drive\n\nDrive forward and come back", odom_drive_example},   Right_7_ball
       // {"Odom Coordinates PP Drive\n\nDrive forward and come back", odom_pure_pursuit_example},

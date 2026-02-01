@@ -532,8 +532,10 @@ void SpooktacularAuton60Seconds() {
 ///
 // 60 second auton - robot starts above parkzone facing right
 ///
-void PressureBreakpointSkills() {
 
+// This collects from 1st matchloader, 2nd matchloader and scores into far-end of long-goal
+void SkillsBase() {
+  
   matchloader.set(true);
   spin_intake();
 
@@ -668,6 +670,38 @@ void PressureBreakpointSkills() {
   chassis.pid_wait();
  chassis.pid_drive_set(-3_in, DRIVE_SPEED); 
   chassis.pid_wait();
+
+}
+
+void PressureBreakpointSkills() {
+  // Complete first half - robot will be at far-end of long-goal at end of this
+  SkillsBase();
+
+  // PARK
+
+  chassis.pid_drive_set(10, DRIVE_SPEED);
+  chassis.pid_wait();
+  chassis.pid_turn_set(180_deg, TURN_SPEED);
+  chassis.pid_wait();
+  chassis.pid_drive_set(17, DRIVE_SPEED);
+  chassis.pid_wait();
+  chassis.pid_turn_set(90_deg, TURN_SPEED);
+  chassis.pid_wait();
+  chassis.pid_drive_set(71, DRIVE_SPEED);
+  chassis.pid_wait();
+  chassis.pid_turn_set(180_deg, TURN_SPEED);
+  chassis.pid_wait();
+  chassis.pid_drive_set(30, DRIVE_SPEED);
+  chassis.pid_wait();
+  chassis.pid_turn_set(90_deg, TURN_SPEED);
+  chassis.pid_wait();
+  chassis.pid_drive_set(50, DRIVE_SPEED);
+  chassis.pid_wait();
+}
+
+void PressureBreakpointSkillsFull() {
+  // Complete first half - robot will be at far-end of long-goal at end of this
+  SkillsBase();
 
 // afterparty
 
@@ -881,11 +915,9 @@ chassis.pid_wait();
 
 }
 
-//
-// 60 second auton - robot starts above parkzone facing right
-///
-void SuperSoloAWP() {
-  // SuperSoloAWP
+// Robot starts above park-zone, facing left
+// Runs part of solo AWP until scoring middle-goal
+void SplitGoalRightBase(uint32_t middlegoal_waittime) {
   chassis.odom_xyt_set(46_in, 7.5_in, 180_deg);    // Set the current position, you can start at a specific position with this
   chassis.drive_angle_set(180_deg);    // Set the current angle
 
@@ -895,7 +927,7 @@ void SuperSoloAWP() {
   chassis.pid_wait();
 
   // drive to matchloader to matchload
-  chassis.pid_drive_set(-35_in, DRIVE_SPEED); ///////////////////////////////////////////////
+  chassis.pid_drive_set(-37.7_in, DRIVE_SPEED); ///////////////////////////////////////////////
   chassis.pid_wait_quick_chain();
   drop_matchloader();
   chassis.pid_turn_set(93_deg, TURN_SPEED);
@@ -907,7 +939,7 @@ void SuperSoloAWP() {
   pros::delay(0.2*1000); // pick up alliance color blocks from loader
 
   // score into 1st long goal
-  chassis.pid_drive_set(-28.7_in, DRIVE_SPEED); 
+  chassis.pid_drive_set(-30_in, DRIVE_SPEED); 
   chassis.pid_wait();
   outtake.move(-127);
   pros::delay(1.5*1000); // score into long goal
@@ -932,23 +964,39 @@ void SuperSoloAWP() {
   chassis.pid_wait();
 
   // scoring in middle goal
+  spin_intake();
   chassis.pid_turn_set(140_deg, TURN_SPEED);
   chassis.pid_wait_quick_chain();
   chassis.pid_drive_set(-20_in, DRIVE_SPEED); 
   chassis.pid_wait_quick_chain();
   drop_middlegoal();
-  pros::delay(0.5*1000); // score middle goal blocks - leave some for long goal
+  pros::delay(middlegoal_waittime); // score middle goal blocks - leave some for long goal
   stop_outtake();
   lift_middlegoal();
+}
+
+void SplitGoalRight() {
+  // Run auton upto middle goal and wait for more seconds to fully unload blocks
+  SplitGoalRightBase(3*1000);
+}
+
+//
+// Robot starts above parkzone facing left
+///
+void SuperSoloAWP() {
+  // SuperSoloAWP
+
+  // Score matchloader, pick up field blocks and score only few blocks into middle goal 
+  SplitGoalRightBase(0.75*1000);
   
   // Last long goal
   chassis.pid_turn_set(135.544_deg, TURN_SPEED);
   chassis.pid_wait();
-  chassis.pid_drive_set(52.541_in, DRIVE_SPEED); 
+  chassis.pid_drive_set(46_in, DRIVE_SPEED); 
   chassis.pid_wait();
   chassis.pid_turn_set(90_deg, TURN_SPEED);
   chassis.pid_wait();
-  chassis.pid_drive_set(-18.807_in, DRIVE_SPEED); 
+  chassis.pid_drive_set(-21_in, DRIVE_SPEED); 
   chassis.pid_wait();
   outtake.move(-127); // dump all blocks
   pros::delay(1.5*1000); // score long goal
@@ -990,7 +1038,7 @@ void Right_7_ball() {
   // go to matchloader
   chassis.pid_turn_set(46.538_deg, TURN_SPEED);
   chassis.pid_wait();
-  chassis.pid_drive_set(-36_in, DRIVE_SPEED);  
+  chassis.pid_drive_set(-38_in, DRIVE_SPEED);  
   chassis.pid_wait();
   chassis.pid_turn_set(180_deg, TURN_SPEED);
   chassis.pid_wait();
@@ -1001,18 +1049,23 @@ void Right_7_ball() {
   // drive backward to long goal
   chassis.pid_drive_set(-32.213_in, DRIVE_SPEED); 
   chassis.pid_wait();
-  // try reversing intake for a bit to unjam
-  reverse_intake();
-  pros::delay(0.4 * 1000);  
+
   // score into long goal
   spin_intake();
   spin_outtake();
-  lift_matchloader();
+  pros::delay(2 * 1000); 
+  stop_outtake();
+  // try reversing intake for a bit to unjam
+  reverse_intake();
+  pros::delay(0.5 * 1000);  
+  spin_intake();
+  spin_outtake();
   pros::delay(2 * 1000); 
 
   // hood slam
   chassis.pid_drive_set(5_in, DRIVE_SPEED); 
   chassis.pid_wait();
+  lift_matchloader();
   chassis.pid_drive_set(-6_in, DRIVE_SPEED_MAX); 
   chassis.pid_wait();
 }
