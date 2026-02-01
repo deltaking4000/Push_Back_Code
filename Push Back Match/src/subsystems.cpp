@@ -23,6 +23,11 @@ void reverse_intake() {
     intake.move(127);
 }
 
+void reverse_outtake(){
+    outtake.move(127);
+}
+
+
 // Pneumatics
 void lift_matchloader() {
     matchloader.set(false); 
