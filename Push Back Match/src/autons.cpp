@@ -990,16 +990,16 @@ void SuperSoloAWP() {
   SplitGoalRightBase(0.75*1000);
   
   // Last long goal
-  chassis.pid_turn_set(135.544_deg, TURN_SPEED);
-  chassis.pid_wait();
-  chassis.pid_drive_set(46_in, DRIVE_SPEED); 
-  chassis.pid_wait();
+  chassis.pid_turn_set(135_deg, TURN_SPEED);
+  chassis.pid_wait_quick_chain();
+  chassis.pid_drive_set(43_in, DRIVE_SPEED); 
+  chassis.pid_wait_quick_chain();
   chassis.pid_turn_set(90_deg, TURN_SPEED);
-  chassis.pid_wait();
+  chassis.pid_wait_quick_chain();
   chassis.pid_drive_set(-21_in, DRIVE_SPEED); 
   chassis.pid_wait();
   outtake.move(-127); // dump all blocks
-  pros::delay(1.5*1000); // score long goal
+  pros::delay(2*1000); // score long goal
 
 }
 
@@ -1063,11 +1063,30 @@ void Right_7_ball() {
   pros::delay(2 * 1000); 
 
   // hood slam
+  /* // try wing-mech hold instead
   chassis.pid_drive_set(5_in, DRIVE_SPEED); 
   chassis.pid_wait();
   lift_matchloader();
   chassis.pid_drive_set(-6_in, DRIVE_SPEED_MAX); 
   chassis.pid_wait();
+  */
+
+  // chassis.odom_theta_direction_get() tells if theta is flipped
+  auto wingmech_angle = -210_deg;
+  if (chassis.odom_theta_direction_get()) {
+    // wing-mech is only on left side
+    // If flipped, then make sure angle is re-flipped to put wing-mech on other side
+    wingmech_angle = 210_deg;
+  }
+  chassis.pid_turn_set(wingmech_angle, TURN_SPEED);
+  chassis.pid_wait();
+  chassis.pid_drive_set(20_in, DRIVE_SPEED); 
+  chassis.pid_wait();
+  chassis.pid_turn_set(180_deg, TURN_SPEED);
+  chassis.pid_wait();
+  chassis.pid_drive_set(-36_in, DRIVE_SPEED_SLOW); 
+  chassis.pid_wait();
+
 }
 
 
