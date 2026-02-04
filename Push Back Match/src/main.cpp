@@ -138,6 +138,8 @@ void initialize() {
       {"LEFT BLUE/RED WITH MATCHLOADER\nPosition above parkzone facing left.", AutonLeftMatchloaderOnly},
       {"LEFT SIDE 7 BALL\nPosition above parkzone facing up.", Right_7_ball},
       {"RIGHT SIDE 7 BALL\nPosition above parkzone facing up.", Left_7_ball},
+      {"LEFT SIDE 4 BALL\nPosition above parkzone facing up.", Right_4_ball},
+      {"RIGHT SIDE 4 BALL\nPosition above parkzone facing up.", Left_4_ball},
       {"RIGHT SIDE SPLIT MIDDLE+LONG\nPosition above parkzone facing left on the right side.", SplitGoalRight},
       {"SuperSoloAWP\n\nPosition above parkzone facing left on the right side.", SuperSoloAWP},
       {"60 SECOND AUTON\nPosition above park zone facing right",  PressureBreakpointSkills},

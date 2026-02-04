@@ -29,4 +29,6 @@ void MoveFwd1();
  void Move_Nothing_Auton();
  void Right_7_ball();
  void Left_7_ball();
+  void Right_4_ball();
+ void Left_4_ball();
 void SplitGoalRight();
