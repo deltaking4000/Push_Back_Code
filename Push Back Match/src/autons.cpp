@@ -918,16 +918,16 @@ chassis.pid_wait();
 // Robot starts above park-zone, facing left
 // Runs part of solo AWP until scoring middle-goal
 void SplitGoalRightBase(uint32_t middlegoal_waittime) {
-  chassis.odom_xyt_set(46_in, 7.5_in, 180_deg);    // Set the current position, you can start at a specific position with this
+  chassis.odom_xyt_set(46_in, 16.5_in, 180_deg);    // Set the current position, you can start at a specific position with this
   chassis.drive_angle_set(180_deg);    // Set the current angle
 
   // take care of the other robot and steal their preload
   intake.move(-127);
-  chassis.pid_drive_set(7.916_in, DRIVE_SPEED); 
-  chassis.pid_wait();
+ /* chassis.pid_drive_set(7.916_in, DRIVE_SPEED); 
+  chassis.pid_wait();*/
 
   // drive to matchloader to matchload
-  chassis.pid_drive_set(-37.7_in, DRIVE_SPEED); ///////////////////////////////////////////////
+  chassis.pid_drive_set(-23.2_in, DRIVE_SPEED); ///////////////////////////////////////////////
   chassis.pid_wait_quick_chain();
   drop_matchloader();
   chassis.pid_turn_set(93_deg, TURN_SPEED);
@@ -936,13 +936,13 @@ void SplitGoalRightBase(uint32_t middlegoal_waittime) {
   // intaking from the loader
   chassis.pid_drive_set(12.5_in, DRIVE_SPEED, false); 
   chassis.pid_wait();
-  pros::delay(0.2*1000); // pick up alliance color blocks from loader
+  pros::delay(0.17*1000); // pick up alliance color blocks from loader
 
   // score into 1st long goal
   chassis.pid_drive_set(-30_in, DRIVE_SPEED); 
   chassis.pid_wait();
   outtake.move(-127);
-  pros::delay(1.5*1000); // score into long goal
+  pros::delay(1*1000); // score into long goal
   outtake.move(0);
   lift_matchloader();
 
@@ -950,24 +950,26 @@ void SplitGoalRightBase(uint32_t middlegoal_waittime) {
   chassis.pid_swing_set(ez::LEFT_SWING, 230_deg, SWING_SPEED, ez::RIGHT_TURN);
   chassis.pid_wait_quick_chain();
 
+  pros::Task([=]{
+    pros::delay(0.6*1000);
+    drop_matchloader();
+  });
   chassis.pid_drive_set(16_in, DRIVE_SPEED); 
-  chassis.pid_wait_until(7_in);
-  drop_matchloader();
   chassis.pid_wait_quick_chain();
  
   // go get 3-block heap #2
-  chassis.pid_turn_set(190_deg, TURN_SPEED);
+  chassis.pid_turn_set(180_deg, TURN_SPEED);
   chassis.pid_wait_quick_chain();
   lift_matchloader();
   
-  chassis.pid_odom_set({{22_in, -32_in}, fwd, DRIVE_SPEED});
+  chassis.pid_odom_set({{22_in, -28_in}, fwd, DRIVE_SPEED});
   chassis.pid_wait();
 
   // scoring in middle goal
   spin_intake();
   chassis.pid_turn_set(140_deg, TURN_SPEED);
   chassis.pid_wait_quick_chain();
-  chassis.pid_drive_set(-20_in, DRIVE_SPEED); 
+  chassis.pid_drive_set(-21.5_in, DRIVE_SPEED); 
   chassis.pid_wait_quick_chain();
   drop_middlegoal();
   pros::delay(middlegoal_waittime); // score middle goal blocks - leave some for long goal
@@ -985,17 +987,21 @@ void SplitGoalRight() {
 ///
 void SuperSoloAWP() {
   // SuperSoloAWP
+  chassis.pid_turn_exit_condition_set(90_ms, 3_deg, 150_ms, 7_deg, 250_ms, 250_ms);
+  // chassis.pid_swing_exit_condition_set(90_ms, 3_deg, 150_ms, 7_deg, 250_ms, 250_ms);
+  chassis.pid_drive_exit_condition_set(90_ms, 1_in, 150_ms, 3_in, 250_ms, 250_ms);
 
   // Score matchloader, pick up field blocks and score only few blocks into middle goal 
-  SplitGoalRightBase(0.75*1000);
+  SplitGoalRightBase(0.5*1000);
   
   // Last long goal
   chassis.pid_turn_set(135_deg, TURN_SPEED);
   chassis.pid_wait_quick_chain();
-  chassis.pid_drive_set(43_in, DRIVE_SPEED); 
+  chassis.pid_drive_set(46_in, DRIVE_SPEED); 
   chassis.pid_wait_quick_chain();
   chassis.pid_turn_set(90_deg, TURN_SPEED);
   chassis.pid_wait_quick_chain();
+  spin_intake();
   chassis.pid_drive_set(-21_in, DRIVE_SPEED); 
   chassis.pid_wait();
   outtake.move(-127); // dump all blocks
@@ -1010,7 +1016,7 @@ void Move_Nothing_Auton(){
 
 void MoveFwd1() {
   // SuperSoloAWP
-  chassis.pid_drive_set(1_in, DRIVE_SPEED);
+  chassis.pid_drive_set(4_in, DRIVE_SPEED);
 
 }
 
@@ -1073,7 +1079,7 @@ void Right_7_ball() {
 
   // chassis.odom_theta_direction_get() tells if theta is flipped
   auto wingmech_angle = -210_deg;
-  if (chassis.odom_theta_direction_get()) {
+  if (!chassis.odom_theta_direction_get()) {
     // wing-mech is only on left side
     // If flipped, then make sure angle is re-flipped to put wing-mech on other side
     wingmech_angle = 210_deg;
