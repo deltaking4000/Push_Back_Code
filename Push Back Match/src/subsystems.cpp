@@ -45,6 +45,14 @@ void drop_middlegoal() {
     middlegoal.set(true);
 }
 
+void lift_middlegoaldescore() {
+    middlegoaldescore.set(false);
+}
+
+void drop_middlegoaldescore() {
+    middlegoaldescore.set(true);
+}
+
 void lift_wingmech() {
     wingmech.set(true);
 }

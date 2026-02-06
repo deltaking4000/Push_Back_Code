@@ -11,6 +11,7 @@ inline pros::Motor lowerintake(-11);  // Negative port will reverse the motor
 inline pros::Motor upperintake(-12);  // Negative port will reverse the motor
 inline pros::Motor outtake(-14);
 inline ez::Piston matchloader('A');
+inline ez::Piston middlegoaldescore('G');
 inline ez::Piston wingmech('B');
 inline ez::Piston middlegoal('H');
 
@@ -24,5 +25,7 @@ void lift_matchloader();
 void drop_matchloader();
 void lift_middlegoal();
 void drop_middlegoal();
+void lift_middlegoaldescore();
+void drop_middlegoaldescore();
 void lift_wingmech();
 void drop_wingmech();
