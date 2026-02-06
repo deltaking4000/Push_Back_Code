@@ -922,7 +922,7 @@ void SplitGoalRightBase(uint32_t middlegoal_waittime) {
   chassis.drive_angle_set(180_deg);    // Set the current angle
 
   // take care of the other robot and steal their preload
-  intake.move(-127);
+  spin_intake();
  /* chassis.pid_drive_set(7.916_in, DRIVE_SPEED); 
   chassis.pid_wait();*/
 
@@ -936,14 +936,14 @@ void SplitGoalRightBase(uint32_t middlegoal_waittime) {
   // intaking from the loader
   chassis.pid_drive_set(12.5_in, DRIVE_SPEED, false); 
   chassis.pid_wait();
-  pros::delay(0.17*1000); // pick up alliance color blocks from loader
+  pros::delay(0.23*1000); // pick up alliance color blocks from loader
 
   // score into 1st long goal
   chassis.pid_drive_set(-30_in, DRIVE_SPEED); 
   chassis.pid_wait();
-  outtake.move(-127);
+  spin_outtake();
   pros::delay(1*1000); // score into long goal
-  outtake.move(0);
+  stop_outtake();
   lift_matchloader();
 
   // go get 3-block heap #1
@@ -987,7 +987,7 @@ void SplitGoalRight() {
 ///
 void SuperSoloAWP() {
   // SuperSoloAWP
-  chassis.pid_turn_exit_condition_set(90_ms, 3_deg, 150_ms, 7_deg, 250_ms, 250_ms);
+  chassis.pid_turn_exit_condition_set(90_ms, 3_deg, 150_ms, 7_deg, 100_ms, 250_ms);
   // chassis.pid_swing_exit_condition_set(90_ms, 3_deg, 150_ms, 7_deg, 250_ms, 250_ms);
   chassis.pid_drive_exit_condition_set(90_ms, 1_in, 150_ms, 3_in, 250_ms, 250_ms);
 
@@ -1002,10 +1002,14 @@ void SuperSoloAWP() {
   chassis.pid_turn_set(90_deg, TURN_SPEED);
   chassis.pid_wait_quick_chain();
   spin_intake();
-  chassis.pid_drive_set(-21_in, DRIVE_SPEED); 
+  chassis.pid_drive_set(-21.5_in, DRIVE_SPEED); 
   chassis.pid_wait();
   outtake.move(-127); // dump all blocks
-  pros::delay(2*1000); // score long goal
+  //pros::delay(0.2*1000); // score into long goal
+  reverse_intake();
+  pros::delay(0.2*1000); // score into long goal
+  spin_intake();
+  pros::delay(2*1000); // score into long goal // score long goal
 
 }
 
@@ -1015,9 +1019,8 @@ void Move_Nothing_Auton(){
 }
 
 void MoveFwd1() {
-  // SuperSoloAWP
   chassis.pid_drive_set(4_in, DRIVE_SPEED);
-
+  chassis.pid_wait();
 }
 
 void Left_7_ball() {
