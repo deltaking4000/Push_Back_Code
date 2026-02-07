@@ -15,7 +15,7 @@ ez::Drive chassis(
     {-1, 15, -17},     // Left Chassis Ports (negative port will reverse it!)
     {10, -16, 18},  // Right Chassis Ports (negative port will reverse it!)
 
-    7,      // Gyro Port
+    6,      // Gyro Port
     (24.0/17.91)*3.25,  // Wheel Diameter (Remember, 4" wheels without screw holes are actually 4.125!)
     450,   // Wheel RPM = cartridge * (motor gear / wheel gear) 
 
