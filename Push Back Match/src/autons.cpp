@@ -1093,6 +1093,7 @@ void Right_7_ball() {
   chassis.pid_wait();
   chassis.pid_turn_set(180_deg, TURN_SPEED);
   chassis.pid_wait();
+  drop_wingmech();
   chassis.pid_drive_set(-36_in, DRIVE_SPEED_SLOW); 
   chassis.pid_wait();
 
@@ -1178,6 +1179,7 @@ void Right_4_ball() {
   chassis.pid_wait();
   chassis.pid_turn_set(180_deg, TURN_SPEED);
   chassis.pid_wait();
+  drop_wingmech();
   chassis.pid_drive_set(-36_in, DRIVE_SPEED_SLOW); 
   chassis.pid_wait();
 
