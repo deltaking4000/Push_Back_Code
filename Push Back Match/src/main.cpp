@@ -15,7 +15,7 @@ ez::Drive chassis(
     {-1, 15, -17},     // Left Chassis Ports (negative port will reverse it!)
     {10, -16, 18},  // Right Chassis Ports (negative port will reverse it!)
 
-    6,      // Gyro Port
+    7,      // Gyro Port
     (24.0/17.91)*3.25,  // Wheel Diameter (Remember, 4" wheels without screw holes are actually 4.125!)
     450,   // Wheel RPM = cartridge * (motor gear / wheel gear) 
 
@@ -143,6 +143,8 @@ void initialize() {
       {"RIGHT SIDE SPLIT MIDDLE+LONG\nPosition above parkzone facing left on the right side.", SplitGoalRight},
       {"SuperSoloAWP\n\nPosition above parkzone facing left on the right side.", SuperSoloAWP},
       {"60 SECOND AUTON\nPosition above park zone facing right",  PressureBreakpointSkills},
+      {" BIG BIG 60 SECOND AUTON\nPosition above park zone facing right",  PressureBreakpointSkillsFull},
+
       // {"Drive\n\nDrive forward and come back", drive_example},
       // {"Odom Drive\n\nDrive forward and come back", odom_drive_example},   Right_7_ball
       // {"Odom Coordinates PP Drive\n\nDrive forward and come back", odom_pure_pursuit_example},
