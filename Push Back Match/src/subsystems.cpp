@@ -46,11 +46,11 @@ void drop_middlegoal() {
 }
 
 void lift_middlegoaldescore() {
-    middlegoaldescore.set(false);
+    middlegoaldescore.set(true);
 }
 
 void drop_middlegoaldescore() {
-    middlegoaldescore.set(true);
+    middlegoaldescore.set(false);
 }
 
 void lift_wingmech() {
