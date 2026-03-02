@@ -694,9 +694,127 @@ void PressureBreakpointSkills() {
   chassis.pid_wait();
 }
 
+// This collects from 1st matchloader, 2nd matchloader and scores into far-end of long-goal - use with full auton
+void SkillsBaseFull() {
+  
+  matchloader.set(true);
+  spin_intake();
+
+  // 1. 1st match-loader - drive and intake
+
+ 
+  chassis.pid_drive_set(39_in, DRIVE_SPEED_MAX);
+  chassis.pid_wait();
+  chassis.pid_turn_set(90_deg, TURN_SPEED);
+  chassis.pid_wait();
+  chassis.pid_drive_set(10.75_in, DRIVE_SPEED_MATCHLOADER); 
+  chassis.pid_wait();
+  chassis.pid_turn_set(90_deg, TURN_SPEED);
+  chassis.pid_wait();
+  // wait for intake to complete
+  jiggle();
+  // chassis.pid_drive_set(-2.5_in, DRIVE_SPEED_SLOW);
+  // chassis.pid_wait();
+  // chassis.pid_drive_set(3_in, DRIVE_SPEED_SLOW);
+  // chassis.pid_wait();
+
+
+  // 2. drive to other end of long-goal andcore
+  chassis.pid_drive_set(-6_in, DRIVE_SPEED_MAX); 
+  chassis.pid_wait_quick_chain();
+  stop_intake();
+
+
+
+  chassis.pid_turn_set(124.737_deg, TURN_SPEED); // 938F worlds recap
+  chassis.pid_wait_quick_chain();
+  chassis.pid_drive_set(-24_in, DRIVE_SPEED_MAX); 
+  chassis.pid_wait_quick_chain();
+  lift_matchloader();
+  chassis.pid_turn_set(90_deg, TURN_SPEED);
+  chassis.pid_wait_quick_chain();
+  chassis.pid_drive_set(-40_in, DRIVE_SPEED_MAX); 
+  chassis.pid_wait_quick_chain();
+// Wall is on the RIGHT. 
+// Ratio is 110:30 (approx 3.6:1)
+chassis.pid_swing_set(ez::LEFT_SWING, 45_deg, 110, 30);
+chassis.pid_wait_quick_chain();
+  chassis.pid_drive_set(-10, DRIVE_SPEED_MAX); 
+  chassis.pid_wait_quick_chain();
+  chassis.pid_turn_set(270_deg, TURN_SPEED);
+  chassis.pid_wait_quick_chain();
+  chassis.pid_drive_exit_condition_set(90_ms, 1_in, 150_ms, 3_in, 150_ms, 250_ms);
+  chassis.pid_drive_set(-20.5_in, DRIVE_SPEED);
+  chassis.pid_wait_quick_chain();
+  default_constants();
+  chassis.drive_angle_set(270);
+  // chassis.pid_turn_set(270_deg, TURN_SPEED);
+  // chassis.pid_wait_quick_chain();
+
+  // score in long goal and wait for blocks to score
+  spin_intake();
+  spin_outtake();
+  pros::delay(4 * 1000); 
+  // try reversing intake for a bit to unjam /**/ 
+  /*reverse_intake();
+  reverse_outtake();
+  pros::delay(0.5 * 1000);  
+  spin_intake();
+  spin_outtake();
+  pros::delay(3 * 1000); */
+
+  outtake.move(0);
+
+  // 3. 2nd match-loader intake and score
+  matchloader.set(true);
+
+  chassis.pid_drive_set(35.5_in, DRIVE_SPEED_MATCHLOADER); 
+  chassis.pid_wait();
+  chassis.pid_turn_set(270_deg, TURN_SPEED);
+  chassis.pid_wait();
+
+  // wait for intake to complete
+  
+  // JIGGLE
+  jiggle();
+
+  // chassis.pid_drive_set(-2.5_in, DRIVE_SPEED_SLOW);
+  // chassis.pid_wait();
+  // chassis.pid_drive_set(3_in, DRIVE_SPEED_SLOW);
+  // chassis.pid_wait();
+  stop_intake();
+
+  chassis.pid_drive_exit_condition_set(90_ms, 1_in, 150_ms, 3_in, 150_ms, 250_ms);
+
+  chassis.pid_drive_set(-33_in, 55); 
+  chassis.pid_wait();
+  default_constants();
+  chassis.pid_turn_set(270_deg, TURN_SPEED);
+  chassis.pid_wait();
+
+  // score in long goal and wait for blocks to score
+  spin_intake();
+  spin_outtake();
+  pros::delay(4 * 1000); 
+  // try reversing intake for a bit to unjam
+  /*reverse_intake();
+  pros::delay(0.5 * 1000);  
+  spin_intake();
+  spin_outtake();
+  pros::delay(3 * 1000); */
+
+  outtake.move(0);
+  matchloader.set(false);
+  chassis.pid_drive_set(5_in, DRIVE_SPEED_MAX); 
+  chassis.pid_wait();
+ chassis.pid_drive_set(-5_in, DRIVE_SPEED_MAX); 
+  chassis.pid_wait();
+
+}
+
 void PressureBreakpointSkillsFull() {
   // Complete first half - robot will be at far-end of long-goal at end of this
-  SkillsBase();
+  SkillsBaseFull();
 
 // afterparty 83.5
 
