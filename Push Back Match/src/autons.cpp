@@ -939,7 +939,12 @@ void SplitGoalRightBase(uint32_t middlegoal_waittime) {
 
 void SplitGoalRight() {
   // Run auton upto middle goal and wait for more seconds to fully unload blocks
-  SplitGoalRightBase(3*1000);
+  SplitGoalRightBase(2.75*1000);
+  chassis.pid_drive_set(12_in, DRIVE_SPEED);
+  chassis.pid_wait();
+  lift_middlegoaldescore();
+  chassis.pid_drive_set(-12_in, DRIVE_SPEED_SLOW);
+  chassis.pid_wait();
 }
 
 //
@@ -1104,7 +1109,7 @@ void Right_4_ball() {
   // go to matchloader
   chassis.pid_turn_set(46.538_deg, TURN_SPEED);
   chassis.pid_wait();
-  chassis.pid_drive_set(-42_in, DRIVE_SPEED);  
+  chassis.pid_drive_set(-37.5_in, DRIVE_SPEED);  
   chassis.pid_wait();
   
   chassis.pid_turn_set(180_deg, TURN_SPEED);
