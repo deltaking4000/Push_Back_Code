@@ -724,7 +724,8 @@ void SkillsBaseFull() {
   chassis.pid_turn_set(90_deg, TURN_SPEED);
   chassis.pid_wait();
   // wait for intake to complete
-  jigglefast();
+  pros::delay(1 * 1000); 
+  
 
   // 2. drive to other end of long-goal and score
   chassis.pid_drive_set(-6_in, DRIVE_SPEED_MAX); 
