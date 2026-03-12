@@ -752,17 +752,16 @@ void SkillsBaseFull() {
   chassis.pid_wait_quick_chain();
   spin_intake();
   chassis.pid_drive_exit_condition_set(90_ms, 1_in, 150_ms, 3_in, 150_ms, 250_ms);
-  chassis.pid_drive_set(-20.5_in, DRIVE_SPEED);
+  chassis.pid_drive_set(-23.5_in, DRIVE_SPEED_SLOW);
   chassis.pid_wait_quick_chain();
   default_constants();
-  chassis.drive_angle_set(270);
-  // chassis.pid_turn_set(270_deg, TURN_SPEED);
-  // chassis.pid_wait_quick_chain();
+  chassis.pid_turn_set(270_deg, TURN_SPEED);
+  chassis.pid_wait_quick_chain();
 
   // score in long goal and wait for blocks to score
   spin_intake();
   spin_outtake();
-  pros::delay(4 * 1000); 
+  pros::delay(3.5 * 1000); 
   // try reversing intake for a bit to unjam /**/ 
   /*reverse_intake();
   reverse_outtake();
@@ -802,7 +801,7 @@ void SkillsBaseFull() {
   // score in long goal and wait for blocks to score
   spin_intake();
   spin_outtake();
-  pros::delay(4 * 1000); 
+  pros::delay(3.5 * 1000); 
   // try reversing intake for a bit to unjam
   /*reverse_intake();
   pros::delay(0.5 * 1000);  
@@ -851,7 +850,7 @@ chassis.pid_wait_quick_chain();*/
   chassis.pid_turn_set(-90_deg, TURN_SPEED);
   chassis.pid_wait_quick_chain();
   spin_intake();
-  chassis.pid_drive_set(16_in, DRIVE_SPEED_MATCHLOADER); 
+  chassis.pid_drive_set(15_in, DRIVE_SPEED_MATCHLOADER); 
   chassis.pid_wait_quick_chain();
   // chassis.pid_turn_set(-90_deg, TURN_SPEED);
   // chassis.pid_wait_quick_chain();
@@ -861,7 +860,130 @@ chassis.pid_wait_quick_chain();*/
 
 
   // 2. drive to other end of long-goal and score
-  chassis.pid_drive_set(-6_in, DRIVE_SPEED_MAX); 
+  chassis.pid_drive_set(-7_in, DRIVE_SPEED_MAX); 
+  chassis.pid_wait();
+  stop_intake();
+
+
+
+  chassis.pid_turn_set(-56_deg, TURN_SPEED); // -124.737
+  chassis.pid_wait_quick_chain();
+  chassis.pid_drive_set(-25_in, DRIVE_SPEED_MAX); /////////////////////////////////////
+  chassis.pid_wait_quick_chain();
+  lift_matchloader();
+  chassis.pid_turn_set(-85_deg, TURN_SPEED);
+  chassis.pid_wait_quick_chain();
+  chassis.pid_drive_set(-38_in, DRIVE_SPEED_MAX); 
+  chassis.pid_wait_quick_chain();
+  chassis.drive_angle_set(270_deg);
+  chassis.pid_swing_set(ez::LEFT_SWING, 225_deg, 110, 30);//225
+  chassis.pid_wait_quick_chain();
+  chassis.pid_drive_set(-11_in, DRIVE_SPEED_MAX); /////////////////////////////////////
+  chassis.pid_wait_quick_chain();
+  chassis.pid_turn_set(-270_deg, TURN_SPEED);
+  chassis.pid_wait_quick_chain();
+  spin_intake();
+  chassis.pid_drive_exit_condition_set(90_ms, 1_in, 150_ms, 3_in, 150_ms, 250_ms);
+  chassis.pid_drive_set(-23_in, DRIVE_SPEED_SLOW);
+  chassis.pid_wait_quick_chain();
+  default_constants();
+  chassis.pid_turn_set(-270_deg, TURN_SPEED);
+  chassis.pid_wait_quick_chain();
+
+  // score in long goal and wait for blocks to score 
+  spin_intake();
+  spin_outtake();
+  pros::delay(3.5 * 1000); 
+  outtake.move(0);
+
+  // 3. 2nd match-loader intake and score
+  matchloader.set(true);
+
+  chassis.pid_drive_set(35.5_in, DRIVE_SPEED_MATCHLOADER); 
+  chassis.pid_wait_quick_chain();
+  chassis.pid_turn_set(-270_deg, TURN_SPEED);
+  chassis.pid_wait_quick_chain();
+
+  // wait for intake to complete
+  jigglefast(); 
+  //stop_intake();
+
+  chassis.pid_drive_exit_condition_set(90_ms, 1_in, 150_ms, 3_in, 150_ms, 250_ms);
+  chassis.pid_drive_set(-27_in, DRIVE_SPEED_MATCHLOADER);
+  chassis.pid_wait_quick_chain();
+  // chassis.pid_turn_set(-270_deg, TURN_SPEED);
+  // chassis.pid_wait_quick_chain();
+
+  // score in long goal and wait for blocks to score
+  spin_intake();
+  spin_outtake();
+  pros::delay(3.5 * 1000); // trade 1 for 15
+  lift_matchloader();
+
+  // hood push
+ /* chassis.pid_drive_set(5_in, DRIVE_SPEED_MAX); 
+  chassis.pid_wait();
+  chassis.pid_drive_set(-5_in, DRIVE_SPEED_MAX); 
+  chassis.pid_wait();*/
+
+  stop_intake();
+  stop_outtake();
+
+  // park
+  chassis.pid_drive_set(10, DRIVE_SPEED_MAX);
+  chassis.pid_wait_quick_chain();
+  chassis.pid_turn_set(-0_deg, TURN_SPEED);
+  chassis.pid_wait_quick_chain();
+  chassis.pid_drive_set(37, DRIVE_SPEED_MAX);
+  chassis.pid_wait_quick_chain();
+  chassis.pid_turn_set(90_deg, TURN_SPEED);
+  chassis.pid_wait_quick_chain();
+  spin_intake();
+  chassis.pid_drive_set(48, DRIVE_SPEED_MAX);
+  chassis.pid_wait_quick_chain();
+
+}
+
+void RidelessPressureBreakpointSkillsFull() {
+  // Complete first half - robot will be at far-end of long-goal at end of this
+  SkillsBaseFull();
+
+// afterparty 83.5
+
+chassis.pid_drive_set(10, DRIVE_SPEED_MAX);
+chassis.pid_wait_quick_chain();
+chassis.pid_turn_set(180_deg, TURN_SPEED);
+chassis.pid_wait();
+// wall reset
+chassis.pid_drive_set(-20, DRIVE_SPEED_SLOW);
+chassis.pid_wait_quick_chain();
+chassis.drive_angle_set(180);
+
+//  expirement
+chassis.pid_drive_set(110.5, DRIVE_SPEED); //83.5, 107.5, 111.5
+chassis.pid_wait();
+/*chassis.pid_turn_set(180_deg, TURN_SPEED);
+chassis.pid_wait_quick_chain();
+chassis.pid_drive_set(-13, DRIVE_SPEED_MAX);
+chassis.pid_wait_quick_chain();*/
+  // Conclusion of Act 1 -180
+
+  // Part 2
+  drop_matchloader();
+  chassis.pid_turn_set(-90_deg, TURN_SPEED);
+  chassis.pid_wait_quick_chain();
+  spin_intake();
+  chassis.pid_drive_set(15_in, DRIVE_SPEED_MATCHLOADER); 
+  chassis.pid_wait_quick_chain();
+  // chassis.pid_turn_set(-90_deg, TURN_SPEED);
+  // chassis.pid_wait_quick_chain();
+  // wait for intake to complete
+  jigglefast();
+
+
+
+  // 2. drive to other end of long-goal and score
+  chassis.pid_drive_set(-7_in, DRIVE_SPEED_MAX); 
   chassis.pid_wait();
   stop_intake();
 
@@ -887,8 +1009,8 @@ chassis.pid_wait_quick_chain();*/
   chassis.pid_drive_set(-27_in, DRIVE_SPEED_MATCHLOADER);
   chassis.pid_wait_quick_chain();
   default_constants();
-  // chassis.pid_turn_set(-270_deg, TURN_SPEED);
-  // chassis.pid_wait_quick_chain();
+  chassis.pid_turn_set(-270_deg, TURN_SPEED);
+  chassis.pid_wait_quick_chain();
 
   // score in long goal and wait for blocks to score 
   spin_intake();
@@ -917,7 +1039,7 @@ chassis.pid_wait_quick_chain();*/
   // score in long goal and wait for blocks to score
   spin_intake();
   spin_outtake();
-  pros::delay(4 * 1000); 
+  pros::delay(3.5 * 1000); // trade 1 for 15
   lift_matchloader();
 
   // hood push
@@ -943,6 +1065,7 @@ chassis.pid_wait_quick_chain();*/
   chassis.pid_wait_quick_chain();
 
 }
+
 
 ///
 // 60 second auton - robot starts above parkzone facing right
@@ -1146,11 +1269,11 @@ void SplitGoalLeft() {
   drop_middlegoal();
   pros::delay(2 * 1000); 
   lift_middlegoal();
-  chassis.pid_drive_set(12_in, DRIVE_SPEED);
+  /*chassis.pid_drive_set(12_in, DRIVE_SPEED);
   chassis.pid_wait_quick_chain();
   lift_middlegoaldescore();
   chassis.pid_drive_set(-12_in, DRIVE_SPEED);
-  chassis.pid_wait_quick_chain();
+  chassis.pid_wait_quick_chain();*/
 
   // go to wing
   chassis.pid_drive_set(55.75_in, DRIVE_SPEED); 
@@ -1213,15 +1336,15 @@ void Right_7_ball() {
   spin_intake();
   spin_outtake();
   pros::delay(2 * 1000); 
-  stop_outtake();
   // try reversing intake for a bit to unjam
-  reverse_intake();
+ /* reverse_intake();
   pros::delay(0.5 * 1000);  
   spin_intake();
   spin_outtake();
-  pros::delay(1 * 1000); 
+  pros::delay(1 * 1000); */
     chassis.pid_drive_set(4_in, DRIVE_SPEED);
   chassis.pid_wait_quick();
+  stop_outtake();
 
   // hood slam
   /* // try wing-mech hold instead
@@ -1241,7 +1364,7 @@ void Right_7_ball() {
   }
   chassis.pid_turn_set(wingmech_angle, TURN_SPEED);
   chassis.pid_wait_quick_chain();
-  chassis.pid_drive_set(20_in, DRIVE_SPEED); 
+  chassis.pid_drive_set(16_in, DRIVE_SPEED); 
   chassis.pid_wait_quick_chain();
   chassis.pid_turn_set(180_deg, TURN_SPEED);
   chassis.pid_wait_quick_chain();

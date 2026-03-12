@@ -1,7 +1,6 @@
 #pragma once
 
 void default_constants();
-
 void drive_example();
 void turn_example();
 void drive_and_turn();
@@ -25,6 +24,7 @@ void SpooktacularAuton60Seconds();
 void SpaceAuton60Seconds();
 void PressureBreakpointSkills();
 void PressureBreakpointSkillsFull();
+void RidelessPressureBreakpointSkillsFull();
 void SuperSoloAWP();
 void MoveFwd1();
 void Move_Nothing_Auton();
