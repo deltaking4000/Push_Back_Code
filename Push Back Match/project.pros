@@ -467,9 +467,9 @@
       }
     },
     "upload_options": {
-      "description": "Curvature driving with Lemlib using EZ-Template for auton",
+      "description": "EZTemplate",
       "icon": "X",
-      "slot": 1
+      "slot": 2
     },
     "use_early_access": false
   }
