@@ -14,7 +14,8 @@ inline pros::Motor outtake(-14);
 
 #include "pros/adi.hpp"
 
-pros::adi::DigitalOut matchloader('A'); 
+
+pros::adi::Pneumatics matchloader('A', true); 
 pros::adi::DigitalOut middlegoaldescore('G'); 
 pros::adi::DigitalOut wingmech('B'); 
 pros::adi::DigitalOut middlegoal('H'); 

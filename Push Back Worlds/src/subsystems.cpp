@@ -28,11 +28,11 @@ void reverse_outtake(){
 
 // // Pneumatics
 void lift_matchloader() {
-    matchloader.set_value(true);  // retract
+    matchloader.set_value(false);  // retract
 }
 
 void drop_matchloader() {
-   matchloader.set_value(false);   // extend
+   matchloader.set_value(true);   // extend
 }
 
 void lift_middlegoal() {

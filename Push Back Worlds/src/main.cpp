@@ -26,7 +26,7 @@ pros::Imu imu(7);
 lemlib::Drivetrain drivetrain(&leftMotors, // left motor group
                               &rightMotors, // right motor group
                               12, // 12 inch track width
-                              lemlib::Omniwheel::NEW_325, // using new 3.25" omnis + traction
+                              lemlib::Omniwheel::NEW_325 * 49.0/48.0, // using new 3.25" omnis + traction
                               450, // drivetrain rpm is 360
                               2 // horizontal drift is 2 (for now)
 );
@@ -93,6 +93,9 @@ rd::Selector selector({
 void initialize() {
     //pros::lcd::initialize(); // initialize brain screen
     chassis.calibrate(); // calibrate sensors
+    imu.reset(true);
+
+
 
     // the default rate is 50. however, if you need to change the rate, you
     // can do the following.
@@ -178,11 +181,10 @@ void opcontrol() {
         }
 
         if (controller.get_digital(DIGITAL_L1)) {
-            lift_matchloader();
-            
+            drop_matchloader();            
         } 
         else if (controller.get_digital(DIGITAL_L2)) {
-            drop_matchloader();
+            lift_matchloader();
         } 
 
 

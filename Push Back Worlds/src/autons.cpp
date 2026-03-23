@@ -1,5 +1,7 @@
 #include "main.h"
 #include "autons.h"
+#include "subsystems.hpp"
+
 
 // // Move to x: 20 and y: 15, and face heading 90. Timeout set to 4000 ms
 // chassis.moveToPose(20, 15, 90, 4000);
@@ -34,9 +36,24 @@ void best_auton() {
 }
 
 void good_auton() {
-    chassis.moveToPoint(0, -10, 4000); 
+    chassis.moveToPoint(0, 48, 4000); 
 }
 
 void simple_auton() {
-    chassis.moveToPoint(0, 10, 4000); 
+    chassis.setPose(46.5, 12, 270);
+    chassis.turnToPoint(18.7, 25.2, 400, {}, false); 
+    spin_intake();
+    chassis.moveToPoint(18.7, 25.2, 4000); 
+    chassis.waitUntil(30);
+    drop_matchloader();
+    chassis.turnToPoint(44.8, 47.4, 4000, {}, false); 
+    chassis.moveToPoint(44.8, 47.4, 4000, {}, false); 
+    lift_matchloader();
+    chassis.turnToHeading(90, 4000, {}, false);
+   // chassis.moveToPoint(26, 47.4, 4000, {.forwards = false}, false);
+    chassis.moveToPose(26, 47.4, 90, 4000, {.forwards = false}, false);
+    spin_outtake();
+    pros::delay(1500);
+    stop_intake();
+    stop_outtake();
 }
