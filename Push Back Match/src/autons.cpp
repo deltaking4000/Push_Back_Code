@@ -1596,3 +1596,19 @@ void Right_4_ball() {
   chassis.pid_wait_quick_chain();
 
 }
+void Matchloader(){
+  // Path
+  chassis.drive_angle_set(180_deg);    // Set the current angle for drive motions
+  spin_intake();
+  drop_matchloader();
+  chassis.pid_drive_set(55_in, DRIVE_SPEED); 
+  chassis.pid_wait();
+  chassis.pid_turn_set(270_deg, TURN_SPEED);
+  chassis.pid_wait();
+  chassis.pid_drive_set(14_in, DRIVE_SPEED); 
+  chassis.pid_wait();
+  chassis.pid_turn_set(270_deg, TURN_SPEED);
+  chassis.pid_wait();
+
+
+}
