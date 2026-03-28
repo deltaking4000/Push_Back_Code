@@ -1601,14 +1601,30 @@ void Matchloader(){
   chassis.drive_angle_set(180_deg);    // Set the current angle for drive motions
   spin_intake();
   drop_matchloader();
-  chassis.pid_drive_set(55_in, DRIVE_SPEED); 
+  chassis.pid_drive_set(47_in, DRIVE_SPEED); 
   chassis.pid_wait();
   chassis.pid_turn_set(270_deg, TURN_SPEED);
   chassis.pid_wait();
-  chassis.pid_drive_set(14_in, DRIVE_SPEED); 
+  pros::delay(1.2 * 1000);
+  chassis.pid_drive_set(12.5_in, DRIVE_SPEED); 
   chassis.pid_wait();
   chassis.pid_turn_set(270_deg, TURN_SPEED);
   chassis.pid_wait();
+  chassis.pid_drive_set(-30_in, DRIVE_SPEED); 
+  chassis.pid_wait();
+  spin_outtake();
+  pros::delay(1.2 * 1000);
+  chassis.pid_drive_set(10_in, DRIVE_SPEED); 
+  chassis.pid_wait();
+  chassis.pid_turn_set(315_deg, TURN_SPEED);
+  chassis.pid_wait();
+  chassis.pid_drive_set(15_in, DRIVE_SPEED);
+  chassis.pid_wait();
+  chassis.pid_turn_set(270_deg, TURN_SPEED);
+  chassis.pid_wait();
+  chassis.pid_drive_set(-30_in, DRIVE_SPEED);
+  chassis.pid_wait();
+
 
 
 }

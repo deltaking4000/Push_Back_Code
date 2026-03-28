@@ -1,7 +1,7 @@
 {
   "py/object": "pros.conductor.project.Project",
   "py/state": {
-    "project_name": "Pushback",
+    "project_name": "Pushback Test",
     "target": "v5",
     "templates": {
       "EZ-Template": {
@@ -468,8 +468,8 @@
     },
     "upload_options": {
       "description": "EZTemplate",
-      "icon": "X",
-      "slot": 2
+      "icon": "pizza",
+      "slot": 1
     },
     "use_early_access": false
   }
