@@ -133,45 +133,36 @@ void initialize() {
 
   // Autonomous Selector using LLEMU
   ez::as::auton_selector.autons_add({
-      // {"RIGHT BLUE/RED (BASIC)\nPosition on the right.", SpooktacularAutonRight},
-      // {"LEFT BLUE/RED (BASIC)\nPosition on the left.", SpooktacularAutonLeft},
-      {"OPTCIAL TEST\n\nOPTICAL TEST", optical_test},// delete later!!!
       {"Doesnt move\n\nPosition at parkzone corner facing either direction", Move_Nothing_Auton},
-      {"Moves fwd 1 inch\n\nPosition at parkzone corner facing either direction", MoveFwd1},
-      {"RIGHT BLUE/RED WITH MATCHLOADER\nPosition above parkzone facing right.", AutonRightMatchloaderOnly},
-      {"LEFT BLUE/RED WITH MATCHLOADER\nPosition above parkzone facing left.", AutonLeftMatchloaderOnly},
+      {"Moves fwd few inches\n\nPosition at parkzone corner facing either direction", MoveFwd4},
       {"LEFT SIDE 7 BALL WING\nPosition above parkzone facing up.", Right_7_ball},
       {"RIGHT SIDE 7 BALL WING\nPosition above parkzone facing up.", Left_7_ball},
-      {"LEFT SIDE 7 BALL HOOD\nPosition above parkzone facing up.", Right_7_ball_Base},
-      {"RIGHT SIDE 7 BALL HOOD\nPosition above parkzone facing up.", Left_7_ball_Base},
       {"LEFT SIDE 4 BALL\nPosition above parkzone facing up.", Right_4_ball},
       {"RIGHT SIDE 4 BALL\nPosition above parkzone facing up.", Left_4_ball},
       {"RIGHT SIDE SPLIT MIDDLE+LONG\nPosition above parkzone facing left on the right side.", SplitGoalRight},
       {"LEFT SIDE SPLIT MIDDLE+LONG\nPosition above parkzone facing up on the left side.", SplitGoalLeft},
       {"SoloAWP (NOT VALID AT STATES!)\n\nPosition above parkzone facing left on the right side.", SuperSoloAWP},
-      {"60 SECOND AUTON\nPosition above park zone facing right",  PressureBreakpointSkills},
       {" BIG BIG 60 SECOND AUTON\nPosition above park zone facing right",  PressureBreakpointSkillsFull},
 
-      {"Drive\n\nDrive forward and come back", drive_example},
-      {"Odom Drive\n\nDrive forward and come back", odom_drive_example}, 
-      {"Odom Coordinates PP Drive\n\nDrive forward and come back", odom_pure_pursuit_example},
-      {"Turn\n\nTurn 3 times.", turn_example},
-      {"Tracking Wheel Offsets\n\n Measure Tracking Wheel Offsets.", measure_offsets},
+      // {"LEFT SIDE 7 BALL HOOD\nPosition above parkzone facing up.", Right_7_ball_Base},
+      // {"RIGHT SIDE 7 BALL HOOD\nPosition above parkzone facing up.", Left_7_ball_Base},
+      // {"60 SECOND AUTON\nPosition above park zone facing right",  PressureBreakpointSkills},
+      // {"OPTCIAL TEST\n\nOPTICAL TEST", optical_test},// delete later!!!
 
-      /*
-      {"Drive and Turn\n\nDrive forward, turn, come back", drive_and_turn},
-      {"Drive and Turn\n\nSlow down during drive", wait_until_change_speed},
-      {"Swing Turn\n\nSwing in an 'S' curve", swing_example},
-      {"Motion Chaining\n\nDrive forward, turn, and come back, but blend everything together :D", motion_chaining},
-      {"Combine all 3 movements", combining_movements},
-      {"Interference\n\nAfter driving forward, robot performs differently if interfered or not", interfered_example},
-      {"Simple Odom\n\nThis is the same as the drive example, but it uses odom instead!", odom_drive_example},
-      {"Pure Pursuit\n\nGo to (0, 30) and pass through (6, 10) on the way.  Come back to (0, 0)", odom_pure_pursuit_example},
-      {"Pure Pursuit Wait Until\n\nGo to (24, 24) but start running an intake once the robot passes (12, 24)", odom_pure_pursuit_wait_until_example},
-      {"Boomerang\n\nGo to (0, 24, 45) then come back to (0, 0, 0)", odom_boomerang_example},
-      {"Boomerang Pure Pursuit\n\nGo to (0, 24, 45) on the way to (24, 24) then come back to (0, 0, 0)", odom_boomerang_injected_pure_pursuit_example},
-      {"Measure Offsets\n\nThis will turn the robot a bunch of times and calculate your offsets for your tracking wheels.", measure_offsets},
-      */
+      // {"Drive\n\nDrive forward and come back", drive_example},
+      // {"Turn\n\nTurn 3 times.", turn_example},
+      // {"Drive and Turn\n\nDrive forward, turn, come back", drive_and_turn},
+      // {"Drive and Turn\n\nSlow down during drive", wait_until_change_speed},
+      // {"Swing Turn\n\nSwing in an 'S' curve", swing_example},
+      // {"Motion Chaining\n\nDrive forward, turn, and come back, but blend everything together :D", motion_chaining},
+      // {"Combine all 3 movements", combining_movements},
+      // {"Interference\n\nAfter driving forward, robot performs differently if interfered or not", interfered_example},
+      // {"Simple Odom\n\nThis is the same as the drive example, but it uses odom instead!", odom_drive_example},
+      // {"Pure Pursuit\n\nGo to (0, 30) and pass through (6, 10) on the way.  Come back to (0, 0)", odom_pure_pursuit_example},
+      // {"Pure Pursuit Wait Until\n\nGo to (24, 24) but start running an intake once the robot passes (12, 24)", odom_pure_pursuit_wait_until_example},
+      // {"Boomerang\n\nGo to (0, 24, 45) then come back to (0, 0, 0)", odom_boomerang_example},
+      // {"Boomerang Pure Pursuit\n\nGo to (0, 24, 45) on the way to (24, 24) then come back to (0, 0, 0)", odom_boomerang_injected_pure_pursuit_example},
+      // {"Measure Offsets\n\nThis will turn the robot a bunch of times and calculate your offsets for your tracking wheels.", measure_offsets},
   });
 
   // Initialize chassis and auton selector
@@ -395,32 +386,7 @@ void opcontrol() {
     // Put more user control code here!
     // . . .
 
-/*
-		if (master.get_digital_new_press(DIGITAL_R1)) {
-			if (intakeStarted == false) {
-				intake.move_velocity(600);
-				intakeStarted = true;
-			}
-			else {
-				intake.move_velocity(0);
-				intakeStarted = false;
-			}
-		}
-
-		else if (master.get_digital_new_press(DIGITAL_R2)) {
-
-			if (intakeStarted == false) {
-				intake.move_velocity(-600);
-				intakeStarted = true;
-			}
-			else {
-				intake.move_velocity(0);
-				intakeStarted = false;
-			}
-		}*/
-
-     // Uncomment for hold-button to spin, comment out above block
-
+    
     if (master.get_digital(DIGITAL_R1)) {
       intake.move(-127);
     } 
