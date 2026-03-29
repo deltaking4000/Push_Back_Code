@@ -19,11 +19,11 @@ const int SWING_SPEED = 110;
 ///
 void default_constants() {
   // P, I, D, and Start I
-  chassis.pid_drive_constants_set(25.0, 0.0, 105.0);         // Fwd/rev constants, used for odom and non odom motions
+  chassis.pid_drive_constants_set(15.0, 0.0, 75.0);         // Fwd/rev constants, used for odom and non odom motions
   chassis.pid_heading_constants_set(11.0, 0.0, 20.0);        // Holds the robot straight while going forward without odom
   chassis.pid_turn_constants_set(2.5, 0.0, 14, 15.0);     // Turn in place constants
   chassis.pid_swing_constants_set(6.0, 0.0, 65.0);           // Swing constants
-  chassis.pid_odom_angular_constants_set(6.5, 0.0, 52.5);    // Angular control for odom motions
+  chassis.pid_odom_angular_constants_set(4.2, 0.0, 32.5);    // Angular control for odom motions
   chassis.pid_odom_boomerang_constants_set(5.8, 0.0, 32.5);  // Angular control for boomerang motions
 
   // Exit conditions
@@ -64,13 +64,13 @@ void drive_example() {
   // The third parameter is a boolean (true or false) for enabling/disabling a slew at the start of drive motions
   // for slew, only enable it when the drive distance is greater than the slew distance + a few inches
 
-  chassis.pid_drive_set(24_in, DRIVE_SPEED_SLOW, true);
+  chassis.pid_drive_set(48_in, DRIVE_SPEED_SLOW, true);
   chassis.pid_wait();
 
-  chassis.pid_drive_set(-12_in, DRIVE_SPEED_SLOW);
+  chassis.pid_drive_set(-24_in, DRIVE_SPEED_SLOW);
   chassis.pid_wait();
 
-  chassis.pid_drive_set(-12_in, DRIVE_SPEED_SLOW);
+  chassis.pid_drive_set(-24_in, DRIVE_SPEED_SLOW);
   chassis.pid_wait();
 }
 
@@ -81,17 +81,17 @@ void turn_example() {
   // The first parameter is the target in degrees
   // The second parameter is max speed the robot will drive at
 
-  // chassis.pid_turn_set(90_deg, TURN_SPEED);
-  // chassis.pid_wait();
-
-  // chassis.pid_turn_set(45_deg, TURN_SPEED);
-  // chassis.pid_wait();
-
-  // chassis.pid_turn_set(0_deg, TURN_SPEED);
-  // chassis.pid_wait();
-
-  chassis.pid_turn_set(3600_deg, 40, ez::raw);
+  chassis.pid_turn_set(90_deg, TURN_SPEED);
   chassis.pid_wait();
+
+  chassis.pid_turn_set(45_deg, TURN_SPEED);
+  chassis.pid_wait();
+
+  chassis.pid_turn_set(0_deg, TURN_SPEED);
+  chassis.pid_wait();
+
+//   chassis.pid_turn_set(3600_deg, 40, ez::raw);
+//   chassis.pid_wait();
 }
 
 ///
@@ -254,13 +254,13 @@ void odom_drive_example() {
   // You can replace pid_drive_set with pid_odom_set and your robot will
   // have better error correction.
 
-  chassis.pid_odom_set(24_in, DRIVE_SPEED, true);
+  chassis.pid_odom_set(48_in, DRIVE_SPEED, true);
   chassis.pid_wait();
 
-  chassis.pid_odom_set(-12_in, DRIVE_SPEED);
+  chassis.pid_odom_set(-24_in, DRIVE_SPEED);
   chassis.pid_wait();
 
-  chassis.pid_odom_set(-12_in, DRIVE_SPEED);
+  chassis.pid_odom_set(-24_in, DRIVE_SPEED);
   chassis.pid_wait();
 }
 
@@ -268,45 +268,17 @@ void odom_drive_example() {
 // Odom Pure Pursuit
 ///
 void odom_pure_pursuit_example() {
-  intake.move(-127);
-  matchloader.set(true);
-  chassis.odom_xyt_set(46_in, 7.5_in, 0_deg);    // Set the current position, you can start at a specific position with this
-/*
-  chassis.pid_odom_set({{46_in, 46.928_in, 90_deg}, fwd, DRIVE_SPEED},
+  // Drive to 0, 30 and pass through 6, 10 and 0, 20 on the way, with slew
+  chassis.pid_odom_set({{{6_in, 10_in}, fwd, DRIVE_SPEED},
+                        {{0_in, 20_in}, fwd, DRIVE_SPEED},
+                        {{0_in, 30_in}, fwd, DRIVE_SPEED}},
                        true);
   chassis.pid_wait();
-*/
 
-  // Path
-
-  chassis.pid_odom_set({{46.095_in, 46.928_in, 90_deg}, fwd, DRIVE_SPEED});
+  // Drive to 0, 0 backwards
+  chassis.pid_odom_set({{0_in, 0_in}, rev, DRIVE_SPEED},
+                       true);
   chassis.pid_wait();
-  chassis.pid_drive_set(12_in, DRIVE_SPEED, true);
-  chassis.pid_wait();
-  pros::delay(2 * 1000); 
-  intake.move(0);
-  chassis.pid_drive_set(-6_in, DRIVE_SPEED, true);
-  chassis.pid_wait();
-  matchloader.set(false);
-  chassis.pid_odom_set({{33.92_in, 34.475_in, 270_deg}, fwd, DRIVE_SPEED});
-  chassis.pid_wait();
-  chassis.pid_odom_set({{-47.843_in, 34.475_in, 270_deg}, fwd, DRIVE_SPEED});
-  chassis.pid_wait();
-  chassis.pid_odom_set({{-31.867_in, 47.454_in, 270_deg}, rev, DRIVE_SPEED});
-  chassis.pid_wait();
-
-
-  // // Drive to 0, 30 and pass through 6, 10 and 0, 20 on the way, with slew
-  // chassis.pid_odom_set({{{6_in, 10_in}, fwd, DRIVE_SPEED},
-  //                       {{0_in, 20_in}, fwd, DRIVE_SPEED},
-  //                       {{0_in, 30_in}, fwd, DRIVE_SPEED}},
-  //                      true);
-  // chassis.pid_wait();
-
-  // // Drive to 0, 0 backwards
-  // chassis.pid_odom_set({{0_in, 0_in}, rev, DRIVE_SPEED},
-  //                      true);
-  // chassis.pid_wait();
 }
 
 ///
