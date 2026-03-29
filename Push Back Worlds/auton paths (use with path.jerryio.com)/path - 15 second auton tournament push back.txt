@@ -1,0 +1,133 @@
+// SuperSoloAWP
+
+chassis.pid_drive_set(7.916_in, DRIVE_SPEED); 
+chassis.pid_wait();
+chassis.pid_turn_set(180_deg, TURN_SPEED);
+chassis.pid_wait();
+chassis.pid_drive_set(-47.26_in, DRIVE_SPEED); 
+chassis.pid_wait();
+chassis.pid_turn_set(90.738_deg, TURN_SPEED);
+chassis.pid_wait();
+chassis.pid_drive_set(12.905_in, DRIVE_SPEED); 
+chassis.pid_wait();
+chassis.pid_turn_set(90_deg, TURN_SPEED);
+chassis.pid_wait();
+chassis.pid_drive_set(-29.711_in, DRIVE_SPEED); 
+chassis.pid_wait();
+chassis.pid_turn_set(16.621_deg, TURN_SPEED);
+chassis.pid_wait();
+chassis.pid_drive_set(-11.636_in, DRIVE_SPEED); 
+chassis.pid_wait();
+chassis.pid_turn_set(189.926_deg, TURN_SPEED);
+chassis.pid_wait();
+chassis.pid_drive_set(33.788_in, DRIVE_SPEED); 
+chassis.pid_wait();
+chassis.pid_turn_set(173.924_deg, TURN_SPEED);
+chassis.pid_wait();
+chassis.pid_drive_set(25.939_in, DRIVE_SPEED); 
+chassis.pid_wait();
+chassis.pid_turn_set(136.019_deg, TURN_SPEED);
+chassis.pid_wait();
+chassis.pid_drive_set(-16.535_in, DRIVE_SPEED); 
+chassis.pid_wait();
+chassis.pid_turn_set(135.544_deg, TURN_SPEED);
+chassis.pid_wait();
+chassis.pid_drive_set(49.541_in, DRIVE_SPEED); 
+chassis.pid_wait();
+chassis.pid_turn_set(89.999_deg, TURN_SPEED);
+chassis.pid_wait();
+chassis.pid_drive_set(-16.807_in, DRIVE_SPEED); 
+chassis.pid_wait();
+chassis.pid_turn_set(90_deg, TURN_SPEED);
+chassis.pid_wait();
+
+// RightStraight
+
+chassis.pid_drive_set(24.053_in, DRIVE_SPEED); 
+chassis.pid_wait();
+chassis.pid_turn_set(294.52_deg, TURN_SPEED);
+chassis.pid_wait();
+chassis.pid_drive_set(21.682_in, DRIVE_SPEED); 
+chassis.pid_wait();
+chassis.pid_turn_set(46.538_deg, TURN_SPEED);
+chassis.pid_wait();
+chassis.pid_drive_set(36.476_in, DRIVE_SPEED); 
+chassis.pid_wait();
+chassis.pid_turn_set(90.434_deg, TURN_SPEED);
+chassis.pid_wait();
+chassis.pid_drive_set(-22.842_in, DRIVE_SPEED); 
+chassis.pid_wait();
+chassis.pid_turn_set(89.588_deg, TURN_SPEED);
+chassis.pid_wait();
+
+// RightMatchLoaderOnly
+
+chassis.pid_drive_set(39.344_in, DRIVE_SPEED); 
+chassis.pid_wait();
+chassis.pid_turn_set(90.738_deg, TURN_SPEED);
+chassis.pid_wait();
+chassis.pid_drive_set(12.905_in, DRIVE_SPEED); 
+chassis.pid_wait();
+chassis.pid_turn_set(90_deg, TURN_SPEED);
+chassis.pid_wait();
+chassis.pid_drive_set(-29.711_in, DRIVE_SPEED); 
+chassis.pid_wait();
+chassis.pid_turn_set(90_deg, TURN_SPEED);
+chassis.pid_wait();
+
+// 7 block (no wing mech)
+
+chassis.pid_drive_set(-0_in, DRIVE_SPEED); 
+chassis.pid_wait();
+chassis.pid_turn_set(287.632_deg, TURN_SPEED);
+chassis.pid_wait();
+chassis.pid_drive_set(25.148_in, DRIVE_SPEED); 
+chassis.pid_wait();
+chassis.pid_turn_set(46.538_deg, TURN_SPEED);
+chassis.pid_wait();
+chassis.pid_drive_set(36.476_in, DRIVE_SPEED); 
+chassis.pid_wait();
+chassis.pid_turn_set(90_deg, TURN_SPEED);
+chassis.pid_wait();
+chassis.pid_drive_set(12.47_in, DRIVE_SPEED); 
+chassis.pid_wait();
+chassis.pid_turn_set(90_deg, TURN_SPEED);
+chassis.pid_wait();
+chassis.pid_drive_set(-33.017_in, DRIVE_SPEED); 
+chassis.pid_wait();
+chassis.pid_turn_set(90_deg, TURN_SPEED);
+chassis.pid_wait();
+
+// 7 block (wing mech)
+
+chassis.pid_drive_set(0_in, DRIVE_SPEED); 
+chassis.pid_wait();
+chassis.pid_turn_set(287.632_deg, TURN_SPEED);
+chassis.pid_wait();
+chassis.pid_drive_set(25.148_in, DRIVE_SPEED); 
+chassis.pid_wait();
+chassis.pid_turn_set(46.538_deg, TURN_SPEED);
+chassis.pid_wait();
+chassis.pid_drive_set(36.476_in, DRIVE_SPEED); 
+chassis.pid_wait();
+chassis.pid_turn_set(90_deg, TURN_SPEED);
+chassis.pid_wait();
+chassis.pid_drive_set(12.47_in, DRIVE_SPEED); 
+chassis.pid_wait();
+chassis.pid_turn_set(90_deg, TURN_SPEED);
+chassis.pid_wait();
+chassis.pid_drive_set(-33.017_in, DRIVE_SPEED); 
+chassis.pid_wait();
+chassis.pid_turn_set(118.262_deg, TURN_SPEED);
+chassis.pid_wait();
+chassis.pid_drive_set(16.695_in, DRIVE_SPEED); 
+chassis.pid_wait();
+chassis.pid_turn_set(90_deg, TURN_SPEED);
+chassis.pid_wait();
+chassis.pid_drive_set(-20.633_in, DRIVE_SPEED); 
+chassis.pid_wait();
+chassis.pid_turn_set(90_deg, TURN_SPEED);
+chassis.pid_wait();
+
+
+#PATH.JERRYIO-DATA {"appVersion":"0.10.0","format":"Rigid Code Gen v0.1","gc":{"robotWidth":14.5,"robotHeight":15,"showRobot":true,"uol":2.54,"pointDensity":0.7874015748031495,"controlMagnetDistance":1.968503937007874,"fieldImage":{"displayName":"V5RC 2026 - Push Back","signature":"V5RC-PushBack-H2H-TopDownHighlighted-TileColor66_71","origin":{"__type":"built-in"}},"coordinateSystem":"VEX Gaming Positioning System","headingOutputType":"Absolute Heading","outputTemplate":"path: `// ${name}\n\n${code}\n`\nforward: `chassis.pid_drive_set(${distance}_in, DRIVE_SPEED); \nchassis.pid_wait();`\nbackward: `chassis.pid_drive_set(-${distance}_in, DRIVE_SPEED); \nchassis.pid_wait();`\nturnLeft: `turnLeft(${heading}, ${speed});`\nturnRight: `turnRight(${heading}, ${speed});`\nturnTo: `chassis.pid_turn_set(${heading}_deg, TURN_SPEED);\nchassis.pid_wait();`"},"paths":[{"segments":[{"controls":[{"uid":"192r6W8t7z","x":45.59623346050815,"y":7.5,"lock":false,"visible":true,"heading":180,"__type":"end-point"},{"uid":"yuPfzuJS1D","x":45.59623346050815,"y":-0.4160240279243445,"lock":false,"visible":true,"heading":180,"__type":"end-point"}],"speedProfiles":[],"lookaheadKeyframes":[],"uid":"ER0xpF11OR"},{"controls":[{"uid":"yuPfzuJS1D","x":45.59623346050815,"y":-0.4160240279243445,"lock":false,"visible":true,"heading":180,"__type":"end-point"},{"uid":"eGrjwFxr1W","x":45.59623346050815,"y":46.84430554428119,"lock":false,"visible":true,"heading":90.73839512207968,"__type":"end-point"}],"speedProfiles":[],"lookaheadKeyframes":[],"uid":"MxrOhCzcI9"},{"controls":[{"uid":"eGrjwFxr1W","x":45.59623346050815,"y":46.84430554428119,"lock":false,"visible":true,"heading":90.73839512207968,"__type":"end-point"},{"uid":"WEV2mKPAYr","x":58.5,"y":46.678,"lock":false,"visible":true,"heading":90,"__type":"end-point"}],"speedProfiles":[],"lookaheadKeyframes":[],"uid":"5KteHbbLTb"},{"controls":[{"uid":"WEV2mKPAYr","x":58.5,"y":46.678,"lock":false,"visible":true,"heading":90,"__type":"end-point"},{"uid":"fcCTBs4EJ5","x":28.788862732364638,"y":46.678,"lock":false,"visible":true,"heading":16.620610337835615,"__type":"end-point"}],"speedProfiles":[],"lookaheadKeyframes":[],"uid":"nzCoEMBLPj"},{"controls":[{"uid":"fcCTBs4EJ5","x":28.788862732364638,"y":46.678,"lock":false,"visible":true,"heading":16.620610337835615,"__type":"end-point"},{"uid":"SGGyzsZ8my","x":25.460670508969883,"y":35.52845198473902,"lock":false,"visible":true,"heading":189.9262455066517,"__type":"end-point"}],"speedProfiles":[],"lookaheadKeyframes":[],"uid":"qJuzUSfPEg"},{"controls":[{"uid":"SGGyzsZ8my","x":25.460670508969883,"y":35.52845198473902,"lock":false,"visible":true,"heading":189.9262455066517,"__type":"end-point"},{"uid":"1v7aJ1skBM","x":19.63633411802906,"y":2.2465297507914603,"lock":false,"visible":true,"heading":173.923655178851,"__type":"end-point"}],"speedProfiles":[],"lookaheadKeyframes":[],"uid":"ghXRGUskhb"},{"controls":[{"uid":"1v7aJ1skBM","x":19.63633411802906,"y":2.2465297507914603,"lock":false,"visible":true,"heading":173.923655178851,"__type":"end-point"},{"uid":"tnO92Jg2z9","x":22.382092702329732,"y":-23.546959980517897,"lock":false,"visible":true,"heading":136.01939028145512,"__type":"end-point"}],"speedProfiles":[],"lookaheadKeyframes":[],"uid":"pmeaMRB6nb"},{"controls":[{"uid":"tnO92Jg2z9","x":22.382092702329732,"y":-23.546959980517897,"lock":false,"visible":true,"heading":136.01939028145512,"__type":"end-point"},{"uid":"11cujJFnT0","x":10.899829531617826,"y":-11.648672781881645,"lock":false,"visible":true,"heading":135.5443615727072,"__type":"end-point"}],"speedProfiles":[],"lookaheadKeyframes":[],"uid":"csBDDiYy4M"},{"controls":[{"uid":"11cujJFnT0","x":10.899829531617826,"y":-11.648672781881645,"lock":false,"visible":true,"heading":135.5443615727072,"__type":"end-point"},{"uid":"SDrcUnfX0n","x":45.59623346050816,"y":-47.010715155450924,"lock":false,"visible":true,"heading":89.99902896627714,"__type":"end-point"}],"speedProfiles":[],"lookaheadKeyframes":[],"uid":"jgmxwqQGeT"},{"controls":[{"uid":"SDrcUnfX0n","x":45.59623346050816,"y":-47.010715155450924,"lock":false,"visible":true,"heading":89.99902896627714,"__type":"end-point"},{"uid":"gfVyKBkERS","x":28.789,"y":-47.011,"lock":false,"visible":true,"heading":90,"__type":"end-point"}],"speedProfiles":[],"lookaheadKeyframes":[],"uid":"FUpy0R7xFa"}],"pc":{"speed":30},"name":"SuperSoloAWP","uid":"rybnifAvrG","lock":false,"visible":false},{"segments":[{"controls":[{"uid":"CcDUPoWZa4","x":66.1978037917396,"y":13.287688960631229,"lock":false,"visible":true,"heading":269.58780725859765,"__type":"end-point"},{"uid":"vh3sTwZcvK","x":42.14514027687142,"y":13.114648215919946,"lock":false,"visible":true,"heading":294.51964268819074,"__type":"end-point"}],"speedProfiles":[],"lookaheadKeyframes":[],"uid":"0tBI8ekM4g"},{"controls":[{"uid":"vh3sTwZcvK","x":42.14514027687142,"y":13.114648215919946,"lock":false,"visible":true,"heading":294.51964268819074,"__type":"end-point"},{"uid":"SueQJ8rwPs","x":22.418495379785295,"y":22.112766940906607,"lock":false,"visible":true,"heading":46.53777238469745,"__type":"end-point"}],"speedProfiles":[],"lookaheadKeyframes":[],"uid":"ShO2SIpthm"},{"controls":[{"uid":"SueQJ8rwPs","x":22.418495379785295,"y":22.112766940906607,"lock":false,"visible":true,"heading":46.53777238469745,"__type":"end-point"},{"uid":"8qxCcgoSZU","x":48.89372932061142,"y":47.20367492404248,"lock":false,"visible":true,"heading":90.43405063213936,"__type":"end-point"}],"speedProfiles":[],"lookaheadKeyframes":[],"uid":"IGWhqp6KWr"},{"controls":[{"uid":"8qxCcgoSZU","x":48.89372932061142,"y":47.20367492404248,"lock":false,"visible":true,"heading":90.43405063213936,"__type":"end-point"},{"uid":"sH7GPD7kxE","x":26.052351018722202,"y":47.376715668753754,"lock":false,"visible":true,"heading":89.58780725859765,"__type":"end-point"}],"speedProfiles":[],"lookaheadKeyframes":[],"uid":"uOHH7fyZLZ"}],"pc":{"speed":30},"name":"RightStraight","uid":"dtnqLtSthe","lock":false,"visible":false},{"segments":[{"controls":[{"uid":"TOehnH390t","x":45.59623346050815,"y":7.5,"lock":false,"visible":true,"heading":0,"__type":"end-point"},{"uid":"qMJdVnYO9Q","x":45.59623346050815,"y":46.84430554428119,"lock":false,"visible":true,"heading":90.73839512207968,"__type":"end-point"}],"speedProfiles":[],"lookaheadKeyframes":[],"uid":"L81I3loj6h"},{"controls":[{"uid":"qMJdVnYO9Q","x":45.59623346050815,"y":46.84430554428119,"lock":false,"visible":true,"heading":90.73839512207968,"__type":"end-point"},{"uid":"7EzLd9ke8k","x":58.5,"y":46.678,"lock":false,"visible":true,"heading":90,"__type":"end-point"}],"speedProfiles":[],"lookaheadKeyframes":[],"uid":"5KteHbbLTb"},{"controls":[{"uid":"7EzLd9ke8k","x":58.5,"y":46.678,"lock":false,"visible":true,"heading":90,"__type":"end-point"},{"uid":"EdYbmGA8AN","x":28.788862732364638,"y":46.678,"lock":false,"visible":true,"heading":90,"__type":"end-point"}],"speedProfiles":[],"lookaheadKeyframes":[],"uid":"nzCoEMBLPj"}],"pc":{"speed":30},"name":"RightMatchLoaderOnly","uid":"P1DN2MOnj2","lock":false,"visible":false},{"segments":[{"controls":[{"uid":"WrDzzGDN8A","x":46.38511095204009,"y":14.495347172512526,"lock":false,"visible":true,"heading":90,"__type":"end-point"},{"uid":"MygBy6IilV","x":46.38511095204008,"y":14.495347172512526,"lock":false,"visible":true,"heading":287.632057393951,"__type":"end-point"}],"speedProfiles":[],"lookaheadKeyframes":[],"uid":"0tBI8ekM4g"},{"controls":[{"uid":"MygBy6IilV","x":46.38511095204008,"y":14.495347172512526,"lock":false,"visible":true,"heading":287.632057393951,"__type":"end-point"},{"uid":"UX1yfYgrt0","x":22.418495379785295,"y":22.112766940906607,"lock":false,"visible":true,"heading":46.53777238469745,"__type":"end-point"}],"speedProfiles":[],"lookaheadKeyframes":[],"uid":"ShO2SIpthm"},{"controls":[{"uid":"UX1yfYgrt0","x":22.418495379785295,"y":22.112766940906607,"lock":false,"visible":true,"heading":46.53777238469745,"__type":"end-point"},{"uid":"OBTZolbhBU","x":48.89372932061142,"y":47.20367492404248,"lock":false,"visible":true,"heading":90,"__type":"end-point"}],"speedProfiles":[],"lookaheadKeyframes":[],"uid":"IGWhqp6KWr"},{"controls":[{"uid":"OBTZolbhBU","x":48.89372932061142,"y":47.20367492404248,"lock":false,"visible":true,"heading":90,"__type":"end-point"},{"uid":"p0hU4yeB6j","x":61.36363636363636,"y":47.20367492404248,"lock":false,"visible":true,"heading":90,"__type":"end-point"}],"speedProfiles":[],"lookaheadKeyframes":[],"uid":"uOHH7fyZLZ"},{"controls":[{"uid":"p0hU4yeB6j","x":61.36363636363636,"y":47.20367492404248,"lock":false,"visible":true,"heading":90,"__type":"end-point"},{"uid":"uld50HoBAe","x":28.34645669291339,"y":47.20367492404249,"lock":false,"visible":true,"heading":90,"__type":"end-point"}],"speedProfiles":[],"lookaheadKeyframes":[],"uid":"WJ4hQ4WKCL"}],"pc":{"speed":30},"name":"7 block (no wing mech)","uid":"ceYydFU1ko","lock":false,"visible":false},{"segments":[{"controls":[{"uid":"lmMu4DNOVY","x":46.38511095204009,"y":14.495347172512524,"lock":false,"visible":true,"heading":270,"__type":"end-point"},{"uid":"T3ekl0Wpp3","x":46.38511095204008,"y":14.495347172512524,"lock":false,"visible":true,"heading":287.632057393951,"__type":"end-point"}],"speedProfiles":[],"lookaheadKeyframes":[],"uid":"0tBI8ekM4g"},{"controls":[{"uid":"T3ekl0Wpp3","x":46.38511095204008,"y":14.495347172512524,"lock":false,"visible":true,"heading":287.632057393951,"__type":"end-point"},{"uid":"YXHEN37las","x":22.418495379785295,"y":22.112766940906607,"lock":false,"visible":true,"heading":46.53777238469745,"__type":"end-point"}],"speedProfiles":[],"lookaheadKeyframes":[],"uid":"ShO2SIpthm"},{"controls":[{"uid":"YXHEN37las","x":22.418495379785295,"y":22.112766940906607,"lock":false,"visible":true,"heading":46.53777238469745,"__type":"end-point"},{"uid":"stYkVdC2T6","x":48.89372932061142,"y":47.20367492404248,"lock":false,"visible":true,"heading":90,"__type":"end-point"}],"speedProfiles":[],"lookaheadKeyframes":[],"uid":"IGWhqp6KWr"},{"controls":[{"uid":"stYkVdC2T6","x":48.89372932061142,"y":47.20367492404248,"lock":false,"visible":true,"heading":90,"__type":"end-point"},{"uid":"YZNZIf0n80","x":61.36363636363635,"y":47.20367492404248,"lock":false,"visible":true,"heading":90,"__type":"end-point"}],"speedProfiles":[],"lookaheadKeyframes":[],"uid":"uOHH7fyZLZ"},{"controls":[{"uid":"YZNZIf0n80","x":61.36363636363635,"y":47.20367492404248,"lock":false,"visible":true,"heading":90,"__type":"end-point"},{"uid":"W62YaYNcf5","x":28.346456692913392,"y":47.20367492404249,"lock":false,"visible":true,"heading":118.26202630697144,"__type":"end-point"}],"speedProfiles":[],"lookaheadKeyframes":[],"uid":"WJ4hQ4WKCL"},{"controls":[{"uid":"W62YaYNcf5","x":28.346456692913392,"y":47.20367492404249,"lock":false,"visible":true,"heading":118.26202630697144,"__type":"end-point"},{"uid":"BptAif7tRH","x":43.05130508154603,"y":39.29849677881174,"lock":false,"visible":true,"heading":90,"__type":"end-point"}],"speedProfiles":[],"lookaheadKeyframes":[],"uid":"oQFvugy5BQ"},{"controls":[{"uid":"BptAif7tRH","x":43.05130508154603,"y":39.29849677881174,"lock":false,"visible":true,"heading":90,"__type":"end-point"},{"uid":"S8rfNS1naj","x":22.4184953797853,"y":39.29849677881174,"lock":false,"visible":true,"heading":90,"__type":"end-point"}],"speedProfiles":[],"lookaheadKeyframes":[],"uid":"ktJNX8w9mR"}],"pc":{"speed":30},"name":"7 block (wing mech)","uid":"uFDYxVH7fl","lock":false,"visible":true}]}

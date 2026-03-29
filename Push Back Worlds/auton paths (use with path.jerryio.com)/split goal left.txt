@@ -1,0 +1,40 @@
+
+void SplitGoalLeft() {
+  Right_7_ball_Base();
+  // Second half of split
+
+  // go to middle goal
+  lift_matchloader();
+  chassis.pid_drive_set(14.5_in, DRIVE_SPEED_MAX); 
+  chassis.pid_wait_quick_chain();
+  stop_outtake();
+  chassis.pid_turn_set(225_deg, TURN_SPEED);
+  chassis.pid_wait_quick_chain();
+  chassis.pid_drive_set(-51_in, DRIVE_SPEED_MAX); 
+  chassis.pid_wait_quick_chain();
+
+  // score in middle goal + descore
+  drop_middlegoal();
+  pros::delay(2 * 1000); 
+  lift_middlegoal();
+  chassis.pid_drive_set(12_in, DRIVE_SPEED_MAX);
+  chassis.pid_wait_quick_chain();
+  lift_middlegoaldescore();
+  chassis.pid_drive_set(-12_in, DRIVE_SPEED_MAX);
+  chassis.pid_wait_quick_chain();
+
+  // go to wing
+  chassis.pid_drive_set(55.75_in, DRIVE_SPEED_MAX); 
+  chassis.pid_wait_quick_chain();
+  drop_middlegoaldescore();
+  chassis.pid_turn_set(180_deg, TURN_SPEED);
+  chassis.pid_wait_quick_chain();
+
+  // wing
+  chassis.pid_drive_set(-39_in, DRIVE_SPEED_MAX); 
+  chassis.pid_wait_quick_chain();
+  chassis.pid_turn_set(180_deg, TURN_SPEED);
+  chassis.pid_wait_quick_chain();
+
+  // done
+}
