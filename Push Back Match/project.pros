@@ -1,7 +1,7 @@
 {
   "py/object": "pros.conductor.project.Project",
   "py/state": {
-    "project_name": "Pushback",
+    "project_name": "EZ - WORLDS",
     "target": "v5",
     "templates": {
       "EZ-Template": {
@@ -467,9 +467,9 @@
       }
     },
     "upload_options": {
-      "description": "EZTemplate",
-      "icon": "X",
-      "slot": 2
+      "description": "Worlds",
+      "icon": "planet",
+      "slot": 1
     },
     "use_early_access": false
   }
