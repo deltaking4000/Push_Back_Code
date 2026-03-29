@@ -1128,7 +1128,7 @@ void Left_4_ball() {
   // go to matchloader
   chassis.pid_turn_set(46.538_deg, TURN_SPEED);
   chassis.pid_wait_quick_chain();
-  chassis.pid_drive_set(-30_in, DRIVE_SPEED);  
+  chassis.pid_drive_set(-22_in, DRIVE_SPEED);  
   chassis.pid_wait_quick_chain();
   
   chassis.pid_turn_set(180_deg, TURN_SPEED);
@@ -1152,6 +1152,7 @@ void Left_4_ball() {
   chassis.pid_drive_set(7_in, DRIVE_SPEED);
   chassis.pid_wait_quick();
   stop_outtake();
+
   // try reversing intake for a bit to unjam
  /* reverse_intake();
   pros::delay(0.5 * 1000);  
@@ -1182,8 +1183,9 @@ void Left_4_ball() {
   chassis.pid_turn_set(180_deg, TURN_SPEED);
   chassis.pid_wait_quick_chain();
   drop_wingmech();
-  chassis.pid_drive_set(-41_in, DRIVE_SPEED_SLOW); 
+  chassis.pid_drive_set(-41_in, 50); 
   chassis.pid_wait_quick_chain();
+  lift_matchloader();
 
 }
 
