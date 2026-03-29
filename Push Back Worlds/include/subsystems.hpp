@@ -1,24 +1,24 @@
 #pragma once
 
+#include "EZ-Template/api.hpp"
 #include "api.h"
 
-// Your motors, sensors, etc. should go here.  Below are examples
-inline pros::MotorGroup intake({-5});  // Negative port will reverse the motor
-inline pros::Motor lowerintake(-11);  // Negative port will reverse the motor
-inline pros::Motor upperintake(-12);  // Negative port will reverse the motor
+extern Drive chassis;
+
+// Motors
+inline pros::MotorGroup intake({-5});  
 inline pros::Motor outtake(-14);
-// inline ez::Piston matchloader('A');
-// inline ez::Piston middlegoaldescore('G');
-// inline ez::Piston wingmech('B');
-// inline ez::Piston middlegoal('H');
+inline pros::Motor lowerintake(-11);  // not used now
+inline pros::Motor upperintake(-12);  // not used now
 
-#include "pros/adi.hpp"
+// Pneumatics
+inline ez::Piston matchloader('A');
+inline ez::Piston middlegoaldescore('G');
+inline ez::Piston wingmech('B');
+inline ez::Piston middlegoal('H');
 
-pros::adi::DigitalOut matchloader('A'); 
-pros::adi::DigitalOut middlegoaldescore('G'); 
-pros::adi::DigitalOut wingmech('B'); 
-pros::adi::DigitalOut middlegoal('H'); 
-
+// Sensors
+inline pros::Optical optical(11);
 
 void spin_intake();
 void spin_outtake();

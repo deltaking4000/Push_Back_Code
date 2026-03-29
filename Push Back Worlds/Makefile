@@ -14,7 +14,7 @@ INCDIR=$(ROOT)/include
 
 WARNFLAGS+=
 EXTRA_CFLAGS=
-EXTRA_CXXFLAGS=
+EXTRA_CXXFLAGS=-Wno-deprecated-enum-enum-conversion
 
 # Set to 1 to enable hot/cold linking
 USE_PACKAGE:=1
@@ -25,9 +25,9 @@ EXCLUDE_COLD_LIBRARIES:=
 
 # Set this to 1 to add additional rules to compile your project as a PROS library template
 IS_LIBRARY:=0
-LIBNAME:=LemLib
-VERSION:=0.5.6
-
+# TODO: CHANGE THIS!
+LIBNAME:=libbest
+VERSION:=1.0.0
 # EXCLUDE_SRC_FROM_LIB= $(SRCDIR)/unpublishedfile.c
 # this line excludes opcontrol.c and similar files
 EXCLUDE_SRC_FROM_LIB+=$(foreach file, $(SRCDIR)/main,$(foreach cext,$(CEXTS),$(file).$(cext)) $(foreach cxxext,$(CXXEXTS),$(file).$(cxxext)))
@@ -35,8 +35,7 @@ EXCLUDE_SRC_FROM_LIB+=$(foreach file, $(SRCDIR)/main,$(foreach cext,$(CEXTS),$(f
 # files that get distributed to every user (beyond your source archive) - add
 # whatever files you want here. This line is configured to add all header files
 # that are in the the include directory get exported
-
-TEMPLATE_FILES=$(INCDIR)/lemlib/*.hpp $(INCDIR)/lemlib/logger/*.hpp $(INCDIR)/lemlib/chassis/*.hpp $(INCDIR)/fmt/*.h $(INCDIR)/fmt/LICENSE $(FWDIR)/hot-cold-asset.mk $(ROOT)/static/example.txt $(INCDIR)/lemlib/LICENSE $(INCDIR)/lemlib/README.md $(INCDIR)/lemlib/VERSION
+TEMPLATE_FILES=$(INCDIR)/**/*.h $(INCDIR)/**/*.hpp
 
 .DEFAULT_GOAL=quick
 

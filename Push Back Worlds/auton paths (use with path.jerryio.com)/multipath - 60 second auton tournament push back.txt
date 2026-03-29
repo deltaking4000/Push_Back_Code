@@ -1,0 +1,47 @@
+// 1st match-loader - drive and intake
+
+chassis.pid_drive_set(37.943_in, DRIVE_SPEED); 
+chassis.pid_wait();
+chassis.pid_turn_set(90_deg, TURN_SPEED);
+chassis.pid_wait();
+chassis.pid_drive_set(10.069_in, DRIVE_SPEED); 
+chassis.pid_wait();
+chassis.pid_turn_set(90_deg, TURN_SPEED);
+chassis.pid_wait();
+
+// drive to other end of long-goal and score
+
+chassis.pid_drive_set(-3.411_in, DRIVE_SPEED); 
+chassis.pid_wait();
+chassis.pid_turn_set(124.737_deg, TURN_SPEED);
+chassis.pid_wait();
+chassis.pid_drive_set(-21.465_in, DRIVE_SPEED); 
+chassis.pid_wait();
+chassis.pid_turn_set(90_deg, TURN_SPEED);
+chassis.pid_wait();
+chassis.pid_drive_set(-65.066_in, DRIVE_SPEED); 
+chassis.pid_wait();
+chassis.pid_turn_set(57.923_deg, TURN_SPEED);
+chassis.pid_wait();
+chassis.pid_drive_set(-21.626_in, DRIVE_SPEED); 
+chassis.pid_wait();
+chassis.pid_turn_set(270_deg, TURN_SPEED);
+chassis.pid_wait();
+chassis.pid_drive_set(-15.911_in, DRIVE_SPEED); 
+chassis.pid_wait();
+chassis.pid_turn_set(270_deg, TURN_SPEED);
+chassis.pid_wait();
+
+// 2nd match-loader intake and score
+
+chassis.pid_drive_set(23.464_in, DRIVE_SPEED); 
+chassis.pid_wait();
+chassis.pid_turn_set(270_deg, TURN_SPEED);
+chassis.pid_wait();
+chassis.pid_drive_set(-23.464_in, DRIVE_SPEED); 
+chassis.pid_wait();
+chassis.pid_turn_set(270_deg, TURN_SPEED);
+chassis.pid_wait();
+
+
+#PATH.JERRYIO-DATA {"appVersion":"0.10.0","format":"Rigid Code Gen v0.1","gc":{"robotWidth":15,"robotHeight":17,"showRobot":true,"uol":2.54,"pointDensity":0.7874015748031495,"controlMagnetDistance":1.968503937007874,"fieldImage":{"displayName":"V5RC 2026 - Push Back (Skills)","signature":"V5RC-PushBack-Skills-TopDownHighlighted-TileColor66_71","origin":{"__type":"built-in"}},"coordinateSystem":"Path-Based Coordinates","headingOutputType":"Absolute Heading","outputTemplate":"path: `// ${name}\n\n${code}\n`\nforward: `chassis.pid_drive_set(${distance}_in, DRIVE_SPEED); \nchassis.pid_wait();`\nbackward: `chassis.pid_drive_set(-${distance}_in, DRIVE_SPEED); \nchassis.pid_wait();`\nturnLeft: `turnLeft(${heading}, ${speed});`\nturnRight: `turnRight(${heading}, ${speed});`\nturnTo: `chassis.pid_turn_set(${heading}_deg, TURN_SPEED);\nchassis.pid_wait();`"},"paths":[{"segments":[{"controls":[{"uid":"go4qPl0t9P","x":45.67943826609302,"y":8.486890169656627,"lock":false,"visible":true,"heading":0.500387098792217,"__type":"end-point"},{"uid":"41vTMTBVtB","x":46.010804129382976,"y":46.42828151635685,"lock":false,"visible":true,"heading":90,"__type":"end-point"}],"speedProfiles":[],"lookaheadKeyframes":[],"uid":"NoxA4M1xE0"},{"controls":[{"uid":"41vTMTBVtB","x":46.010804129382976,"y":46.42828151635685,"lock":false,"visible":true,"heading":90,"__type":"end-point"},{"uid":"tiPrSwHSKP","x":56.080038964201634,"y":46.42828151635685,"lock":false,"visible":true,"heading":90,"__type":"end-point"}],"speedProfiles":[],"lookaheadKeyframes":[],"uid":"WnqGlmA6mo"}],"pc":{"speed":30},"name":"1st match-loader - drive and intake","uid":"3ZhdApK1Eg","lock":false,"visible":true},{"segments":[{"controls":[{"uid":"2nb4LXgi6y","x":56.080038964201634,"y":46.42828151635685,"lock":false,"visible":true,"heading":90,"__type":"end-point"},{"uid":"YUJqNZtAlF","x":52.66864193522201,"y":46.42828151635685,"lock":false,"visible":true,"heading":124.73729310160581,"__type":"end-point"}],"speedProfiles":[],"lookaheadKeyframes":[],"uid":"fCwLGHc2gd"},{"controls":[{"uid":"YUJqNZtAlF","x":52.66864193522201,"y":46.42828151635685,"lock":false,"visible":true,"heading":124.73729310160581,"__type":"end-point"},{"uid":"CAP0GDYum2","x":35.02922315122981,"y":58.659387937332575,"lock":false,"visible":true,"heading":90,"__type":"end-point"}],"speedProfiles":[],"lookaheadKeyframes":[],"uid":"sPpmjeUCI9"},{"controls":[{"uid":"CAP0GDYum2","x":35.02922315122981,"y":58.659387937332575,"lock":false,"visible":true,"heading":90,"__type":"end-point"},{"uid":"3gyfwVF8Hh","x":-30.03693481613767,"y":58.659387937332575,"lock":false,"visible":true,"heading":57.9234714069014,"__type":"end-point"}],"speedProfiles":[],"lookaheadKeyframes":[],"uid":"Q0sBDJfmuA"},{"controls":[{"uid":"3gyfwVF8Hh","x":-30.03693481613767,"y":58.659387937332575,"lock":false,"visible":true,"heading":57.9234714069014,"__type":"end-point"},{"uid":"6RVRg6Vajt","x":-48.36128909849922,"y":47.175,"lock":false,"visible":true,"heading":270,"__type":"end-point"}],"speedProfiles":[],"lookaheadKeyframes":[],"uid":"sTK8qv5bVF"},{"controls":[{"uid":"6RVRg6Vajt","x":-48.36128909849922,"y":47.175,"lock":false,"visible":true,"heading":270,"__type":"end-point"},{"uid":"GE36zy4kOZ","x":-32.45,"y":47.175,"lock":false,"visible":true,"heading":270,"__type":"end-point"}],"speedProfiles":[],"lookaheadKeyframes":[],"uid":"xdYs6dH71C"}],"pc":{"speed":30},"name":"drive to other end of long-goal and score","uid":"bmgg32RQ0K","lock":false,"visible":true},{"segments":[{"controls":[{"uid":"LWvYnDh0T4","x":-32.45,"y":47.175,"lock":false,"visible":true,"heading":270,"__type":"end-point"},{"uid":"GhhAmIFi3e","x":-55.9136293530319,"y":47.175,"lock":false,"visible":true,"heading":270,"__type":"end-point"}],"speedProfiles":[],"lookaheadKeyframes":[],"uid":"Z6CW61yOcq"},{"controls":[{"uid":"GhhAmIFi3e","x":-55.9136293530319,"y":47.175,"lock":false,"visible":true,"heading":270,"__type":"end-point"},{"uid":"ZE72e921id","x":-32.45,"y":47.175,"lock":false,"visible":true,"heading":270,"__type":"end-point"}],"speedProfiles":[],"lookaheadKeyframes":[],"uid":"bTQXfvA6xw"}],"pc":{"speed":30},"name":"2nd match-loader intake and score","uid":"GGfKSx6VGy","lock":false,"visible":false}]}

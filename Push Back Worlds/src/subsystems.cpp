@@ -1,3 +1,5 @@
+#include "EZ-Template/api.hpp"
+
 #include "subsystems.hpp"
 
 // Intakes and Outtakes
@@ -26,37 +28,35 @@ void reverse_outtake(){
 }
 
 
-// // Pneumatics
+// Pneumatics
 void lift_matchloader() {
-    matchloader.set_value(true);  // retract
+    matchloader.set(false); 
 }
 
 void drop_matchloader() {
-   matchloader.set_value(false);   // extend
+    matchloader.set(true);
 }
 
 void lift_middlegoal() {
-    middlegoal.set_value(true);  // retract
-    
+    middlegoal.set(false);
 }
 
 void drop_middlegoal() {
-    middlegoal.set_value(false);  // extend
-   
+    middlegoal.set(true);
 }
 
 void lift_middlegoaldescore() {
-    middlegoaldescore.set_value(true);
+    middlegoaldescore.set(true);
 }
 
 void drop_middlegoaldescore() {
-    middlegoaldescore.set_value(false);
+    middlegoaldescore.set(false);
 }
 
 void lift_wingmech() {
-    wingmech.set_value(true);
+    wingmech.set(true);
 }
 
 void drop_wingmech() {
-    wingmech.set_value(false);
+    wingmech.set(false);
 }
