@@ -133,7 +133,7 @@ void initialize() {
       // {"RIGHT BLUE/RED (BASIC)\nPosition on the right.", SpooktacularAutonRight},
       // {"LEFT BLUE/RED (BASIC)\nPosition on the left.", SpooktacularAutonLeft},
       {"Doesnt move\n\nPosition at parkzone corner facing either direction", Move_Nothing_Auton},
-      {"Test\n\nTest", Matchloader},
+      {"AHHHHHHHHHHHHH\n\nTest", Matchloader},
       {"Moves fwd 1 inch\n\nPosition at parkzone corner facing either direction", MoveFwd1},
       {"RIGHT BLUE/RED WITH MATCHLOADER\nPosition above parkzone facing right.", AutonRightMatchloaderOnly},
       {"LEFT BLUE/RED WITH MATCHLOADER\nPosition above parkzone facing left.", AutonLeftMatchloaderOnly},
