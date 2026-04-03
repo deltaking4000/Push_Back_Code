@@ -966,7 +966,7 @@ void SuperSoloAWP() {
   spin_intake();
   chassis.pid_turn_set(140_deg, TURN_SPEED);
   chassis.pid_wait_quick_chain();
-  chassis.pid_odom_set(-20_in, DRIVE_SPEED); 
+  chassis.pid_odom_set(-17_in, DRIVE_SPEED); 
   chassis.pid_wait_quick_chain();
   drop_middlegoal();
   pros::delay(1*1000); // score middle goal blocks - leave some for long goal
