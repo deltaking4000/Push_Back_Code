@@ -35,7 +35,7 @@ ez::Drive chassis(
 // ez::tracking_wheel vert_tracker(9, 2.75, 4.0);   // This tracking wheel is parallel to the drive wheels
 // ez::tracking_wheel horiz_tracker(-14, 2, 4.0);  // This tracking wheel is perpendicular to the drive wheels
 //ez::tracking_wheel vert_tracker(-20, (24.0/28.1)*3.25, -1.015);  // This tracking wheel is parallel to the drive wheels
-ez::tracking_wheel vert_tracker(-20, 2.85, 0.2);  // This tracking wheel is parallel to the drive wheels
+ez::tracking_wheel vert_tracker(-20, (24.0/23.2)*2.75, 0.1);  // This tracking wheel is parallel to the drive wheels 2.85
 
 //////////////////////////////////////////////////////////
 // Lemlib config:
@@ -118,7 +118,7 @@ void initialize() {
   //  - change `left` to `right` if the tracking wheel is to the right of the centerline
   //  - ignore this if you aren't using a vertical tracker
   
-  chassis.odom_tracker_left_set(&vert_tracker);
+  chassis.odom_tracker_right_set(&vert_tracker);
 
   // Configure your chassis controls
   chassis.opcontrol_curve_buttons_toggle(true);   // Enables modifying the controller curve with buttons on the joysticks
@@ -387,6 +387,9 @@ void opcontrol() {
     // Put more user control code here!
     // . . .
 
+    if (master.get_digital(DIGITAL_LEFT)) {
+      chassis.drive_sensor_reset();
+    }
     
     if (master.get_digital(DIGITAL_R1)) {
       intake.move(-127);

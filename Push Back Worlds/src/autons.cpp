@@ -81,14 +81,14 @@ void turn_example() {
   // The first parameter is the target in degrees
   // The second parameter is max speed the robot will drive at
 
-  chassis.pid_turn_set(90_deg, TURN_SPEED);
+  chassis.pid_turn_set(-90_deg, TURN_SPEED);
   chassis.pid_wait();
 
-  chassis.pid_turn_set(45_deg, TURN_SPEED);
-  chassis.pid_wait();
+  // chassis.pid_turn_set(45_deg, TURN_SPEED);
+  // chassis.pid_wait();
 
-  chassis.pid_turn_set(0_deg, TURN_SPEED);
-  chassis.pid_wait();
+  // chassis.pid_turn_set(0_deg, TURN_SPEED);
+  // chassis.pid_wait();
 
 //   chassis.pid_turn_set(3600_deg, 40, ez::raw);
 //   chassis.pid_wait();
@@ -877,7 +877,7 @@ void SplitGoalRight() {
 //
 // Robot starts above parkzone facing left
 ///
-void SuperSoloAWP() {
+void OldSuperSoloAWP() {
   // SuperSoloAWP
   chassis.pid_turn_exit_condition_set(90_ms, 3_deg, 150_ms, 7_deg, 100_ms, 250_ms);
   // chassis.pid_swing_exit_condition_set(90_ms, 3_deg, 150_ms, 7_deg, 250_ms, 250_ms);
@@ -895,6 +895,94 @@ void SuperSoloAWP() {
   chassis.pid_wait_quick_chain();
   spin_intake();
   chassis.pid_drive_set(-21.5_in, DRIVE_SPEED); 
+  chassis.pid_wait();
+  outtake.move(-127); // dump all blocks
+  //pros::delay(0.2*1000); // score into long goal
+  reverse_intake();
+  pros::delay(0.2*1000); // score into long goal
+  spin_intake();
+  pros::delay(2*1000); // score into long goal // score long goal
+
+}
+
+void SuperSoloAWP() {
+  // SuperSoloAWP
+  chassis.pid_turn_exit_condition_set(90_ms, 3_deg, 150_ms, 7_deg, 100_ms, 250_ms);
+  // chassis.pid_swing_exit_condition_set(90_ms, 3_deg, 150_ms, 7_deg, 250_ms, 250_ms);
+  chassis.pid_drive_exit_condition_set(90_ms, 1_in, 150_ms, 3_in, 250_ms, 250_ms);
+
+  // Score matchloader, pick up field blocks and score only few blocks into middle goal 
+  chassis.odom_xyt_set(46.5_in, 5_in, 180_deg);    // Set the current position, you can start at a specific position with this
+  chassis.drive_angle_set(180_deg);    // Set the current angle
+
+  // take care of the other robot and steal their preload
+  spin_intake();
+  chassis.pid_drive_set(6.7_in, DRIVE_SPEED); 
+  chassis.pid_wait();
+
+
+  // drive to matchloader to matchload
+  chassis.pid_odom_set(-38_in, DRIVE_SPEED); // actually 50
+  chassis.pid_wait_quick_chain();
+  drop_matchloader();
+  chassis.pid_turn_set(93_deg, TURN_SPEED);
+  chassis.pid_wait_quick_chain();
+
+  // intaking from the loader
+  chassis.pid_odom_set(9_in, DRIVE_SPEED, false); 
+  chassis.pid_wait();
+  pros::delay(0.23*1000); // pick up alliance color blocks from loader
+
+  // score into 1st long goal
+  chassis.pid_odom_set(-27.5_in, DRIVE_SPEED); 
+  chassis.pid_wait();
+  spin_outtake();
+  pros::delay(1*1000); // score into long goal
+  stop_outtake();
+  lift_matchloader();
+
+  // go get 3-block heap #1
+  chassis.pid_swing_set(ez::LEFT_SWING, 230_deg, SWING_SPEED, ez::RIGHT_TURN);
+  chassis.pid_wait_quick_chain();
+
+  pros::Task([=]{
+    pros::delay(0.6*1000);
+    drop_matchloader();
+  });
+  chassis.pid_odom_set(16_in, DRIVE_SPEED); 
+  chassis.pid_wait_quick_chain();
+ 
+  // go get 3-block heap #2
+  chassis.pid_turn_set(180_deg, TURN_SPEED);
+  chassis.pid_wait_quick_chain();
+  lift_matchloader();
+  
+  chassis.pid_odom_set(45.6_in, DRIVE_SPEED);
+  chassis.pid_wait();
+  drop_matchloader();
+
+  // scoring in middle goal
+
+  spin_intake();
+  chassis.pid_turn_set(140_deg, TURN_SPEED);
+  chassis.pid_wait_quick_chain();
+  chassis.pid_odom_set(-20_in, DRIVE_SPEED); 
+  chassis.pid_wait_quick_chain();
+  drop_middlegoal();
+  pros::delay(1*1000); // score middle goal blocks - leave some for long goal
+  stop_outtake();
+  lift_middlegoal();
+  lift_matchloader();
+
+  // Last long goal
+  chassis.pid_turn_set(135_deg, TURN_SPEED);
+  chassis.pid_wait_quick_chain();
+  chassis.pid_odom_set(46.5_in, DRIVE_SPEED); 
+  chassis.pid_wait_quick_chain();
+  chassis.pid_turn_set(90_deg, TURN_SPEED);
+  chassis.pid_wait_quick_chain();
+  spin_intake();
+  chassis.pid_odom_set(-21.5_in, DRIVE_SPEED); 
   chassis.pid_wait();
   outtake.move(-127); // dump all blocks
   //pros::delay(0.2*1000); // score into long goal
@@ -1106,7 +1194,6 @@ void Right_7_ball_Base() {
 void Right_4_ball() {
   chassis.odom_theta_flip();
   Left_4_ball();
-
 }
 
 void Left_4_ball() {
