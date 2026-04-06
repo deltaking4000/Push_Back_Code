@@ -967,9 +967,15 @@ void SuperSoloAWP() {
   chassis.pid_turn_set(140_deg, TURN_SPEED);
   chassis.pid_wait_quick_chain();
   chassis.pid_odom_set(-17_in, DRIVE_SPEED); 
+  reverse_intake();
+  pros::Task([=]{
+    pros::delay(0.2*1000);
+    stop_intake();
+  });
   chassis.pid_wait_quick_chain();
   drop_middlegoal();
-  pros::delay(1*1000); // score middle goal blocks - leave some for long goal
+  spin_intake();
+  pros::delay(1*500); // score middle goal blocks - leave some for long goal
   stop_outtake();
   lift_middlegoal();
   lift_matchloader();
@@ -977,7 +983,7 @@ void SuperSoloAWP() {
   // Last long goal
   chassis.pid_turn_set(135_deg, TURN_SPEED);
   chassis.pid_wait_quick_chain();
-  chassis.pid_odom_set(46.5_in, DRIVE_SPEED); 
+  chassis.pid_odom_set(48_in, DRIVE_SPEED); 
   chassis.pid_wait_quick_chain();
   chassis.pid_turn_set(90_deg, TURN_SPEED);
   chassis.pid_wait_quick_chain();
