@@ -864,7 +864,7 @@ void SplitGoalRightBase(uint32_t middlegoal_waittime) {
   lift_middlegoal();
 }
 
-void SplitGoalRight() {
+void SplitGoalRightOld() {
   // Run auton upto middle goal and wait for more seconds to fully unload blocks
   SplitGoalRightBase(2.75*1000);
   chassis.pid_drive_set(12_in, DRIVE_SPEED);
@@ -874,7 +874,7 @@ void SplitGoalRight() {
   chassis.pid_wait();
 }
 
-//
+//spli
 // Robot starts above parkzone facing left
 ///
 void OldSuperSoloAWP() {
@@ -1019,6 +1019,74 @@ void Left_7_ball_Base() {
   chassis.odom_theta_flip();
   Right_7_ball_Base();
 
+}
+
+void SplitGoalRight() {
+
+  chassis.odom_xyt_set(48_in, 16_in, 285_deg);    // Set the current position, you can start at a specific position with this
+  //  chassis.drive_angle_set(0_deg);    // Set the current angle for drive motions
+  
+  // pick the 3 blocks on field
+  spin_intake();
+  // chassis.pid_turn_set(340_deg, TURN_SPEED);
+  // chassis.pid_wait_quick_chain();
+  chassis.pid_odom_set(30_in, DRIVE_SPEED_SLOW); 
+  chassis.pid_wait_until(16_in);
+  drop_matchloader();
+  chassis.pid_wait();
+
+  // lower goal
+  chassis.pid_turn_set({0,0}, fwd, TURN_SPEED);
+  chassis.pid_wait();
+  lift_matchloader();
+  chassis.pid_odom_set(6.5_in, DRIVE_SPEED); 
+  chassis.pid_wait();
+  reverse_intake();
+  pros::delay(1 * 1000); 
+  stop_intake();
+
+  // go to matchloader
+  chassis.pid_odom_set(-40_in, DRIVE_SPEED); 
+  chassis.pid_wait();
+  drop_matchloader();
+  chassis.pid_turn_exit_condition_set(90_ms, 3_deg, 100_ms, 7_deg, 100_ms, 250_ms);
+  chassis.pid_turn_set(90_deg, TURN_SPEED);
+  chassis.pid_wait();
+  spin_intake();
+  chassis.pid_odom_set(13.5_in, DRIVE_SPEED_MATCHLOADER); 
+  chassis.pid_wait();
+  pros::delay(0.65 * 1000);
+
+  // go to long goal
+  chassis.pid_odom_set(-32.213_in, DRIVE_SPEED_SLOW); 
+  chassis.pid_wait_quick_chain();
+  default_constants();
+  // score into long goal
+  reverse_intake();
+  pros::delay(0.25 * 1000); 
+
+  spin_intake();
+  spin_outtake();
+  pros::delay(1.1 * 1000); 
+  stop_intake();
+  stop_outtake();
+
+
+  // wing
+  chassis.pid_odom_set(5_in, DRIVE_SPEED); 
+  chassis.pid_wait();
+  chassis.pid_turn_set(130_deg, TURN_SPEED);
+  chassis.pid_wait_quick_chain();
+  chassis.pid_odom_set(13.5_in, DRIVE_SPEED); 
+  chassis.pid_wait_quick_chain();
+  chassis.pid_turn_set(90_deg, TURN_SPEED);
+  chassis.pid_wait_quick_chain();
+  drop_wingmech();
+  lift_matchloader();
+  chassis.pid_odom_set(-27_in, 60); 
+  chassis.pid_wait_quick_chain();
+  
+  // done
 }
 
 void SplitGoalLeft() {
