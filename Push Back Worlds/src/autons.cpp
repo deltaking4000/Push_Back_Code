@@ -922,14 +922,14 @@ void SuperSoloAWP() {
 
 
   // drive to matchloader to matchload
-  chassis.pid_odom_set(-40_in, DRIVE_SPEED); // actually 50
+  chassis.pid_odom_set(-39_in, DRIVE_SPEED); // actually 50
   chassis.pid_wait_quick_chain();
   drop_matchloader();
   chassis.pid_turn_set(90_deg, TURN_SPEED);
   chassis.pid_wait_quick_chain();
 
   // intaking from the loader
-  chassis.pid_odom_set(9_in, DRIVE_SPEED, false); 
+  chassis.pid_odom_set(9.5_in, DRIVE_SPEED, false); 
   chassis.pid_wait();
   pros::delay(0.23*1000); // pick up alliance color blocks from loader
 
@@ -957,7 +957,7 @@ void SuperSoloAWP() {
   chassis.pid_wait_quick_chain();
   lift_matchloader();
   
-  chassis.pid_odom_set(45.6_in, DRIVE_SPEED);
+  chassis.pid_odom_set(46.4_in, DRIVE_SPEED);
   chassis.pid_wait();
   drop_matchloader();
 
@@ -966,7 +966,7 @@ void SuperSoloAWP() {
   spin_intake();
   chassis.pid_turn_set(140_deg, TURN_SPEED);
   chassis.pid_wait_quick_chain();
-  chassis.pid_odom_set(-17_in, DRIVE_SPEED); 
+  chassis.pid_odom_set(-17.5_in, DRIVE_SPEED); 
   reverse_intake();
   reverse_outtake();
   pros::Task([=]{
@@ -977,20 +977,20 @@ void SuperSoloAWP() {
   chassis.pid_wait_quick_chain();
   drop_middlegoal();
   spin_intake();
-  pros::delay(1*500); // score middle goal blocks - leave some for long goal
+  pros::delay(1*700); // score middle goal blocks - leave some for long goal
   stop_outtake();
   lift_middlegoal();
   lift_matchloader();
 
   // Last long goal
-  chassis.pid_turn_set(135_deg, TURN_SPEED);
+  chassis.pid_turn_set(145_deg, TURN_SPEED);
   chassis.pid_wait_quick_chain();
-  chassis.pid_odom_set(48_in, DRIVE_SPEED); 
+  chassis.pid_odom_set(41_in, DRIVE_SPEED_MAX); 
   chassis.pid_wait_quick_chain();
   chassis.pid_turn_set(90_deg, TURN_SPEED);
   chassis.pid_wait_quick_chain();
   spin_intake();
-  chassis.pid_odom_set(-21.5_in, DRIVE_SPEED); 
+  chassis.pid_odom_set(-9_in, DRIVE_SPEED); 
   chassis.pid_wait();
   outtake.move(-127); // dump all blocks
   //pros::delay(0.2*1000); // score into long goal
@@ -1196,13 +1196,13 @@ void Right_7_ball() {
   // go to matchloader
   chassis.pid_turn_set(46.538_deg, TURN_SPEED);
   chassis.pid_wait_quick_chain();
-  chassis.pid_drive_set(-25_in, DRIVE_SPEED);  
+  chassis.pid_drive_set(-28_in, DRIVE_SPEED);  
   chassis.pid_wait_quick_chain();
   chassis.pid_turn_set(180_deg, TURN_SPEED);
   chassis.pid_wait_quick_chain();
-  chassis.pid_drive_set(7_in, DRIVE_SPEED); 
+  chassis.pid_drive_set(6.5_in, DRIVE_SPEED); 
   chassis.pid_wait_quick_chain();
-  pros::delay(0.6 * 1000); 
+  pros::delay(0.55 * 1000); 
   /* // jiggle left-right
   pros::delay(0.25 * 1000); 
   chassis.pid_turn_relative_set(5_deg, TURN_SPEED);
@@ -1216,7 +1216,7 @@ void Right_7_ball() {
   */
 
   // drive backward to long goal
-  chassis.pid_drive_set(-31.5_in, DRIVE_SPEED_SLOW); 
+  chassis.pid_drive_set(-30.5_in, DRIVE_SPEED_SLOW); 
   chassis.pid_wait_quick_chain();
 
   // score into long goal
