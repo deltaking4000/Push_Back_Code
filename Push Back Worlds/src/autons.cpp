@@ -922,10 +922,10 @@ void SuperSoloAWP() {
 
 
   // drive to matchloader to matchload
-  chassis.pid_odom_set(-38_in, DRIVE_SPEED); // actually 50
+  chassis.pid_odom_set(-40_in, DRIVE_SPEED); // actually 50
   chassis.pid_wait_quick_chain();
   drop_matchloader();
-  chassis.pid_turn_set(93_deg, TURN_SPEED);
+  chassis.pid_turn_set(90_deg, TURN_SPEED);
   chassis.pid_wait_quick_chain();
 
   // intaking from the loader
@@ -968,9 +968,11 @@ void SuperSoloAWP() {
   chassis.pid_wait_quick_chain();
   chassis.pid_odom_set(-17_in, DRIVE_SPEED); 
   reverse_intake();
+  reverse_outtake();
   pros::Task([=]{
     pros::delay(0.2*1000);
     stop_intake();
+    stop_outtake();
   });
   chassis.pid_wait_quick_chain();
   drop_middlegoal();
