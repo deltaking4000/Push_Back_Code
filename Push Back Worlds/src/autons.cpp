@@ -1108,11 +1108,11 @@ void SplitGoalLeft() {
   // go to matchloader
   chassis.pid_turn_set(53_deg, TURN_SPEED);//46
   chassis.pid_wait_quick_chain();
-  chassis.pid_odom_set(-22_in, DRIVE_SPEED);  
+  chassis.pid_odom_set(-23_in, DRIVE_SPEED);  
   chassis.pid_wait_quick_chain();
   chassis.pid_turn_set(180_deg, TURN_SPEED);
   chassis.pid_wait_quick_chain();
-  chassis.pid_odom_set(11.7_in, DRIVE_SPEED_SLOW); 
+  chassis.pid_odom_set(13_in, DRIVE_SPEED_SLOW); 
   chassis.pid_wait_quick_chain();
   pros::delay(0.65 * 1000); 
   /* // jiggle left-right
@@ -1163,7 +1163,7 @@ void SplitGoalLeft() {
   chassis.pid_wait_quick_chain();*/
 
   // go to wing
-  chassis.pid_odom_set(32_in, DRIVE_SPEED); 
+  chassis.pid_odom_set(32.5_in, DRIVE_SPEED); 
   chassis.pid_wait_quick_chain();
   // chassis.pid_swing_set(LEFT_SWING, 350, SWING_SPEED);
   // chassis.pid_wait_quick_chain();
@@ -1171,7 +1171,7 @@ void SplitGoalLeft() {
   chassis.pid_wait_quick_chain();
 
   // wing
-  chassis.pid_odom_set(13_in, DRIVE_SPEED); 
+  chassis.pid_odom_set(13_in, DRIVE_SPEED_MAX); 
   chassis.pid_wait_quick_chain();
 
 
