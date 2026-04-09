@@ -931,7 +931,7 @@ void SuperSoloAWP() {
   // intaking from the loader
   chassis.pid_odom_set(9.5_in, DRIVE_SPEED, false); 
   chassis.pid_wait();
-  pros::delay(0.23*1000); // pick up alliance color blocks from loader
+  pros::delay(0.3*1000); // pick up alliance color blocks from loader
 
   // score into 1st long goal
   chassis.pid_odom_set(-27.5_in, DRIVE_SPEED); 
@@ -970,7 +970,7 @@ void SuperSoloAWP() {
   reverse_intake();
   reverse_outtake();
   pros::Task([=]{
-    pros::delay(0.2*1000);
+    pros::delay(0.20*1000);
     stop_intake();
     stop_outtake();
   });
@@ -990,7 +990,7 @@ void SuperSoloAWP() {
   chassis.pid_turn_set(90_deg, TURN_SPEED);
   chassis.pid_wait_quick_chain();
   spin_intake();
-  chassis.pid_odom_set(-9_in, DRIVE_SPEED); 
+  chassis.pid_odom_set(-9.75_in, DRIVE_SPEED); 
   chassis.pid_wait();
   outtake.move(-127); // dump all blocks
   //pros::delay(0.2*1000); // score into long goal
