@@ -7,6 +7,10 @@ void spin_intake() {
     intake.move(-127);
 }
 
+void spin_intake_slow() {
+    intake.move(-75);
+}
+
 void spin_outtake() {
     outtake.move(-127);
 }

@@ -21,6 +21,7 @@ inline ez::Piston middlegoal('H');
 inline pros::Optical optical(11);
 
 void spin_intake();
+void spin_intake_slow();
 void spin_outtake();
 void stop_intake();
 void stop_outtake();
