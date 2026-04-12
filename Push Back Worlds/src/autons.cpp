@@ -917,39 +917,46 @@ void SuperSoloAWP() {
 
   // take care of the other robot and steal their preload
   spin_intake();
-  chassis.pid_drive_set(6.7_in, DRIVE_SPEED); 
+  chassis.pid_drive_set(8_in, DRIVE_SPEED); 
   chassis.pid_wait();
 
 
   // drive to matchloader to matchload
-  chassis.pid_odom_set(-39_in, DRIVE_SPEED); // actually 50
+  chassis.pid_odom_set(-40.3_in, DRIVE_SPEED); // actually 50
   chassis.pid_wait_quick_chain();
   drop_matchloader();
   chassis.pid_turn_set(90_deg, TURN_SPEED);
   chassis.pid_wait_quick_chain();
 
   // intaking from the loader
-  chassis.pid_odom_set(9.5_in, DRIVE_SPEED, false); 
+  chassis.pid_odom_set(10.25_in, DRIVE_SPEED, false); 
   chassis.pid_wait();
   pros::delay(0.25*1000); // pick up alliance color blocks from loader
 
   // score into 1st long goal
-  chassis.pid_odom_set(-28_in, DRIVE_SPEED_MAX); 
+  chassis.pid_odom_set(-28.5_in, DRIVE_SPEED_MAX); 
+  pros::Task([=]{
+    pros::delay(1*950);
+    spin_outtake();
+  });
   chassis.pid_wait();
   spin_outtake();
-  pros::delay(1*1000); // score into long goal
-  stop_outtake();
+  pros::delay(1*1050); // score into long goal
   lift_matchloader();
 
   // go get 3-block heap #1
   chassis.pid_swing_set(ez::LEFT_SWING, 230_deg, SWING_SPEED, ez::RIGHT_TURN);
+  pros::Task([=]{
+    pros::delay(0.3*1000);
+    stop_outtake();
+  });
   chassis.pid_wait_quick_chain();
 
   pros::Task([=]{
     pros::delay(0.6*1000);
     drop_matchloader();
   });
-  chassis.pid_odom_set(15.25_in, DRIVE_SPEED); 
+  chassis.pid_odom_set(15.15_in, DRIVE_SPEED); 
   chassis.pid_wait_quick_chain();
  
   // go get 3-block heap #2
@@ -970,14 +977,14 @@ void SuperSoloAWP() {
   reverse_intake();
   reverse_outtake();
   pros::Task([=]{
-    pros::delay(0.23*1000);
+    pros::delay(0.20*1000);
     stop_intake();
     stop_outtake();
   });
   chassis.pid_wait_quick_chain();
   drop_middlegoal();
   spin_intake_slow();
-  pros::delay(1*850); // score middle goal blocks - leave some for long goal
+  pros::delay(1*900); // score middle goal blocks - leave some for long goal
   stop_outtake();
   lift_middlegoal();
   lift_matchloader();
@@ -991,11 +998,16 @@ void SuperSoloAWP() {
   chassis.pid_wait_quick_chain();
   spin_intake();
   chassis.pid_odom_set(-9.5_in, DRIVE_SPEED); 
+  pros::Task([=]{
+    pros::delay(0.30*1000);
+    spin_outtake();
+  });
   chassis.pid_wait();
+  spin_intake();
   outtake.move(-127); // dump all blocks
   //pros::delay(0.2*1000); // score into long goal
   reverse_intake();
-  pros::delay(0.2*1000); // score into long goal
+  pros::delay(0.1*1000); // score into long goal
   spin_intake();
   pros::delay(2*1000); // score into long goal // score long goal
 
