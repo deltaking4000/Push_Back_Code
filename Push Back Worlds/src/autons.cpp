@@ -958,7 +958,7 @@ void SuperSoloAWP() {
     pros::delay(0.2*1000);
     drop_matchloader();
   });
-  chassis.pid_odom_set(14_in, DRIVE_SPEED); 
+  chassis.pid_odom_set(15.15_in, DRIVE_SPEED); 
   chassis.pid_wait_quick_chain();
  
   // go get 3-block heap #2
@@ -966,7 +966,7 @@ void SuperSoloAWP() {
   chassis.pid_wait_quick_chain();
   lift_matchloader();
   
-  chassis.pid_odom_set(46.4_in, DRIVE_SPEED);
+  chassis.pid_odom_set(46.4_in, DRIVE_SPEED_MAX);
   chassis.pid_wait();
   drop_matchloader();
 
@@ -1500,6 +1500,3 @@ void optical_sensing(int timeout) {
   optical.set_led_pwm(0);
   printf("OPTICAL SENSING: DONE");
 }
-
-
-
