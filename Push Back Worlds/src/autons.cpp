@@ -1042,44 +1042,41 @@ void Left_7_ball_Base() {
 void SplitGoalRight() {
 
   chassis.odom_xyt_set(48_in, 16_in, 285_deg);    // Set the current position, you can start at a specific position with this
-  //  chassis.drive_angle_set(0_deg);    // Set the current angle for drive motions
-  
-  // pick the 3 blocks on field
+  //  this lets the IMU know the angle of the robot
+  // This section picks up the corner stack
   spin_intake();
-  // chassis.pid_turn_set(340_deg, TURN_SPEED);
-  // chassis.pid_wait_quick_chain();
   chassis.pid_odom_set(30_in, DRIVE_SPEED_SLOW); 
   chassis.pid_wait_until(16_in);
   drop_matchloader();
   chassis.pid_wait();
 
   // lower goal
-  chassis.pid_turn_set({0,0}, fwd, TURN_SPEED);
+  chassis.pid_turn_set({0,0}, fwd, TURN_SPEED); //turn to low goal
   chassis.pid_wait();
   lift_matchloader();
-  chassis.pid_odom_set(6.5_in, DRIVE_SPEED); 
+  chassis.pid_odom_set(6.5_in, DRIVE_SPEED); //drive to low goal
   chassis.pid_wait();
   reverse_intake();
-  pros::delay(1 * 1000); 
+  pros::delay(1 * 1000); //This part scores on low goal, but is currently to long, tune to reduce to 2-3 blocks
   stop_intake();
 
   // go to matchloader
-  chassis.pid_odom_set(-40_in, DRIVE_SPEED); 
+  chassis.pid_odom_set(-40_in, DRIVE_SPEED); //go backwards after scoring low goal, towards matchloader
   chassis.pid_wait();
-  drop_matchloader();
+  drop_matchloader();//deploy the matchloader
   chassis.pid_turn_exit_condition_set(90_ms, 3_deg, 100_ms, 7_deg, 100_ms, 250_ms);
-  chassis.pid_turn_set(90_deg, TURN_SPEED);
+  chassis.pid_turn_set(90_deg, TURN_SPEED);//turn dead on into the matchloader
   chassis.pid_wait();
   spin_intake();
   chassis.pid_odom_set(13.5_in, DRIVE_SPEED_MATCHLOADER); 
   chassis.pid_wait();
-  pros::delay(0.65 * 1000);
+  pros::delay(0.65 * 1000);//enter matchloader and wait. Needs tuning as it picks up 2 blocks too much
 
   // go to long goal
-  chassis.pid_odom_set(-27_in, DRIVE_SPEED_MAX); 
+  chassis.pid_odom_set(-27_in, DRIVE_SPEED_MAX); //drive into long goal, 
   pros::Task([=]{
     reverse_intake();
-    pros::delay(0.20*1);
+    pros::delay(0.20*1); //this saves time. Instead of antijamming when it reaches the goal, it antijams while in motion, saving time
     stop_intake();
   });
   chassis.pid_wait_quick_chain();
