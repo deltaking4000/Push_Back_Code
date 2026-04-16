@@ -922,18 +922,19 @@ void SuperSoloAWP() {
 
 
   // drive to matchloader to matchload
-  chassis.pid_odom_set(-40.3_in, DRIVE_SPEED); // actually 50
+  chassis.pid_odom_set(-40.5_in, DRIVE_SPEED); // actually 50
   chassis.pid_wait_quick_chain();
   drop_matchloader();
   chassis.pid_turn_set(90_deg, TURN_SPEED);
   chassis.pid_wait_quick_chain();
 
   // intaking from the loader
-  chassis.pid_odom_set(10.25_in, DRIVE_SPEED, false); 
+  chassis.pid_odom_set(10.5_in, DRIVE_SPEED, false); 
   chassis.pid_wait();
   pros::delay(0.25*1000); // pick up alliance color blocks from loader
 
   // score into 1st long goal
+  chassis.pid_turn_set(90_deg, TURN_SPEED);
   chassis.pid_odom_set(-28.5_in, DRIVE_SPEED_MAX); 
   pros::Task([=]{
     pros::delay(1*950);
@@ -963,10 +964,12 @@ void SuperSoloAWP() {
   chassis.pid_turn_set(180_deg, TURN_SPEED);
   chassis.pid_wait_quick_chain();
   lift_matchloader();
-  
+  pros::Task([=]{
+    pros::delay(0.85*1000);
+    drop_matchloader();
+  });
   chassis.pid_odom_set(46.4_in, DRIVE_SPEED);
   chassis.pid_wait();
-  drop_matchloader();
 
   // scoring in middle goal
 
@@ -977,14 +980,15 @@ void SuperSoloAWP() {
   reverse_intake();
   reverse_outtake();
   pros::Task([=]{
-    pros::delay(0.20*1000);
+    pros::delay(0.15*1000);
     stop_intake();
     stop_outtake();
+    pros::delay(0.5*1000);
+    drop_middlegoal();
+    spin_intake_slow();
   });
   chassis.pid_wait_quick_chain();
-  drop_middlegoal();
-  spin_intake_slow();
-  pros::delay(1*900); // score middle goal blocks - leave some for long goal
+  pros::delay(1*750); // score middle goal blocks - leave some for long goal
   stop_outtake();
   lift_middlegoal();
   lift_matchloader();
@@ -997,7 +1001,7 @@ void SuperSoloAWP() {
   chassis.pid_turn_set(90_deg, TURN_SPEED);
   chassis.pid_wait_quick_chain();
   spin_intake();
-  chassis.pid_odom_set(-9.5_in, DRIVE_SPEED); 
+  chassis.pid_odom_set(-13.5_in, DRIVE_SPEED); 
   pros::Task([=]{
     pros::delay(0.30*1000);
     spin_outtake();
@@ -1072,16 +1076,19 @@ void SplitGoalRight() {
   pros::delay(0.65 * 1000);
 
   // go to long goal
-  chassis.pid_odom_set(-32.213_in, DRIVE_SPEED_SLOW); 
+  chassis.pid_odom_set(-27_in, DRIVE_SPEED_MAX); 
+  pros::Task([=]{
+    reverse_intake();
+    pros::delay(0.20*1);
+    stop_intake();
+  });
   chassis.pid_wait_quick_chain();
   default_constants();
   // score into long goal
-  reverse_intake();
-  pros::delay(0.25 * 1000); 
 
   spin_intake();
   spin_outtake();
-  pros::delay(1.1 * 1000); 
+  pros::delay(1.2 * 1000); 
   stop_intake();
   stop_outtake();
 
@@ -1124,9 +1131,9 @@ void SplitGoalLeft() {
   chassis.pid_wait_quick_chain();
   chassis.pid_turn_set(180_deg, TURN_SPEED);
   chassis.pid_wait_quick_chain();
-  chassis.pid_odom_set(13_in, DRIVE_SPEED_SLOW); 
+  chassis.pid_odom_set(13.25_in, DRIVE_SPEED_SLOW); 
   chassis.pid_wait_quick_chain();
-  pros::delay(0.65 * 1000); 
+  pros::delay(0.70 * 1000); 
   /* // jiggle left-right
   pros::delay(0.25 * 1000); 
   chassis.pid_turn_relative_set(5_deg, TURN_SPEED);
@@ -1141,21 +1148,24 @@ void SplitGoalLeft() {
 
   // drive backward to long goal
   chassis.pid_drive_exit_condition_set(90_ms, 1_in, 150_ms, 3_in, 100_ms, 250_ms);
-  chassis.pid_odom_set(-32.213_in, DRIVE_SPEED_SLOW); 
+  chassis.pid_odom_set(-27_in, DRIVE_SPEED_MAX); 
+  pros::Task([=]{
+    reverse_intake();
+    pros::delay(0.20*1);
+    stop_intake();
+  });
   chassis.pid_wait_quick_chain();
   default_constants();
   // score into long goal
-  reverse_intake();
-  pros::delay(0.25 * 1000); 
 
   spin_intake();
   spin_outtake();
-  pros::delay(1.1 * 1000); 
+  pros::delay(1 * 1000); 
   reverse_outtake();
   // go to middle goal
   stop_intake();
   lift_matchloader();
-  chassis.pid_odom_set(13.5_in, DRIVE_SPEED); 
+  chassis.pid_odom_set(14.5_in, DRIVE_SPEED); 
   chassis.pid_wait_quick_chain();
   stop_outtake();
   chassis.pid_turn_set(220_deg, TURN_SPEED);
@@ -1166,7 +1176,7 @@ void SplitGoalLeft() {
   // score in middle goal + descore
   spin_intake();
   drop_middlegoal();
-  pros::delay(2 * 1000); 
+  pros::delay(1.0 * 1000); 
   lift_middlegoal();
   /*chassis.pid_drive_set(12_in, DRIVE_SPEED);
   chassis.pid_wait_quick_chain();
@@ -1175,7 +1185,7 @@ void SplitGoalLeft() {
   chassis.pid_wait_quick_chain();*/
 
   // go to wing
-  chassis.pid_odom_set(32.5_in, DRIVE_SPEED); 
+  chassis.pid_odom_set(31.25_in, DRIVE_SPEED); 
   chassis.pid_wait_quick_chain();
   // chassis.pid_swing_set(LEFT_SWING, 350, SWING_SPEED);
   // chassis.pid_wait_quick_chain();
@@ -1183,7 +1193,7 @@ void SplitGoalLeft() {
   chassis.pid_wait_quick_chain();
 
   // wing
-  chassis.pid_odom_set(13_in, DRIVE_SPEED_MAX); 
+  chassis.pid_odom_set(20_in, DRIVE_SPEED_MAX); 
   chassis.pid_wait_quick_chain();
 
 
