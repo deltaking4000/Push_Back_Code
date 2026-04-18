@@ -953,12 +953,12 @@ void SuperSoloAWP() {
   });
   chassis.pid_wait_quick_chain();
 
-  pros::Task([=]{
-    pros::delay(0.6*1000);
-    drop_matchloader();
-  });
   chassis.pid_odom_set(15.15_in, DRIVE_SPEED); 
   chassis.pid_wait_quick_chain();
+  pros::Task([=]{
+    pros::delay(0.15*1000);
+    drop_matchloader();
+  });
  
   // go get 3-block heap #2
   chassis.pid_turn_set(180_deg, TURN_SPEED);
@@ -1054,10 +1054,11 @@ void SplitGoalRight() {
   chassis.pid_turn_set({0,0}, fwd, TURN_SPEED); //turn to low goal
   chassis.pid_wait();
   lift_matchloader();
-  chassis.pid_odom_set(6.5_in, DRIVE_SPEED); //drive to low goal
+  chassis.pid_odom_set(7_in, DRIVE_SPEED); //drive to low goal
   chassis.pid_wait();
+  pros::delay(0.5 * 1000);
   reverse_intake();
-  pros::delay(1 * 1000); //This part scores on low goal, but is currently to long, tune to reduce to 2-3 blocks
+  pros::delay(0.625 * 1000); //This part scores on low goal, but is currently to long, tune to reduce to 2-3 blocks
   stop_intake();
 
   // go to matchloader
@@ -1068,9 +1069,9 @@ void SplitGoalRight() {
   chassis.pid_turn_set(90_deg, TURN_SPEED);//turn dead on into the matchloader
   chassis.pid_wait();
   spin_intake();
-  chassis.pid_odom_set(13.5_in, DRIVE_SPEED_MATCHLOADER); 
+  chassis.pid_odom_set(16.5_in, DRIVE_SPEED_MATCHLOADER); 
   chassis.pid_wait();
-  pros::delay(0.65 * 1000);//enter matchloader and wait. Needs tuning as it picks up 2 blocks too much
+  pros::delay(0.60 * 1000);//enter matchloader and wait. Needs tuning as it picks up 2 blocks too much
 
   // go to long goal
   chassis.pid_odom_set(-27_in, DRIVE_SPEED_MAX); //drive into long goal, 
@@ -1101,7 +1102,7 @@ void SplitGoalRight() {
   chassis.pid_wait_quick_chain();
   drop_wingmech();
   lift_matchloader();
-  chassis.pid_odom_set(-27_in, 60); 
+  chassis.pid_odom_set(-40_in, 60); 
   chassis.pid_wait_quick_chain();
   
   // done
@@ -1124,13 +1125,13 @@ void SplitGoalLeft() {
   // go to matchloader
   chassis.pid_turn_set(53_deg, TURN_SPEED);//46
   chassis.pid_wait_quick_chain();
-  chassis.pid_odom_set(-23_in, DRIVE_SPEED);  
+  chassis.pid_odom_set(-24_in, DRIVE_SPEED);  
   chassis.pid_wait_quick_chain();
   chassis.pid_turn_set(180_deg, TURN_SPEED);
   chassis.pid_wait_quick_chain();
   chassis.pid_odom_set(13.25_in, DRIVE_SPEED_SLOW); 
   chassis.pid_wait_quick_chain();
-  pros::delay(0.70 * 1000); 
+  pros::delay(0.75 * 1000); 
   /* // jiggle left-right
   pros::delay(0.25 * 1000); 
   chassis.pid_turn_relative_set(5_deg, TURN_SPEED);
@@ -1162,19 +1163,23 @@ void SplitGoalLeft() {
   // go to middle goal
   stop_intake();
   lift_matchloader();
-  chassis.pid_odom_set(14.5_in, DRIVE_SPEED); 
+  chassis.pid_odom_set(16_in, DRIVE_SPEED); 
   chassis.pid_wait_quick_chain();
   stop_outtake();
   chassis.pid_turn_set(220_deg, TURN_SPEED);
   chassis.pid_wait_quick_chain();
-  chassis.pid_odom_set(-51_in, DRIVE_SPEED); 
+  chassis.pid_odom_set(-52_in, DRIVE_SPEED); 
   chassis.pid_wait_quick_chain();
 
   // score in middle goal + descore
-  spin_intake();
+  spin_intake_slow();
   drop_middlegoal();
-  pros::delay(1.0 * 1000); 
+  pros::delay(1.5 * 1000); 
   lift_middlegoal();
+  pros::Task([=]{
+    pros::delay(0.1 * 1000);
+    lift_middlegoaldescore();
+  });
   /*chassis.pid_drive_set(12_in, DRIVE_SPEED);
   chassis.pid_wait_quick_chain();
   lift_middlegoaldescore();
@@ -1182,16 +1187,18 @@ void SplitGoalLeft() {
   chassis.pid_wait_quick_chain();*/
 
   // go to wing
-  chassis.pid_odom_set(31.25_in, DRIVE_SPEED); 
+  chassis.pid_odom_set(31.5_in, DRIVE_SPEED); 
   chassis.pid_wait_quick_chain();
+  drop_middlegoaldescore();
   // chassis.pid_swing_set(LEFT_SWING, 350, SWING_SPEED);
   // chassis.pid_wait_quick_chain();
   chassis.pid_turn_set(350_deg, TURN_SPEED);
   chassis.pid_wait_quick_chain();
 
   // wing
-  chassis.pid_odom_set(20_in, DRIVE_SPEED_MAX); 
+  chassis.pid_odom_set(15_in, DRIVE_SPEED_MAX); 
   chassis.pid_wait_quick_chain();
+  chassis.pid_wait();
 
 
   // done
@@ -1303,9 +1310,9 @@ void Right_7_ball_Base() {
   chassis.pid_wait_quick_chain();
   chassis.pid_turn_set(180_deg, TURN_SPEED);
   chassis.pid_wait_quick_chain();
-  chassis.pid_drive_set(8.7_in, DRIVE_SPEED_SLOW); 
+  chassis.pid_drive_set(10_in, DRIVE_SPEED_SLOW); 
   chassis.pid_wait_quick_chain();
-  pros::delay(0.65 * 1000); 
+  pros::delay(0.75 * 1000); 
   /* // jiggle left-right
   pros::delay(0.25 * 1000); 
   chassis.pid_turn_relative_set(5_deg, TURN_SPEED);
@@ -1320,7 +1327,7 @@ void Right_7_ball_Base() {
 
   // drive backward to long goal
   chassis.pid_drive_exit_condition_set(90_ms, 1_in, 150_ms, 3_in, 100_ms, 250_ms);
-  chassis.pid_drive_set(-32.213_in, DRIVE_SPEED_SLOW); 
+  chassis.pid_drive_set(-26.5_in, DRIVE_SPEED_SLOW); 
   chassis.pid_wait_quick_chain();
   default_constants();
   // score into long goal
