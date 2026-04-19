@@ -26,6 +26,7 @@ void spin_outtake();
 void stop_intake();
 void stop_outtake();
 void reverse_intake();
+void reverse_intake_slow();
 void reverse_outtake();
 void lift_matchloader();
 void drop_matchloader();
