@@ -1023,6 +1023,7 @@ void Move_Nothing_Auton(){
 }
 
 void MoveFwd4() {
+  pros::delay(13*1000);
   chassis.pid_drive_set(4_in, DRIVE_SPEED);
   chassis.pid_wait();
 }
@@ -1129,9 +1130,9 @@ void SplitGoalLeft() {
   chassis.pid_wait_quick_chain();
   chassis.pid_turn_set(180_deg, TURN_SPEED);
   chassis.pid_wait_quick_chain();
-  chassis.pid_odom_set(13.25_in, DRIVE_SPEED_SLOW); 
+  chassis.pid_odom_set(13.5_in, DRIVE_SPEED_SLOW); 
   chassis.pid_wait_quick_chain();
-  pros::delay(0.85 * 1000); 
+  pros::delay(0.9 * 1000); 
   /* // jiggle left-right
   pros::delay(0.25 * 1000); 
   chassis.pid_turn_relative_set(5_deg, TURN_SPEED);
@@ -1158,7 +1159,7 @@ void SplitGoalLeft() {
 
   spin_intake();
   spin_outtake();
-  pros::delay(1 * 1000); 
+  pros::delay(1 * 900); 
   reverse_outtake();
   // go to middle goal
   stop_intake();
@@ -1196,7 +1197,7 @@ void SplitGoalLeft() {
   chassis.pid_wait_quick_chain();
 
   // wing
-  chassis.pid_odom_set(14_in, DRIVE_SPEED_MAX); 
+  chassis.pid_odom_set(18_in, DRIVE_SPEED_MAX); 
   chassis.pid_wait_quick_chain();
   chassis.pid_wait();
   chassis.pid_turn_set(20_deg, TURN_SPEED);
