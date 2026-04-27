@@ -415,11 +415,11 @@ void SkillsBase() {
   // 1. 1st match-loader - drive and intake
 
  
-  chassis.pid_drive_set(39_in, DRIVE_SPEED_MAX);
+  chassis.pid_odom_set(41_in, DRIVE_SPEED_MAX);
   chassis.pid_wait();
   chassis.pid_turn_set(90_deg, TURN_SPEED);
   chassis.pid_wait();
-  chassis.pid_drive_set(10.75_in, DRIVE_SPEED_MATCHLOADER); 
+  chassis.pid_odom_set(12.5_in, DRIVE_SPEED_MATCHLOADER); 
   chassis.pid_wait();
   chassis.pid_turn_set(90_deg, TURN_SPEED);
   chassis.pid_wait();
@@ -432,7 +432,7 @@ void SkillsBase() {
 
 
   // 2. drive to other end of long-goal andcore
-  chassis.pid_drive_set(-6_in, DRIVE_SPEED_MAX); 
+  chassis.pid_odom_set(-6_in, DRIVE_SPEED_MAX); 
   chassis.pid_wait_quick_chain();
   stop_intake();
 
@@ -440,26 +440,26 @@ void SkillsBase() {
 
   chassis.pid_turn_set(124.737_deg, TURN_SPEED); // 938F worlds recap
   chassis.pid_wait_quick_chain();
-  chassis.pid_drive_set(-24_in, DRIVE_SPEED_MAX); 
+  chassis.pid_odom_set(-24_in, DRIVE_SPEED_MAX); 
   chassis.pid_wait_quick_chain();
   lift_matchloader();
   chassis.pid_turn_set(90_deg, TURN_SPEED);
   chassis.pid_wait_quick_chain();
-  chassis.pid_drive_set(-40_in, DRIVE_SPEED_MAX); 
+  chassis.pid_odom_set(-40_in, DRIVE_SPEED_MAX); 
   chassis.pid_wait_quick_chain();
 // Wall is on the RIGHT. 
 // Ratio is 110:30 (approx 3.6:1)
 chassis.pid_swing_set(ez::LEFT_SWING, 45_deg, 110, 30);
 chassis.pid_wait_quick_chain();
-  chassis.pid_drive_set(-10, DRIVE_SPEED_MAX); 
+  chassis.pid_odom_set(-10, DRIVE_SPEED_MAX); 
   chassis.pid_wait_quick_chain();
   chassis.pid_turn_set(270_deg, TURN_SPEED);
   chassis.pid_wait_quick_chain();
   chassis.pid_drive_exit_condition_set(90_ms, 1_in, 150_ms, 3_in, 150_ms, 250_ms);
-  chassis.pid_drive_set(-20.5_in, DRIVE_SPEED_MATCHLOADER);
+  chassis.pid_odom_set(-22_in, DRIVE_SPEED_MATCHLOADER);
   chassis.pid_wait_quick_chain();
   default_constants();
-  chassis.drive_angle_set(270);
+  // chassis.drive_angle_set(270);
   // chassis.pid_turn_set(270_deg, TURN_SPEED);
   // chassis.pid_wait_quick_chain();
 
@@ -468,19 +468,19 @@ chassis.pid_wait_quick_chain();
   spin_outtake();
   pros::delay(4 * 1000); 
   // try reversing intake for a bit to unjam /**/ 
-  /*reverse_intake();
+  reverse_intake();
   reverse_outtake();
   pros::delay(0.5 * 1000);  
   spin_intake();
   spin_outtake();
-  pros::delay(3 * 1000); */
+  pros::delay(3 * 1000); 
 
   outtake.move(0);
 
   // 3. 2nd match-loader intake and score
   matchloader.set(true);
 
-  chassis.pid_drive_set(35.5_in, DRIVE_SPEED_MATCHLOADER); 
+  chassis.pid_odom_set(35.5_in, DRIVE_SPEED_MATCHLOADER); 
   chassis.pid_wait();
   chassis.pid_turn_set(270_deg, TURN_SPEED);
   chassis.pid_wait();
@@ -498,7 +498,7 @@ chassis.pid_wait_quick_chain();
 
   chassis.pid_drive_exit_condition_set(90_ms, 1_in, 150_ms, 3_in, 150_ms, 250_ms);
 
-  chassis.pid_drive_set(-33_in, 55); 
+  chassis.pid_odom_set(-33_in, 55); 
   chassis.pid_wait();
   default_constants();
   chassis.pid_turn_set(270_deg, TURN_SPEED);
@@ -509,17 +509,17 @@ chassis.pid_wait_quick_chain();
   spin_outtake();
   pros::delay(4 * 1000); 
   // try reversing intake for a bit to unjam
-  /*reverse_intake();
+  reverse_intake();
   pros::delay(0.5 * 1000);  
   spin_intake();
   spin_outtake();
-  pros::delay(3 * 1000); */
+  pros::delay(3 * 1000); 
 
   outtake.move(0);
   matchloader.set(false);
-  chassis.pid_drive_set(5_in, DRIVE_SPEED_MAX); 
+  chassis.pid_odom_set(5_in, DRIVE_SPEED_MAX); 
   chassis.pid_wait();
- chassis.pid_drive_set(-5_in, DRIVE_SPEED_MAX); 
+ chassis.pid_odom_set(-5_in, DRIVE_SPEED_MAX); 
   chassis.pid_wait();
 
 }
@@ -530,23 +530,23 @@ void PressureBreakpointSkills() {
 
   // PARK
 
-  chassis.pid_drive_set(10, DRIVE_SPEED_MAX);
+  chassis.pid_odom_set(10, DRIVE_SPEED_MAX);
   chassis.pid_wait();
   chassis.pid_turn_set(180_deg, TURN_SPEED);
   chassis.pid_wait();
-  chassis.pid_drive_set(17, DRIVE_SPEED_MAX);
+  chassis.pid_odom_set(17, DRIVE_SPEED_MAX);
   chassis.pid_wait();
   chassis.pid_turn_set(90_deg, TURN_SPEED);
   chassis.pid_wait();
-  chassis.pid_drive_set(71, DRIVE_SPEED_MAX);
+  chassis.pid_odom_set(71, DRIVE_SPEED_MAX);
   chassis.pid_wait();
   chassis.pid_turn_set(180_deg, TURN_SPEED);
   chassis.pid_wait();
-  chassis.pid_drive_set(33, DRIVE_SPEED_MAX);
+  chassis.pid_odom_set(29.5, DRIVE_SPEED_MAX);
   chassis.pid_wait();
   chassis.pid_turn_set(90_deg, TURN_SPEED);
   chassis.pid_wait();
-  chassis.pid_drive_set(50, DRIVE_SPEED_MAX);
+  chassis.pid_odom_set(50, DRIVE_SPEED_MAX);
   chassis.pid_wait();
 }
 
@@ -1019,13 +1019,17 @@ void SuperSoloAWP() {
 
 void Move_Nothing_Auton(){
   // do nothing
+  
 
 }
 
 void MoveFwd4() {
-  pros::delay(13*1000);
-  chassis.pid_drive_set(4_in, DRIVE_SPEED);
+  spin_intake();
+  spin_outtake();
+  chassis.pid_drive_set(25_in, DRIVE_SPEED);
   chassis.pid_wait();
+  pros::delay(15*1000);
+
 }
 
 void Left_7_ball() {

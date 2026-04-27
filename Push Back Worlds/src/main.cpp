@@ -147,7 +147,7 @@ void initialize() {
 
       // {"LEFT SIDE 7 BALL HOOD\nPosition above parkzone facing up.", Right_7_ball_Base},
       // {"RIGHT SIDE 7 BALL HOOD\nPosition above parkzone facing up.", Left_7_ball_Base},
-      // {"60 SECOND AUTON\nPosition above park zone facing right",  PressureBreakpointSkills},
+      {"60 SECOND AUTON\nPosition above park zone facing right",  PressureBreakpointSkills},
       // {"OPTCIAL TEST\n\nOPTICAL TEST", optical_test},// delete later!!!
 
       // {"Drive\n\nDrive forward and come back", drive_example},
